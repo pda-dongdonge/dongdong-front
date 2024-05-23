@@ -1,10 +1,12 @@
-import { useState } from "react";
-
+import { RouterProvider } from "react-router-dom";
+import MainRouter from "./main-router";
+import { Provider } from "react-redux";
+import store from "./store/store";
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
+    <Provider store={store}>
+      <RouterProvider router={MainRouter}></RouterProvider>
+    </Provider>
   );
 }
 
