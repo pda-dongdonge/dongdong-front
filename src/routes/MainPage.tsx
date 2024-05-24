@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
-import { setUser, clearUser } from "../store/actions";
+import { setUser, clearUser } from "../store/reducer";
 
 export default function MainPage() {
   const dispatch = useDispatch<AppDispatch>();
