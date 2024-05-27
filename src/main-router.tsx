@@ -4,6 +4,7 @@ import SignPage from "./routes/sign/page";
 import MyNavbar from "./components/MyNavbar/MyNavbar";
 import BoardLayout from "./routes/layout";
 import BucketDetailPage from "./routes/bucketDetail/page";
+import UserPage from "./routes/user/page";
 
 const routers = [
   {
@@ -32,8 +33,19 @@ const routers = [
   {
     path: "/bucketlist/:bucketId",
     element: <BucketDetailPage />
+  },
+  {
+    path: "/user",
+    element: <BoardLayout />,
+    children: [
+      {
+        path: "",
+        element: <UserPage />,
+        index: true,
+      },
+    ],
+    // index: true,
   }
-
 ];
 const router = createBrowserRouter(routers);
 
