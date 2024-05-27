@@ -10,6 +10,7 @@ export function useAuth() {
   const dispatch = useDispatch();
   const service = new authAPI(VITE_BASE_URL + "auth");
 
+
   // POST login
   async function login(email: string, password: string) {
     try {
