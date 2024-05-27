@@ -5,17 +5,19 @@ import React from "react";
 import { useState } from "react";
 import CreateBucket from "../CreateBucket/CreateBucket";
 import SignupModal from "../Signup/Signup";
+import { useAuth } from "@/hooks/useAuth";
 const EXPAND_BREAKPOINT = "md";
 
 export default function MyNavbar() {
-    const [modalShow, setModalShow] = useState<boolean>(false);
-    const [fullscreen, setFullscreen] = useState<boolean | string>(true);
-    const [createShow, setCreateShow] = useState<boolean>(false);
+  const { user, login, logOut } = useAuth();
+  const [modalShow, setModalShow] = useState<boolean>(false);
+  const [fullscreen, setFullscreen] = useState<boolean | string>(true);
+  const [createShow, setCreateShow] = useState<boolean>(false);
 
-    function handleShow(breakpoint: boolean | string) {
-        setFullscreen(breakpoint);
-        setCreateShow(true);
-      }
+  function handleShow(breakpoint: boolean | string) {
+    setFullscreen(breakpoint);
+    setCreateShow(true);
+  }
 
   return (
     <Navbar
@@ -41,7 +43,6 @@ export default function MyNavbar() {
           aria-labelledby={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}
           placement="end"
         >
-          {/* 다음장 삽입 */}
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}>
               <img
@@ -54,33 +55,35 @@ export default function MyNavbar() {
               ></img>
             </Offcanvas.Title>
           </Offcanvas.Header>
-
           <Offcanvas.Body className="flex-row-reverse">
             <Nav
               className={`justify-content-around flex-row pb-4 pb-${EXPAND_BREAKPOINT}-0 `}
               style={{ gap: "50px" }}
             >
-              <Nav.Link
-                className="flex-grow-1 text-center"
-                style={{
-                  fontSize: "23px",
-                  justifyItems: "center",
-                  marginTop: "10px",
-                }}
-              >
-               <FaSignInAlt onClick={() => setModalShow(true)} />
-
-                <SignupModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-            />
-              </Nav.Link>
-              <Nav.Link
-                className="flex-grow-1 text-center"
-                style={{ fontSize: "23px", marginTop: "10px" }}
-              >
-                <IoPerson />
-              </Nav.Link>
+              {user.username ? (
+                <Nav.Link
+                  className="flex-grow-1 text-center"
+                  style={{ fontSize: "23px", marginTop: "10px" }}
+                >
+                  <IoPerson />
+                  <span>{user.username}님</span>
+                </Nav.Link>
+              ) : (
+                <Nav.Link
+                  className="flex-grow-1 text-center"
+                  style={{
+                    fontSize: "23px",
+                    justifyItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <FaSignInAlt onClick={() => setModalShow(true)} />
+                  <SignupModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                  />
+                </Nav.Link>
+              )}
             </Nav>
             <Nav
               className="justify-content-start flex-grow-1"
@@ -122,14 +125,30 @@ export default function MyNavbar() {
               >
                 CREATE
               </Button>
-              
+
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
                 onHide={() => setCreateShow(false)}
-            />
+              />
             </Nav>
           </Offcanvas.Body>
+          {user.username ? (
+            <div
+              onClick={async () => {
+                await logOut();
+              }}
+            >
+              로그아웃
+            </div>
+          ) : (
+            <Nav.Link
+              href="/sign"
+              style={{ fontWeight: "bold", fontSize: "18px" }}
+            >
+              로그인
+            </Nav.Link>
+          )}
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
