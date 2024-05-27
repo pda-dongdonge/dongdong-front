@@ -60,7 +60,7 @@ export default function MyNavbar() {
               className={`justify-content-around flex-row pb-4 pb-${EXPAND_BREAKPOINT}-0 `}
               style={{ gap: "50px" }}
             >
-              {user ? (
+              {user.username ? (
                 <Nav.Link
                   className="flex-grow-1 text-center"
                   style={{ fontSize: "23px", marginTop: "10px" }}
@@ -133,7 +133,7 @@ export default function MyNavbar() {
               />
             </Nav>
           </Offcanvas.Body>
-          {user ? (
+          {user.username ? (
             <div
               onClick={async () => {
                 await logOut();
@@ -142,7 +142,12 @@ export default function MyNavbar() {
               로그아웃
             </div>
           ) : (
-            <div>로그인</div>
+            <Nav.Link
+              href="/sign"
+              style={{ fontWeight: "bold", fontSize: "18px" }}
+            >
+              로그인
+            </Nav.Link>
           )}
         </Navbar.Offcanvas>
       </Container>
