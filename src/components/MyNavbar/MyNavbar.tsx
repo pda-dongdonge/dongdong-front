@@ -3,8 +3,8 @@ import { FaSignInAlt } from "react-icons/fa";
 import { IoPerson } from "react-icons/io5";
 import React from "react";
 import { useState } from "react";
-//import CreateBucket from "../../routes/createBucket/page";
-//import SignupModal from "../../routes/signup/page";
+import CreateBucket from "../CreateBucket/CreateBucket";
+import SignupModal from "../Signup/Signup";
 const EXPAND_BREAKPOINT = "md";
 
 export default function MyNavbar() {
@@ -70,10 +70,10 @@ export default function MyNavbar() {
               >
                <FaSignInAlt onClick={() => setModalShow(true)} />
 
-                {/*<SignupModal
+                <SignupModal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
-            />*/}
+            />
               </Nav.Link>
               <Nav.Link
                 className="flex-grow-1 text-center"
@@ -123,11 +123,11 @@ export default function MyNavbar() {
                 CREATE
               </Button>
               
-              {/*<CreateBucket
+              <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
                 onHide={() => setCreateShow(false)}
-            />*/}
+            />
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

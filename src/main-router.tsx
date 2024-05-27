@@ -3,6 +3,8 @@ import MainPage from "./routes/MainPage";
 import SignPage from "./routes/sign/page";
 import MyNavbar from "./components/MyNavbar/MyNavbar";
 import BoardLayout from "./routes/layout";
+import StoreItems from "./routes/storeItem/page";
+import StoreUrl from "./routes/StoreUrl/StoreUrl";
 import BucketDetailPage from "./routes/bucketDetail/page";
 import UserPage from "./routes/user/page";
 import UpdatePage from "./routes/update/page";
@@ -35,6 +37,17 @@ const routers = [
       },
     ],
     // index: true,
+  },
+  {
+    path:"/storeItem",
+    element:<StoreItems/>,
+    index: true,
+  }
+  ,
+  {
+    path:"/storeUrl",
+    element:<StoreUrl/>,
+    index:true
   },
   {
     path: "/bucketlist/:bucketId",
