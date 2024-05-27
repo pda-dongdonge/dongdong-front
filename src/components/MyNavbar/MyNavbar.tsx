@@ -8,14 +8,14 @@ import SignupModal from "../Signup/Signup";
 const EXPAND_BREAKPOINT = "md";
 
 export default function MyNavbar() {
-    const [modalShow, setModalShow] = useState<boolean>(false);
-    const [fullscreen, setFullscreen] = useState<boolean | string>(true);
-    const [createShow, setCreateShow] = useState<boolean>(false);
+  const [modalShow, setModalShow] = useState<boolean>(false);
+  const [fullscreen, setFullscreen] = useState<boolean | string>(true);
+  const [createShow, setCreateShow] = useState<boolean>(false);
 
-    function handleShow(breakpoint: boolean | string) {
-        setFullscreen(breakpoint);
-        setCreateShow(true);
-      }
+  function handleShow(breakpoint: boolean | string) {
+    setFullscreen(breakpoint);
+    setCreateShow(true);
+  }
 
   return (
     <Navbar
@@ -68,12 +68,11 @@ export default function MyNavbar() {
                   marginTop: "10px",
                 }}
               >
-               <FaSignInAlt onClick={() => setModalShow(true)} />
-
+                <FaSignInAlt onClick={() => setModalShow(true)} />
                 <SignupModal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
-            />
+                />
               </Nav.Link>
               <Nav.Link
                 className="flex-grow-1 text-center"
@@ -122,12 +121,12 @@ export default function MyNavbar() {
               >
                 CREATE
               </Button>
-              
+
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
                 onHide={() => setCreateShow(false)}
-            />
+              />
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
