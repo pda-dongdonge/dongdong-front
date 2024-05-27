@@ -29,10 +29,10 @@ useEffect(() => {
     <BucketNav />
 
     <div>
-            {bucketList.map((bucket) => (
-                <BucketItem key={bucket._id} bucket={bucket} handleClick={UserClick} />
-            ))}
-        </div>
+        {bucketList.map((bucket) => (
+            <BucketItem key={bucket._id} bucket={bucket} handleClick={UserClick} />
+        ))}
+    </div>
 
     
     </>
