@@ -5,7 +5,7 @@ import MyNavbar from "./components/MyNavbar/MyNavbar";
 import BoardLayout from "./routes/layout";
 import BucketDetailPage from "./routes/bucketDetail/page";
 import UserPage from "./routes/user/page";
-
+import UpdatePage from "./routes/update/page";
 const routers = [
   {
     path: "/",
@@ -16,6 +16,12 @@ const routers = [
         element: <MainPage />,
         index: true,
       },
+      {
+        path: "update",
+        element: <UpdatePage />,
+        index: true,
+      },
+      
     ],
   },
   {
@@ -33,6 +39,17 @@ const routers = [
   {
     path: "/bucketlist/:bucketId",
     element: <BucketDetailPage />
+  }, {
+    path: "/trend",
+    element: <BoardLayout />,
+    children: [
+      {
+        path: "",
+        element: <SignPage />,
+        index: true,
+      },
+    ],
+    // index: true,
   },
   {
     path: "/user",
