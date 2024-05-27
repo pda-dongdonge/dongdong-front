@@ -1,5 +1,6 @@
 // import React from "react";
 import PhotoGrid from "./photoGrid";
+import InfoBottom from "./infoBottom";
 
 const dummyData = {
   userImage:
@@ -32,6 +33,9 @@ export default function BucketInfo() {
       </div>
       <div className="px-[1rem]">
         <PhotoGrid imageUrl={dummyData.photoList} />
+      </div>
+      <div className="px-[1rem] flex flex-row-reverse gap-[10px] translate-y-[60%]">
+        <InfoBottom />
       </div>
     </div>
   );
