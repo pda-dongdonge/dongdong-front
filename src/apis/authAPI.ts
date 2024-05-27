@@ -16,14 +16,16 @@ export default class authAPI extends BaseApi {
     return resp.data;
   }
   async signUp(auth: IAuth) {
-    const resp = await this.fetcher.post("/signup", {
+    const resp = await this.fetcher.post("/register", {
       email: auth.email,
+      username: auth.username,
+      phone: auth.phone,
       password: auth.password,
     });
     return resp.data;
   }
   async isEmailVerify(email: string) {
-    const resp = await this.fetcher.post("/auth/emailverify", {
+    const resp = await this.fetcher.post("/emailverify", {
       email,
     });
     return resp.data;

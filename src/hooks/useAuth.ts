@@ -37,6 +37,7 @@ export function useAuth() {
       });
       if (res) {
         dispatch(setUser({ email: res.email, username: res.username }));
+        return res;
       } else {
         console.error("signup failed");
       }
