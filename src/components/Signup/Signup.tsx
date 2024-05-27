@@ -2,21 +2,41 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { useAuth } from "@/hooks/useAuth";
+import { useRef } from "react";
 
-export default function SignupModal(props) {
+type Props = {
+  show: boolean;
+  onHide: () => void;
+};
+export default function SignupModal(props: Props) {
+  const { signUp, isEmailVerify } = useAuth();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const handleEmailCheck = async () => {
+    if (emailRef.current) {
+      const email = emailRef.current.value;
+      const res = await isEmailVerify(email);
+      if (res) {
+        //이메일 사용가능 팝업 띄우기
+        alert("사용가능");
+      } else {
+        alert("중복이요");
+      }
+    }
+  };
   return (
     <Modal
       {...props}
-      size="md"
+      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton style={{ borderBottom: "none" }}>
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ textAlign:"center"}}>
-        <div style={{ fontSize: "40px", marginBottom: "20px",}}>
-          <img src="/dongdonglogo.png" width="60px" ></img>
+      <Modal.Body style={{ textAlign: "center" }}>
+        <div style={{ fontSize: "40px", marginBottom: "20px" }}>
+          <img src="/dongdonglogo.png" width="60px"></img>
         </div>
         <h1
           style={{
@@ -40,6 +60,7 @@ export default function SignupModal(props) {
 
           <InputGroup className="mb-3">
             <Form.Control
+              ref={emailRef}
               placeholder="E-mail"
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
@@ -53,6 +74,7 @@ export default function SignupModal(props) {
                 border: "none",
                 color: "white",
               }}
+              onClick={handleEmailCheck}
             >
               CHECK
             </Button>

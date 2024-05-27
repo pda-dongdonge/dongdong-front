@@ -22,6 +22,12 @@ export default class authAPI extends BaseApi {
     });
     return resp.data;
   }
+  async isEmailVerify(email: string) {
+    const resp = await this.fetcher.post("/auth/emailverify", {
+      email,
+    });
+    return resp.data;
+  }
   async isLogin() {
     try {
       const resp = await this.fetcher.get("/islogin");
@@ -30,7 +36,6 @@ export default class authAPI extends BaseApi {
       return;
     }
   }
-
   async logout() {
     const resp = await this.fetcher.get("/logout");
     return resp.data;

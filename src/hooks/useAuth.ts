@@ -10,7 +10,6 @@ export function useAuth() {
   const dispatch = useDispatch();
   const service = new authAPI(VITE_BASE_URL + "auth");
 
-
   // POST login
   async function login(email: string, password: string) {
     try {
@@ -47,7 +46,17 @@ export function useAuth() {
       //실패 케이스에 따라 회원가입 실패 노출(중복 이메일, 잘못된이메일형식, 비번 글자수)
     }
   }
-
+  //POST isEmailVerify 이메일 유효성(중복)체크
+  async function isEmailVerify(email: string) {
+    try {
+      const res = await service.isEmailVerify(email);
+      //true: 사용가능한 이메일 false: 중복 이메일
+      return res.verify;
+    } catch (err) {
+      //이메일 중복체크 실패
+      console.log("Error to verify email", err);
+    }
+  }
   //logout 유저정보 clear
   async function logOut() {
     try {
@@ -77,5 +86,6 @@ export function useAuth() {
     login,
     signUp,
     logOut,
+    isEmailVerify,
   };
 }
