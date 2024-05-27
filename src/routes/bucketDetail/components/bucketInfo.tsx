@@ -9,9 +9,9 @@ const dummyData = {
     "https://d2gfz7wkiigkmv.cloudfront.net/pickin/2/1/2/zU_ec1ZnTQSqkTIQbQaxsA",
     "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FgKDADa_OS_SIwwFOE17Ezw&w=1080&q=75",
     "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FvmyksiS1Q_WxHe8ntXhQiA&w=1080&q=75",
-    // "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FhjvCBXzQTAmlSwo8oAGy3w&w=1080&q=75",
-    // "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2Fo9LQPpyKQFWLbpJTZNXj3A&w=1080&q=75",
-    // "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FWt64eovFTgq6YRSMwzeNrg&w=1080&q=75",
+    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FhjvCBXzQTAmlSwo8oAGy3w&w=1080&q=75",
+    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2Fo9LQPpyKQFWLbpJTZNXj3A&w=1080&q=75",
+    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FWt64eovFTgq6YRSMwzeNrg&w=1080&q=75",
   ],
 };
 

@@ -6,7 +6,7 @@ export default function BucketDetailPage() {
   return (
     <>
       <MyNavbar />
-      <div className="flex justify-center	">
+      <div className="flex justify-center">
         <BucketInfo />
       </div>
     </>
