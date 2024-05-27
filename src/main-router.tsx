@@ -3,6 +3,7 @@ import MainPage from "./routes/MainPage";
 import SignPage from "./routes/sign/page";
 import MyNavbar from "./components/MyNavbar/MyNavbar";
 import BoardLayout from "./routes/layout";
+import UserPage from "./routes/user/page";
 const routers = [
   {
     path: "/",
@@ -27,7 +28,18 @@ const routers = [
     ],
     // index: true,
   },
-
+  {
+    path: "/user",
+    element: <BoardLayout />,
+    children: [
+      {
+        path: "",
+        element: <UserPage />,
+        index: true,
+      },
+    ],
+    // index: true,
+  },
 ];
 const router = createBrowserRouter(routers);
 
