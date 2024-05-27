@@ -3,6 +3,8 @@ import MainPage from "./routes/MainPage";
 import SignPage from "./routes/sign/page";
 import MyNavbar from "./components/MyNavbar/MyNavbar";
 import BoardLayout from "./routes/layout";
+import BucketDetailPage from "./routes/bucketDetail/page";
+
 const routers = [
   {
     path: "/",
@@ -27,6 +29,10 @@ const routers = [
     ],
     // index: true,
   },
+  {
+    path: "/bucketlist/:bucketId",
+    element: <BucketDetailPage />
+  }
 
 ];
 const router = createBrowserRouter(routers);
