@@ -11,10 +11,14 @@ export default function InfoBottom() {
     setValid(prev => !prev);
   }
 
+  const shareClick = (e:React.ChangeEvent<HTMLInputElement>):void => {
+    alert("클릭됨");
+  }
+
   return (
     <>
-      <img className="w-[20px] cursor-pointer" src={shareIcon} />
-      <div onClick={()=> heartClick()}>
+      <img className="w-[20px] cursor-pointer" src={shareIcon} onClick={(e) => shareClick(e)}/>
+      <div onClick={(e)=> heartClick(e)}>
         {valid ? (
           <img src={heartFillIcon} className="w-[20px] cursor-pointer" />
         ) : (
