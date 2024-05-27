@@ -46,6 +46,8 @@ export function useAuth() {
       //실패 케이스에 따라 회원가입 실패 노출(중복 이메일, 잘못된이메일형식, 비번 글자수)
     }
   }
+
+  //logout 유저정보 clear
   async function logOut() {
     try {
       await service.logout();
@@ -55,6 +57,8 @@ export function useAuth() {
       console.log(err);
     }
   }
+
+  //마운트시 로그인여부체크(쿠키)해서 유저정보 세팅
   useEffect(() => {
     async function init() {
       if (!user.email) {
