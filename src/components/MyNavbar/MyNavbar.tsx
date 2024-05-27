@@ -90,13 +90,19 @@ export default function MyNavbar() {
                 href="#action2"
                 style={{ fontWeight: "bold", fontSize: "18px" }}
               >
-                Trending
+                트랜드
+              </Nav.Link>
+              <Nav.Link
+                href="/update"
+                style={{ fontWeight: "bold", fontSize: "18px" }}
+              >
+                최신
               </Nav.Link>
               <Nav.Link
                 href="#action2 "
                 style={{ fontWeight: "bold", fontSize: "18px" }}
               >
-                Feed
+                피드
               </Nav.Link>
               <Button
                 as={Nav.Link}
