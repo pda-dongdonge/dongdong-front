@@ -70,3 +70,19 @@ import InputGroup from "react-bootstrap/InputGroup";
     </Modal>
   );
 }
+export default function StoreUrl() {
+  const [modalShow, setModalShow] = React.useState(false);
+
+  return (
+    <>
+      <Button variant="primary" onClick={() => setModalShow(true)}>
+        Signup
+      </Button>
+
+      <StoreUrlModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </>
+  );
+}
