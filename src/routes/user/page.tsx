@@ -15,7 +15,7 @@ export default function UserPage() {
   }, [tab]);
 
   return (
-    <div className="userPage">
+    <div className="userPage basis-0 shrink grow flex-col">
       <ProfileComponent />
       <MenuComponent tab={currentTab} />
       <BucketListComponent tab={currentTab} />
