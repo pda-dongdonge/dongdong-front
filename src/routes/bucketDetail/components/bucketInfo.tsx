@@ -34,7 +34,7 @@ export default function BucketInfo() {
       <div className="px-[1rem]">
         <PhotoGrid imageUrl={dummyData.photoList} />
       </div>
-      <div className="px-[1rem] flex flex-row-reverse gap-[10px] translate-y-[60%]">
+      <div className="px-[1rem] flex flex-row-reverse gap-[10px] translate-y-[68%]">
         <InfoBottom />
       </div>
     </div>
