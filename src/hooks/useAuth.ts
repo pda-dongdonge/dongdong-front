@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import authAPI, { IAuth } from "../apis/authAPI";
 import { useEffect } from "react";
-import { setUser, clearUser } from "../store/reducer";
+import { setUser, clearUser } from "../store/user";
 import { RootState } from "../store/store";
 
 const { VITE_BASE_URL } = import.meta.env;
