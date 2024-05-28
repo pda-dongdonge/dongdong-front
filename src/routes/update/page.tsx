@@ -12,12 +12,15 @@ const [bucketList, setBucketList] = useState<Bucket[]>([]);
 const service = new bucketlistAPI(VITE_BASE_URL + "");
 
 
+//최신 순으로 하려면 역순으로 해야함
 useEffect(() => {
-    service.getBucketList().then((data) => {
-      setBucketList(data);
-      console.log(data);
-    });
-  }, []);
+  service.getBucketList().then((data) => {
+    const reversedData = data.reverse();
+    setBucketList(reversedData);
+    console.log(reversedData);
+  });
+}, []);
+
 
 
     const UserClick = (bucket: Bucket) => {
