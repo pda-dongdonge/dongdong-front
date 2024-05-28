@@ -19,7 +19,7 @@ const routers = [
         index: true,
       },
       {
-        path: "update",
+        path: "now",
         element: <UpdatePage />,
         index: true,
       },
