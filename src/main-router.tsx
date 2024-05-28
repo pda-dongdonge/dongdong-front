@@ -8,6 +8,7 @@ import StoreUrl from "./routes/StoreUrl/StoreUrl";
 import BucketDetailPage from "./routes/bucketDetail/page";
 import UserPage from "./routes/user/page";
 import UpdatePage from "./routes/update/page";
+import HotPage from "./routes/hot/page";
 const routers = [
   {
     path: "/",
@@ -16,6 +17,11 @@ const routers = [
       {
         path: "",
         element: <MainPage />,
+        index: true,
+      },
+      {
+        path: "hot",
+        element: <HotPage />,
         index: true,
       },
       {
