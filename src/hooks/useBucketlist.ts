@@ -26,10 +26,28 @@ export function useBucketlist() {
     }
   }
 
-  // async function bringBu
+  async function bringBucket(){
+    try{
+      const res=await service.getUserBuckets();
+      if(res){
+        console.log("bring buckets success");
+        console.log("res", res)
+        return res;
+      }else{
+        console.error("get failed");
+        return false;
+      
+      }
+
+    }catch(err){
+      console.log("Error to bringBucket");
+      return false;
+    }
+  }
 
   return{
-    addBucket
+    addBucket,
+    bringBucket
   };
 
 }

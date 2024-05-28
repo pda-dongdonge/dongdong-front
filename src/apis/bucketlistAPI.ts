@@ -46,6 +46,11 @@ export default class bucketlistAPI extends BaseApi {
         const resp = await this.fetcher.get('/hotbucket');
         return resp.data;
       }
+      async getUserBuckets(){
+        const resp = await this.fetcher.get('/');
+        console.log("data", resp.data);
+        return resp.data;
+      }
 }
 
 /*
