@@ -6,7 +6,8 @@ import { useState } from "react";
 import CreateBucket from "../CreateBucket/CreateBucket";
 import SignupModal from "../Signup/Signup";
 import { useAuth } from "@/hooks/useAuth";
-const EXPAND_BREAKPOINT = "md";
+import { IoIosArrowForward } from "react-icons/io";
+const EXPAND_BREAKPOINT = "always";
 
 export default function MyNavbar() {
   const { user, login, logOut } = useAuth();
@@ -19,6 +20,8 @@ export default function MyNavbar() {
     setCreateShow(true);
   }
 
+  
+
   return (
     <Navbar
       expand={EXPAND_BREAKPOINT}
@@ -27,16 +30,35 @@ export default function MyNavbar() {
       style={{ backgroundColor: "white", padding: "20px" }}
     >
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="/">
           <img
             src="/dongdonglogo.png"
             style={{
-              width: "60px",
-              marginRight: "20px",
-              marginLeft: "20px",
+              width: "60px"
             }}
           ></img>
+         
         </Navbar.Brand>
+        DONGDONG
+        <Button
+          as={Nav.Link}
+          href="#action2"
+          size="lg"
+          style={{
+            backgroundColor: "#7758F6",
+            borderRadius: "30px",
+            color: "white",
+            fontWeight: "bold",
+            fontSize: "16px",
+            padding: "13px 22px", // Padding for large button size
+            display: "inline-block",
+            textAlign: "center",
+          }}
+          onClick={() => handleShow(true)}
+        >
+        CREATE
+        </Button>
+
         <Navbar.Toggle aria-controls={`Navbar-expand-${EXPAND_BREAKPOINT}`} />
         <Navbar.Offcanvas
           id={`Navbar-expand-${EXPAND_BREAKPOINT}`}
@@ -53,79 +75,94 @@ export default function MyNavbar() {
                   marginLeft: "20px",
                 }}
               ></img>
+              
             </Offcanvas.Title>
+            <div>
+            Dongdong
+            </div>
+            
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
             <Nav
               className={`flex-row pb-4 pb-${EXPAND_BREAKPOINT}-0 `}
               style={{ gap: "50px"}}
             >
-              <Nav.Link
-                className="flex-grow-1 text-center"
-                style={{
-                  fontSize: "23px",
-                  justifyItems: "center",
-                  marginTop: "10px",
-                  display:"flex",
-                  justifyContent:"center"
-                }}
+              <div
+                className="flex-grow-1 rounded-md py-3.5 pl-5 pr-5 bg bg-violet-50"
               >
-               <FaSignInAlt onClick={() => setModalShow(true)} />
+               
+               {user.username ? (
+                <Nav.Link
+                href="user">
+                  <div className="flex-row flex items-center justify-between  font-bold text-sm">
+                    {user.username}
+                    <img className="rounded-full w-10" src="public\dummy-profile.png"/>
+                  </div>
+                  <div className="flex-row flex items-center text-xs">
+                  내 버킷 <IoIosArrowForward />
+                  </div>
+                  </Nav.Link>
+                ) : (
+                <Nav.Link
+                  href="sign">
+                  <div className="flex-row flex items-center  font-bold text-sm">
+                  로그인 <IoIosArrowForward />
+                  </div>
+                </Nav.Link>
+                )}
 
                 <SignupModal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
             />
-              </Nav.Link>
-              <Nav.Link
-                className="flex-grow-1 text-center"
-                style={{ fontSize: "23px", marginTop: "10px", display:"flex",
-                justifyContent:"center" }}
-              >
-                <IoPerson />
-              </Nav.Link>
+              </div>
+              
+                
+              
             </Nav>
+            
             <Nav
               className="flex-grow-1"
               style={{ gap: "10%", marginTop: "15px" }}
             >
               <Nav.Link
-                href="#action2"
+                href="/hot"
                 style={{ fontWeight: "bold", fontSize: "18px" }}
               >
-                트랜드
+                Hot
               </Nav.Link>
               <Nav.Link
-                href="/update"
+                href="/now"
                 style={{ fontWeight: "bold", fontSize: "18px" }}
               >
-                최신
+                Now
               </Nav.Link>
-              <Nav.Link
-                href="#action2 "
-                style={{ fontWeight: "bold", fontSize: "18px" }}
-              >
-                피드
-              </Nav.Link>
-              <Button
-                as={Nav.Link}
-                href="#action2"
-                size="lg"
-                style={{
-                  backgroundColor: "#00B0F0",
-                  borderRadius: "30px",
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: "16px",
-                  padding: "13px 22px", // Padding for large button size
-                  display: "inline-block",
-                  textAlign: "center",
-                }}
-                onClick={() => handleShow(true)}
-              >
-                CREATE
-              </Button>
 
+              <div>
+                {user.username ? (
+                  <>
+                    <Nav.Link
+                      href="#action2"
+                      style={{ fontWeight: "bold", fontSize: "18px" }}
+                    >
+                      Like
+                    </Nav.Link>
+                    <hr />
+                  </>
+                ) : (
+                  <hr />
+                )}
+              </div>
+              
+              <div className="text-right text-xs"
+              onClick={async () => {
+                await logOut();
+              }}
+            >
+             로그아웃
+            </div>
+              
+             
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
@@ -133,24 +170,15 @@ export default function MyNavbar() {
               />
             </Nav>
           </Offcanvas.Body>
-          {user.username ? (
-            <div
-              onClick={async () => {
-                await logOut();
-              }}
-            >
-              로그아웃
-            </div>
-          ) : (
-            <Nav.Link
-              href="/sign"
-              style={{ fontWeight: "bold", fontSize: "18px" }}
-            >
-              로그인
-            </Nav.Link>
-          )}
+          
         </Navbar.Offcanvas>
       </Container>
+      
     </Navbar>
   );
 }
+
+
+/*
+ <FaSignInAlt onClick={() => setModalShow(true)} />
+*/

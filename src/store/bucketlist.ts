@@ -1,12 +1,15 @@
 import { Schema, ObjectId } from "mongoose";
 
-export interface Bucket {
+export interface Maker {
   _id: string;
+  username: string;
+}
+
+export interface Bucket {
+  _id: number;
   title: string;
   contents: string;
-  maker: string;
-  bucketItemList: string[];
-  likeUser: string[];
+  maker: Maker;
 }
 
 // _id
