@@ -4,12 +4,12 @@ import { BaseApi } from "./baseAPI";
 
 export default class bucketlistAPI extends BaseApi {
     async getBucketList(){
-        const resp = await this.fetcher.get('/bucket');
+        const resp = await this.fetcher.get('/');
         return resp.data;
     }
 
     async postBucket(title:string, contents:string){
-      const resp=await this.fetcher.post('/bucket',{
+      const resp=await this.fetcher.post('/',{
         title:title,
         contents:contents
       })
