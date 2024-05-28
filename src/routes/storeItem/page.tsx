@@ -2,14 +2,21 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-
+import CreateBucket from "@/components/CreateBucket/CreateBucket";
 function StoreItems(props) {
+  
+  const [showCreateBucketModal, setShowCreateBucketModal] = useState(false);
+
+  const handleShow = () => setShowCreateBucketModal(true);
+  const handleClose = () => setShowCreateBucketModal(false);
+  
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", padding: "20px" }}>
       <h4 style={{ fontWeight: "bold", textAlign: "center", marginBottom:"10%", color:"gray"}}>위시 동영상 저장</h4>
       
       <div style={{ flex: 1 }}>
-        <Button variant="info" style={{borderRadius:"10px", fontSize:"16px", fontWeight:"600", color:"white", marginRight:"15px"}}>+</Button>
+        <Button variant="info" style={{borderRadius:"10px", fontSize:"16px", fontWeight:"600", color:"white", marginRight:"15px"}}
+        onClick={handleShow}>+</Button>
         <span style={{fontSize:"17px", color:"darkgray"}} >새 버킷 추가</span>
       </div>
 
@@ -28,6 +35,7 @@ function StoreItems(props) {
           저장
         </Button>
       </footer>
+      <CreateBucket show={showCreateBucketModal} onHide={handleClose} />
     </div>
   );
 }
