@@ -15,7 +15,7 @@ export default function SignupModal(props) {
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ textAlign:"center"}}>
-        <div style={{ fontSize: "40px", marginBottom: "20px",}}>
+        <div style={{ fontSize: "40px", marginBottom: "20px", display:"flex", justifyContent:"center"}}>
           <img src="/dongdonglogo.png" width="60px" ></img>
         </div>
         <h1

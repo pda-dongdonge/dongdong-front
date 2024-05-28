@@ -66,6 +66,8 @@ export default function MyNavbar() {
                   fontSize: "23px",
                   justifyItems: "center",
                   marginTop: "10px",
+                  display:"flex",
+                  justifyContent:"center"
                 }}
               >
                <FaSignInAlt onClick={() => setModalShow(true)} />
@@ -77,7 +79,8 @@ export default function MyNavbar() {
               </Nav.Link>
               <Nav.Link
                 className="flex-grow-1 text-center"
-                style={{ fontSize: "23px", marginTop: "10px" }}
+                style={{ fontSize: "23px", marginTop: "10px", display:"flex",
+                justifyContent:"center" }}
               >
                 <IoPerson />
               </Nav.Link>
