@@ -7,24 +7,24 @@ export default function BucketNav() {
   return  (
     <Nav className="justify-content-start flex-grow-1" style={{ gap: "5%", marginTop: "15px", marginBottom: "15px"  }}>
         <Nav.Link
-            href="#trend"
+            href="/hot"
             style={{ fontWeight: "bold", fontSize: "18px", color:"black" }}
         >
-            트렌드
+            🔥Hot
         </Nav.Link>
 
         <Nav.Link
-            href="/update"
+            href="/now"
             style={{ fontWeight: "bold", fontSize: "18px", color:"black" }}
         >
-        최신
+        ✨Now
         </Nav.Link>
 
         <Nav.Link
             href="#feed"
             style={{ fontWeight: "bold", fontSize: "18px", color:"black" }}
             >
-        피드
+        💖Like
         </Nav.Link>
     </Nav>
   );

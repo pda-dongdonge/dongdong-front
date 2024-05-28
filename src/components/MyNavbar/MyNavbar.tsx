@@ -57,36 +57,36 @@ export default function MyNavbar() {
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
             <Nav
-              className={`justify-content-around flex-row pb-4 pb-${EXPAND_BREAKPOINT}-0 `}
-              style={{ gap: "50px" }}
+              className={`flex-row pb-4 pb-${EXPAND_BREAKPOINT}-0 `}
+              style={{ gap: "50px"}}
             >
-              {user.username ? (
-                <Nav.Link
-                  className="flex-grow-1 text-center"
-                  style={{ fontSize: "23px", marginTop: "10px" }}
-                >
-                  <IoPerson />
-                  <span>{user.username}님</span>
-                </Nav.Link>
-              ) : (
-                <Nav.Link
-                  className="flex-grow-1 text-center"
-                  style={{
-                    fontSize: "23px",
-                    justifyItems: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  <FaSignInAlt onClick={() => setModalShow(true)} />
-                  <SignupModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                  />
-                </Nav.Link>
-              )}
+              <Nav.Link
+                className="flex-grow-1 text-center"
+                style={{
+                  fontSize: "23px",
+                  justifyItems: "center",
+                  marginTop: "10px",
+                  display:"flex",
+                  justifyContent:"center"
+                }}
+              >
+               <FaSignInAlt onClick={() => setModalShow(true)} />
+
+                <SignupModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+            />
+              </Nav.Link>
+              <Nav.Link
+                className="flex-grow-1 text-center"
+                style={{ fontSize: "23px", marginTop: "10px", display:"flex",
+                justifyContent:"center" }}
+              >
+                <IoPerson />
+              </Nav.Link>
             </Nav>
             <Nav
-              className="justify-content-start flex-grow-1"
+              className="flex-grow-1"
               style={{ gap: "10%", marginTop: "15px" }}
             >
               <Nav.Link

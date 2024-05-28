@@ -1,38 +1,45 @@
 import { useEffect, useState } from "react";
-import {SingleImage, TwoImages, MultipleImages } from "./BucketItemList";
 import BucketItemImg from "./BucketItemImg";
-import SingleImg from "./SingleImg";
-import TwoImg from "./TwoImg";
-import MoreImg from "./MoreImg";
+import SingleImg from "../bucketlistItem/SingleImg";
+import TwoImg from "../bucketlistItem/TwoImg";
+import MoreImg from "../bucketlistItem/MoreImg";
+import axios from "axios";
+import bucketlistAPI from "@/apis/bucketlistAPI";
+
+const { VITE_BASE_URL } = import.meta.env;
 
 export default function BucketItem({ bucket, handleClick }) {
-    const [img, setImg] = useState<number | undefined>(undefined);
-    const images: string[] = [
-        "https://i.ytimg.com/vi/77gZ0ECks0A/hq720.jpg",
-      // "https://i.ytimg.com/vi/qwmSWtkAIQo/hq720.jpg",
-       //"https://i.ytimg.com/vi/77gZ0ECks0A/hq720.jpg",
-        // 추가 이미지 URL들...
-    ];
-    useEffect(() => {
-        let imgValue: number = 0;
-        if (images.length === 1) {
-            imgValue = 1;
-        } else if (images.length === 2) {
-            imgValue = 2;
-        } else {
-            imgValue = 3;
-        }
-        setImg(imgValue);
-    }, []); // 컴포넌트가 마운트될 때 한 번만 실행
+    const service = new bucketlistAPI(VITE_BASE_URL + "");
 
+    const [img, setImg] = useState<number | undefined>(undefined);
+    const [bucketImg, setBucketImg] = useState<number[]>([]);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const img = await service.getBucketItemUrl(bucket._id);
+                setBucketImg(img);
+    
+                let imgValue: number = img.length; // 이미지의 수를 imgValue에 저장
+                setImg(imgValue);
+            } catch (error) {
+                console.error("Error fetching image:", error);
+            }
+        };
+    
+        fetchData();
+    }, []); // 컴포넌트가 마운트될 때 한 번만 실행
+   
+    // img 값에 따라 적절한 컴포넌트를 선택하여 렌더링
     let linkComponent;
     if (img === 1) {
-        linkComponent = <SingleImg src= {images[0]} />;
+        linkComponent = <SingleImg src={bucketImg[0]} />;
     } else if (img === 2) {
-        linkComponent = <TwoImg src1={images[0]} src2={images[1]} />;
-    } else if (img && img > 2) {
-        linkComponent = <MoreImg srcArray={images} />;
-    }
+        linkComponent = <TwoImg src1={bucketImg[0]} src2={bucketImg[1]} />;
+    } else if (img > 2) {
+        linkComponent = <MoreImg srcArray={bucketImg} />;
+    } 
+    
 
     return (
     <>

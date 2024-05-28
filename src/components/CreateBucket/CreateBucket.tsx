@@ -2,7 +2,26 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { useBucketlist } from "../../hooks/useBucketlist";
 function CreateBucket(props) {
+  const [bucketName, setBucketName] = useState("");
+  const [bucketDescription, setBucketDescription] = useState("");
+  const {addBucket}=useBucketlist();
+  const handleNameChange = (e) => {
+    setBucketName(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setBucketDescription(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    // 여기에 제출 로직을 추가합니다.
+    console.log("Bucket Name:", bucketName);
+    console.log("Bucket Description:", bucketDescription);
+    await addBucket(bucketName, bucketDescription);
+  };
+
   return (
     <>
       <Modal {...props}>
@@ -31,6 +50,7 @@ function CreateBucket(props) {
                 borderBottom: "3px solid #6066FF",
                 marginBottom: "40px",
               }}
+              onChange={handleNameChange}
             />
             <Form.Label
               htmlFor="inputPassword5"
@@ -46,6 +66,7 @@ function CreateBucket(props) {
                 border: "3px solid #6066FF",
                 height: "200px",
               }}
+              onChange={handleDescriptionChange}
             />
           </p>
         </Modal.Body>
@@ -56,10 +77,11 @@ function CreateBucket(props) {
                 backgroundColor: "#00B0F0",
                 borderRadius: "20px",
                 border: "none",
-                height: "70px",
+                height: "60px",
                 fontSize: "20px",
                 fontWeight: "bold",
               }}
+              onClick={handleSubmit}
             >
               CREATE NEW BUCKET
             </Button>
