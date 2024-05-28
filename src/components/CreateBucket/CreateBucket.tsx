@@ -20,8 +20,8 @@ function CreateBucket(props) {
     console.log("Bucket Name:", bucketName);
     console.log("Bucket Description:", bucketDescription);
     await addBucket(bucketName, bucketDescription);
-    // 예: 서버에 데이터 전송 또는 상태 업데이트
   };
+
   return (
     <>
       <Modal {...props}>
@@ -77,7 +77,7 @@ function CreateBucket(props) {
                 backgroundColor: "#00B0F0",
                 borderRadius: "20px",
                 border: "none",
-                height: "70px",
+                height: "60px",
                 fontSize: "20px",
                 fontWeight: "bold",
               }}

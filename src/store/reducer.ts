@@ -1,6 +1,6 @@
 // src/store/reducer.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import {RootState} from "./store";
 interface UserState {
   email: string | null;
   username: string | null;

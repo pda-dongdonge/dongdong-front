@@ -2,12 +2,70 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { useAuth } from "@/hooks/useAuth";
+import { useRef, useState } from "react";
+import { IAuth } from "@/apis/authAPI";
+interface IAuthWithConfirm extends IAuth {
+  confirmPassword: string;
+}
+type Props = {
+  show: boolean;
+  onHide: () => void;
+};
+export default function SignupModal(props: Props) {
+  const { signUp, isEmailVerify } = useAuth();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-export default function SignupModal(props) {
+  const [formData, setFormData] = useState<IAuthWithConfirm>({
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleEmailCheck = async () => {
+    if (emailRef.current) {
+      const email = emailRef.current.value;
+      const res = await isEmailVerify(email);
+      if (res) {
+        //이메일 사용가능 팝업 띄우기
+        alert("사용가능");
+      } else {
+        alert("중복이요");
+      }
+    }
+  };
+
+  const handleSubmit = async () => {
+    setError(null);
+    setSuccess(null);
+
+    const { email, username, password, confirmPassword, phone } = formData;
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const res = await signUp({ email, username, password, phone });
+      setSuccess(`Sign up successful! ${res.username}`);
+    } catch (error) {
+      setError("Sign up failed. Please try again.");
+    }
+  };
   return (
     <Modal
       {...props}
-      size="md"
+      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -35,15 +93,20 @@ export default function SignupModal(props) {
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               style={{ borderColor: "#6066FF", border: "2px solid #6066FF" }}
+              onChange={handleChange}
+              name={"username"}
             />
           </InputGroup>
 
           <InputGroup className="mb-3">
             <Form.Control
+              ref={emailRef}
               placeholder="E-mail"
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               style={{ borderColor: "#6066FF", border: "2px solid #6066FF" }}
+              onChange={handleChange}
+              name={"email"}
             />
             <Button
               variant="secondary"
@@ -53,6 +116,7 @@ export default function SignupModal(props) {
                 border: "none",
                 color: "white",
               }}
+              onClick={handleEmailCheck}
             >
               CHECK
             </Button>
@@ -63,6 +127,8 @@ export default function SignupModal(props) {
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               style={{ borderColor: "#6066FF", border: "2px solid #6066FF" }}
+              onChange={handleChange}
+              name={"phone"}
             />
           </InputGroup>
           <InputGroup className="mb-3">
@@ -72,6 +138,8 @@ export default function SignupModal(props) {
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               style={{ borderColor: "#6066FF", border: "2px solid #6066FF" }}
+              onChange={handleChange}
+              name={"password"}
             />
           </InputGroup>
           <InputGroup className="mb-3">
@@ -81,11 +149,14 @@ export default function SignupModal(props) {
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               style={{ borderColor: "#6066FF", border: "2px solid #6066FF" }}
+              onChange={handleChange}
+              name={"confirmPassword"}
             />
           </InputGroup>
         </p>
       </Modal.Body>
       <Modal.Footer style={{ borderTop: "none" }}>
+        {error && <span>{error}</span>}
         <div className="d-grid gap-2" style={{ width: "100%" }}>
           <Button
             style={{
@@ -95,6 +166,7 @@ export default function SignupModal(props) {
               borderRadius: "20px",
               fontWeight: "500",
             }}
+            onClick={handleSubmit}
           >
             Register
           </Button>

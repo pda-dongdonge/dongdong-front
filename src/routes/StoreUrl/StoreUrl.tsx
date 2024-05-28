@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-
+import './storeurl.css';
  function StoreUrlModal(props) {
   return (
     <Modal
@@ -11,6 +11,7 @@ import InputGroup from "react-bootstrap/InputGroup";
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="slide-up-modal"
     >
       <Modal.Header closeButton style={{ borderBottom: "none" }}>
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>

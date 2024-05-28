@@ -23,7 +23,6 @@ const routers = [
         element: <UpdatePage />,
         index: true,
       },
-      
     ],
   },
   {
@@ -39,20 +38,20 @@ const routers = [
     // index: true,
   },
   {
-    path:"/storeItem",
-    element:<StoreItems/>,
+    path: "/storeItem",
+    element: <StoreItems />,
     index: true,
-  }
-  ,
+  },
   {
-    path:"/storeUrl",
-    element:<StoreUrl/>,
-    index:true
+    path: "/storeUrl",
+    element: <StoreUrl />,
+    index: true,
   },
   {
     path: "/bucketlist/:bucketId",
-    element: <BucketDetailPage />
-  }, {
+    element: <BucketDetailPage />,
+  },
+  {
     path: "/trend",
     element: <BoardLayout />,
     children: [
@@ -75,7 +74,7 @@ const routers = [
       },
     ],
     // index: true,
-  }
+  },
 ];
 const router = createBrowserRouter(routers);
 
