@@ -2,24 +2,26 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { useBucketlist } from "../../hooks/useBucketlist";
 function CreateBucket(props) {
   const [bucketName, setBucketName] = useState("");
   const [bucketDescription, setBucketDescription] = useState("");
-
-
-  const handleNameChange=(e)=>{
+  const {addBucket}=useBucketlist();
+  const handleNameChange = (e) => {
     setBucketName(e.target.value);
-  }
-  const handleDescriptionChange=(e)=>{
+  };
+
+  const handleDescriptionChange = (e) => {
     setBucketDescription(e.target.value);
-  }
-  const handleSubmit=()=>{
-    console.log(bucketName);
-    console.log(bucketDescription);
+  };
 
+  const handleSubmit = async () => {
+    // 여기에 제출 로직을 추가합니다.
+    console.log("Bucket Name:", bucketName);
+    console.log("Bucket Description:", bucketDescription);
+    await addBucket(bucketName, bucketDescription);
+  };
 
-
-  }
   return (
     <>
       <Modal {...props}>
