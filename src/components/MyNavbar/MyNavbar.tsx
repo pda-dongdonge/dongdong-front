@@ -1,6 +1,4 @@
 import { Container, Nav, Navbar, Offcanvas, Button } from "react-bootstrap";
-import { FaSignInAlt } from "react-icons/fa";
-import { IoPerson } from "react-icons/io5";
 import React from "react";
 import { useState } from "react";
 import CreateBucket from "../CreateBucket/CreateBucket";
@@ -19,8 +17,6 @@ export default function MyNavbar() {
     setFullscreen(breakpoint);
     setCreateShow(true);
   }
-
-  
 
   return (
     <Navbar
@@ -116,9 +112,6 @@ export default function MyNavbar() {
                   onHide={() => setModalShow(false)}
             />
               </div>
-              
-                
-              
             </Nav>
             
             <Nav
@@ -154,15 +147,23 @@ export default function MyNavbar() {
                 )}
               </div>
               
-              <div className="text-right text-xs"
-              onClick={async () => {
-                await logOut();
-              }}
-            >
-             로그아웃
-            </div>
+
+              <div className="text-right text-xs">
+                {user.username ? (
+                    <>
+                      <div onClick={async () => {await logOut();}}>
+                        로그아웃
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                    <div onClick={() => setModalShow(true)} >
+                      회원가입
+                    </div>
+                  </>
+                  )}
+              </div>
               
-             
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
@@ -177,8 +178,3 @@ export default function MyNavbar() {
     </Navbar>
   );
 }
-
-
-/*
- <FaSignInAlt onClick={() => setModalShow(true)} />
-*/
