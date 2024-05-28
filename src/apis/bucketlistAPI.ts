@@ -4,7 +4,7 @@ import { BaseApi } from "./baseAPI";
 
 export default class bucketlistAPI extends BaseApi {
     async getBucketList(){
-        const resp = await this.fetcher.get('/');
+        const resp = await this.fetcher.get('/bucket');
         return resp.data;
     }
 
