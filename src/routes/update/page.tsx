@@ -6,26 +6,32 @@ import axios from "axios";
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "./BucketItem";
 const { VITE_BASE_URL } = import.meta.env;
+
 export default function UpdatePage() {
 const [bucketList, setBucketList] = useState<Bucket[]>([]);
 
-const service = new bucketlistAPI(VITE_BASE_URL + "");
 
+const service = new bucketlistAPI(VITE_BASE_URL + "");
 
 //최신 순으로 하려면 역순으로 해야함
 useEffect(() => {
-  service.getBucketList().then((data) => {
-    const reversedData = data.reverse();
-    setBucketList(reversedData);
-    console.log(reversedData);
-  });
+  const fetchBucketData = async () => {
+    try {
+      const data = await service.getBucketList();
+      const reversedData = data.reverse();
+      setBucketList(reversedData);
+    
+    } catch (error) {
+      console.error("Error fetching bucket data:", error);
+    }
+  };
+
+  fetchBucketData();
 }, []);
 
-
-
-    const UserClick = (bucket: Bucket) => {
-        console.log(bucket);
-      };
+  const UserClick = (bucket: Bucket) => {
+    console.log(bucket);
+  };
 
   return  (
     <>
