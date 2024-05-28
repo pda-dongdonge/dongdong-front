@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import {SingleImage, TwoImages, MultipleImages } from "./BucketItemList";
 import BucketItemImg from "./BucketItemImg";
-import SingleImg from "./SingleImg";
-import TwoImg from "./TwoImg";
-import MoreImg from "./MoreImg";
+import SingleImg from "../bucketlistItem/SingleImg";
+import TwoImg from "../bucketlistItem/TwoImg";
+import MoreImg from "../bucketlistItem/MoreImg";
 import axios from "axios";
 import bucketlistAPI from "@/apis/bucketlistAPI";
 

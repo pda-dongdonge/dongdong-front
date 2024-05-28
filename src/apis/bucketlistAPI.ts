@@ -15,11 +15,14 @@ export default class bucketlistAPI extends BaseApi {
       })
       return resp.data;
     }
-    
-      }
 
       async getBucketItemUrl(bucketId: number){
         const resp = await this.fetcher.get(`/bucket/${bucketId}`);
+        return resp.data;
+      }
+
+      async getHotBucketList(){
+        const resp = await this.fetcher.get('/hotbucket');
         return resp.data;
       }
 }
