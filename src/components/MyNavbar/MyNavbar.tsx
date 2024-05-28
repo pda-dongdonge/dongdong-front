@@ -34,9 +34,7 @@ export default function MyNavbar() {
           <img
             src="/dongdonglogo.png"
             style={{
-              width: "60px",
-              marginRight: "20px",
-              marginLeft: "20px",
+              width: "60px"
             }}
           ></img>
          
@@ -47,7 +45,7 @@ export default function MyNavbar() {
           href="#action2"
           size="lg"
           style={{
-            backgroundColor: "#00B0F0",
+            backgroundColor: "#7758F6",
             borderRadius: "30px",
             color: "white",
             fontWeight: "bold",
