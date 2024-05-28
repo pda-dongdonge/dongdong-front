@@ -1,6 +1,6 @@
-import { RootState } from "@reduxjs/toolkit/query";
+// import { RootState } from "@reduxjs/toolkit/query";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import bucketlistAPI from "../apis/bucketlistAPI";
 
 const { VITE_BASE_URL } = import.meta.env;
@@ -10,6 +10,6 @@ export function useBucketlist() {
   const service = new bucketlistAPI(VITE_BASE_URL + "bucket");
 
   return {
-    getBucketList
+    // getBucketList
   };
 }
