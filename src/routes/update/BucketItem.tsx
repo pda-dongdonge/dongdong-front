@@ -53,7 +53,7 @@ export default function BucketItem({ bucket, handleClick }) {
             <div className="flex flex-col items-center justify-center w-1/6">
                 <img className="rounded-full w-8 my-1" src="public\dummy-profile.png" alt="Dongdong"/>
                 <div className="font-bold truncate w-full text-center"> 
-                    {user.username ? "버킷작성한 userId": "동동이"}
+                    { bucket.maker.username? bucket.maker.username: "동동이"}
                 </div>
             </div>
 
