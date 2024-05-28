@@ -1,10 +1,29 @@
 import React from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import './storeurl.css';
  function StoreUrlModal(props) {
+  const [link, setLink] = useState("");
+  const [comment, setComment] = useState("");
+  const handleLinkChange = (e) => {
+    setLink(e.target.value);
+  };
+
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
+  const handleClick=()=>{
+    if (!link.trim() || !comment.trim()) {
+      alert("링크와 내용을 모두 입력해주세요.");
+      return;
+    }
+    console.log(link);
+    console.log(comment);
+
+  }
   return (
     <Modal
       {...props}
@@ -39,6 +58,7 @@ import './storeurl.css';
           placeholder="영상 링크를 붙여넣어주세요"
           aria-label="Username"
           aria-describedby="basic-addon1"
+          onChange={handleLinkChange}
           
         />
       </InputGroup>
@@ -49,6 +69,7 @@ import './storeurl.css';
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               style={{ borderColor: "#6066FF", border: "2px solid #6066FF", borderRadius:"7px"}}
+              onChange={handleCommentChange}
             />
           </InputGroup>
         </p>
@@ -63,6 +84,7 @@ import './storeurl.css';
               borderRadius: "20px",
               fontWeight: "500",
             }}
+            onClick={handleClick}
           >
             저장
           </Button>
