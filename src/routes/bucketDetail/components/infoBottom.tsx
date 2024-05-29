@@ -33,9 +33,9 @@ export default function InfoBottom() {
       />
       <div onClick={() => heartClick()}>
         {valid ? (
-          <IoIosHeart className="cursor-pointer" size='18' color="#ff869b" />
+          <IoIosHeart className="cursor-pointer" size='19' color="#ff869b" />
         ) : (
-          <IoIosHeartEmpty className="cursor-pointer" size='18' color="#ff869b"/>
+          <IoIosHeartEmpty className="cursor-pointer" size='19' color="#ff869b"/>
         )}
       </div>
     </>
