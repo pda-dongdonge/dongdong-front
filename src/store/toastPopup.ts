@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { RootState } from "./store";
 
-const { TOAST_AVAILABLE_TIME } = import.meta.env;
-
 interface Toast{
     id: number;
     message: string;
@@ -24,25 +22,31 @@ const toastSlice = createSlice({
     reducers: {
         showToast: (state, action: PayloadAction<Toast>) => {
             const newToast:Toast = {
-                id: action.payload.id || Date.now(),
+                id: action.payload.id,
+                // || Date.now(),
                 message: action.payload.message
             };
+            // console.log('showToast action : ', action.payload);
 
             // 새로운 toast 추가
             state.popupList = [...state.popupList, newToast];
             console.log(state.popupList);
 
-            // 일정 시간 후 toastList에서 삭제
-            setTimeout(() => {
-                state.popupList = state.popupList.filter((toast)=>toast.id !== newToast.id);
-                // setToastList((currentList) => currentList.filter((toast) => toast.id !== newToast.id));
-              }, TOAST_AVAILABLE_TIME);              
-
+            // 일정 시간 후 toastList에서 삭제 -> reducer에서는 안됨
+            // setTimeout(() => {
+            //     state.popupList = state.popupList.filter((toast)=>toast.id !== newToast.id);
+            //     // setToastList((currentList) => currentList.filter((toast) => toast.id !== newToast.id));
+            //   }, TOAST_AVAILABLE_TIME);
+        },
+        removeToast: (state, action: PayloadAction<number>) => {
+            state.popupList = state.popupList.filter((toast)=>toast.id !== action.payload);
+            console.log('removed: ', state.popupList);
         },
     }
 })
 
 export const {
-    showToast
+    showToast,
+    removeToast,
 } = toastSlice.actions;
 export default toastSlice.reducer;
