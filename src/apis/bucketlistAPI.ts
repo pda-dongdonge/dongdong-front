@@ -73,6 +73,13 @@ export default class bucketlistAPI extends BaseApi {
         const resp=await this.fetcher.get(`/bucket/feed/${userId}`);
         return resp.data;
       }
+
+      async patchLikeBucket(bucketId: string) {
+        const resp = await this.fetcher.patch(`/like`, {
+          bucketId: bucketId,
+        })
+        return resp;
+      }
 }
 
 /*

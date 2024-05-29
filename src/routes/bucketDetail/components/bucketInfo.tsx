@@ -39,7 +39,7 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
         <PhotoGrid imageList={photoList} />
       </div>
       <div className="px-[1.2rem] flex flex-row-reverse gap-[13px] translate-y-[68%]">
-        <InfoBottom />
+        <InfoBottom bucketId={bucketDetail._id}/>
       </div>
     </div>
   );

@@ -3,15 +3,26 @@ import { useState } from "react";
 import { showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
 import { FaRegCopy } from "react-icons/fa6";
+import { useBucketlist } from "@/hooks/useBucketlist";
 
-export default function InfoBottom() {
+type InfoBottomProps = {
+  bucketId: string;
+}
+
+export default function InfoBottom({bucketId}:InfoBottomProps) {
   const [valid, setValid] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const {likeBucket} = useBucketlist();
 
   const heartClick = (): // e:React.ChangeEvent<HTMLInputElement>
   void => {
     setValid((prev) => !prev);
     //나중에 로직 추가하기
+    likeBucket(bucketId).then(res=>{
+      if (res?.status === 200) {
+        dispatch(showToast({id: Date.now(), message: res.data.message}))
+      }
+    });
   };
 
   const copyToClipboard = async (): Promise<void> => {
