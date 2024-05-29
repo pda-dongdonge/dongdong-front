@@ -20,8 +20,6 @@ export default function MyNavbar() {
     setCreateShow(true);
   }
 
-  
-
   return (
     <Navbar
       expand={EXPAND_BREAKPOINT}
@@ -34,10 +32,9 @@ export default function MyNavbar() {
           <img
             src="/dongdonglogo.png"
             style={{
-              width: "60px"
+              width: "60px",
             }}
           ></img>
-         
         </Navbar.Brand>
         DONGDONG
         <Button
@@ -56,9 +53,8 @@ export default function MyNavbar() {
           }}
           onClick={() => handleShow(true)}
         >
-        CREATE
+          CREATE
         </Button>
-
         <Navbar.Toggle aria-controls={`Navbar-expand-${EXPAND_BREAKPOINT}`} />
         <Navbar.Offcanvas
           id={`Navbar-expand-${EXPAND_BREAKPOINT}`}
@@ -75,52 +71,43 @@ export default function MyNavbar() {
                   marginLeft: "20px",
                 }}
               ></img>
-              
             </Offcanvas.Title>
-            <div>
-            Dongdong
-            </div>
-            
+            <div>Dongdong</div>
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
             <Nav
               className={`flex-row pb-4 pb-${EXPAND_BREAKPOINT}-0 `}
-              style={{ gap: "50px"}}
+              style={{ gap: "50px" }}
             >
-              <div
-                className="flex-grow-1 rounded-md py-3.5 pl-5 pr-5 bg bg-violet-50"
-              >
-               
-               {user.username ? (
-                <Nav.Link
-                href="user">
-                  <div className="flex-row flex items-center justify-between  font-bold text-sm">
-                    {user.username}
-                    <img className="rounded-full w-10" src="public\dummy-profile.png"/>
-                  </div>
-                  <div className="flex-row flex items-center text-xs">
-                  내 버킷 <IoIosArrowForward />
-                  </div>
+              <div className="flex-grow-1 rounded-md py-3.5 pl-5 pr-5 bg bg-violet-50">
+                {user.username ? (
+                  <Nav.Link href="user">
+                    <div className="flex-row flex items-center justify-between  font-bold text-sm">
+                      {user.username}
+                      <img
+                        className="rounded-full w-10"
+                        src="public\dummy-profile.png"
+                      />
+                    </div>
+                    <div className="flex-row flex items-center text-xs">
+                      내 버킷 <IoIosArrowForward />
+                    </div>
                   </Nav.Link>
                 ) : (
-                <Nav.Link
-                  href="sign">
-                  <div className="flex-row flex items-center  font-bold text-sm">
-                  로그인 <IoIosArrowForward />
-                  </div>
-                </Nav.Link>
+                  <Nav.Link href="sign">
+                    <div className="flex-row flex items-center  font-bold text-sm">
+                      로그인 <IoIosArrowForward />
+                    </div>
+                  </Nav.Link>
                 )}
 
                 <SignupModal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
-            />
+                />
               </div>
-              
-                
-              
             </Nav>
-            
+
             <Nav
               className="flex-grow-1"
               style={{ gap: "10%", marginTop: "15px" }}
@@ -153,16 +140,16 @@ export default function MyNavbar() {
                   <hr />
                 )}
               </div>
-              
-              <div className="text-right text-xs"
-              onClick={async () => {
-                await logOut();
-              }}
-            >
-             로그아웃
-            </div>
-              
-             
+
+              <div
+                className="text-right text-xs"
+                onClick={async () => {
+                  await logOut();
+                }}
+              >
+                로그아웃
+              </div>
+
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
@@ -170,14 +157,11 @@ export default function MyNavbar() {
               />
             </Nav>
           </Offcanvas.Body>
-          
         </Navbar.Offcanvas>
       </Container>
-      
     </Navbar>
   );
 }
-
 
 /*
  <FaSignInAlt onClick={() => setModalShow(true)} />

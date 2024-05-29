@@ -29,10 +29,10 @@ export default class userAPI extends BaseApi {
   // follow: true = 팔로우할게요. follow:false = 언팔할게요.
   async follow({ userId, follow }: IFollow) {
     try {
-      await this.fetcher.post(`/follow/${userId}`, {
+      const resp = await this.fetcher.post(`/follow/${userId}`, {
         follow,
       });
-      return true;
+      return resp.data;
     } catch {
       console.log("fail to follow");
     }

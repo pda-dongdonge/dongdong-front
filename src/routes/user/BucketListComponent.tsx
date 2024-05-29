@@ -80,7 +80,7 @@ export default function BucketListComponent({ tab }: Props) {
       likeUser: [],
     },
     {
-      _id: "a42fasdg242",
+      _id: "a42fasd33g242",
       title: "먹방리스트",
       content: "예아아아아아",
       maker: "fsi09fsdsfh",
@@ -97,7 +97,7 @@ export default function BucketListComponent({ tab }: Props) {
       likeUser: [],
     },
     {
-      _id: "a4241fasdg242",
+      _id: "a4241fas11dg242",
       title: "드라마 탑10",
       content: "예아아아아아",
       maker: "fsi09fsdsfh",
@@ -121,7 +121,7 @@ export default function BucketListComponent({ tab }: Props) {
       likeUser: [],
     },
     {
-      _id: "afw42fasdg242",
+      _id: "afw42fa41sdg242",
       title: "동물동물",
       content: "예아아아아아",
       maker: "fsi09fsdsfh",
@@ -152,7 +152,7 @@ export default function BucketListComponent({ tab }: Props) {
       likeUser: [],
     },
     {
-      _id: "f2fsda42fasdg242",
+      _id: "f2fsda42414fasdg242",
       title: "고양이 영상",
       content: "예아아아아아",
       maker: "fsi09fsdsfh",

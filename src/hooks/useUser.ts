@@ -26,22 +26,20 @@ export default function useUser() {
     }
   }
 
-  async function follow() {
+  async function follow(profileId: string) {
     if (!user._id) {
       return console.log("로그인하세요");
     }
-    const res = await service.follow({ userId: user._id, follow: true });
-    if (res) return true;
-    return false;
+    const res = await service.follow({ userId: profileId, follow: true });
+    return res;
   }
 
-  async function unFollow() {
+  async function unFollow(profileId: string) {
     if (!user._id) {
       return console.log("로그인하세요");
     }
-    const res = await service.follow({ userId: user._id, follow: false });
-    if (res) return true;
-    return false;
+    const res = await service.follow({ userId: profileId, follow: false });
+    return res;
   }
 
   return { getUserProfile, follow, unFollow };

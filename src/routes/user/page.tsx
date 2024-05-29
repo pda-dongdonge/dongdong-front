@@ -16,8 +16,7 @@ export default function UserPage() {
   const tab = queryParams.get("tab") || "bucket";
   const { userId } = useParams();
   const [currentTab, setCurrentTab] = useState(tab);
-  const { getUserProfile, follow, unFollow } = useUser();
-
+  const { getUserProfile } = useUser();
   useEffect(() => {
     setCurrentTab(tab);
   }, [tab]);
@@ -33,7 +32,10 @@ export default function UserPage() {
 
   return (
     <div className="userPage basis-0 shrink grow flex-col">
-      <ProfileComponent userInfo={userprofileInfo} />
+      <ProfileComponent
+        userInfo={userprofileInfo}
+        setUserInfo={setUserProfileInfo}
+      />
       <MenuComponent tab={currentTab} />
       <BucketListComponent tab={currentTab} />
     </div>
