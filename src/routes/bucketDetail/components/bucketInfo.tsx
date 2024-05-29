@@ -18,7 +18,7 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
   // console.log(photoList);
   const navigate = useNavigate();
   return (
-    <div className="w-full max-w-[500px] shadow-lg h-[433px] rounded-[2rem]">
+    <div className="w-full max-w-[500px] shadow-lg min-h-[433px] pb-[1.75rem] rounded-[2rem]">
       <div className="w-full h-[50px] rounded-t-[2rem] bg-purple-400 relative">
         <img
           src={dummyProfileImg}
@@ -33,7 +33,8 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
         </p>
       </div>
       <div className="px-[1rem] pt-[1.5rem]">
-        <p>{bucketDetail.contents}</p>
+        <p className="m-0">{bucketDetail.title}</p>
+        <p className="text-slate-500 text-sm">{bucketDetail.contents}</p>
       </div>
       <div className="px-[1rem]">
         <PhotoGrid imageList={photoList} />
