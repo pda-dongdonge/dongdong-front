@@ -19,7 +19,7 @@ export default function InfoBottom() {
   const copyToClipboard = async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      dispatch(showToast({id: Date.now(), message: "copied!"}));
+      dispatch(showToast({ id: Date.now(), message: "copied!" }));
     } catch (error) {
       alert("failed");
     }
@@ -30,7 +30,7 @@ export default function InfoBottom() {
       <img
         className="w-[20px] cursor-pointer"
         src={shareIcon}
-        onClick={()=>copyToClipboard()}
+        onClick={() => copyToClipboard()}
       />
       <div onClick={() => heartClick()}>
         {valid ? (
