@@ -38,7 +38,7 @@ export default function InfoBottom({bucketId}:InfoBottomProps) {
   const copyToClipboard = async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      dispatch(showToast({id: Date.now(), message: "copied!"}));
+      dispatch(showToast({ id: Date.now(), message: "copied!" }));
     } catch (error) {
       alert("failed");
     }

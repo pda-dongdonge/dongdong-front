@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import authAPI, { IAuth } from "../apis/authAPI";
+import { setUser, clearUser } from "../store/user";
 import { useEffect, useState } from "react";
-import { setUser, clearUser } from "../store/reducer";
 import { RootState } from "../store/store";
 
 const { VITE_BASE_URL } = import.meta.env;
@@ -9,14 +9,21 @@ export function useAuth() {
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const service = new authAPI(VITE_BASE_URL + "auth");
-  const [user_id,setUser_id]= useState<string | undefined>(undefined);
+  const [user_id, setUser_id] = useState<string | undefined>(undefined);
 
   // POST login
   async function login(email: string, password: string) {
     try {
       const res = await service.login(email, password);
       if (res) {
-        dispatch(setUser({ email: res.email, username: res.username }));
+        dispatch(
+          setUser({
+            email: res.email,
+            username: res.username,
+            _id: res._id,
+            phone: res.phone,
+          })
+        );
       } else {
         console.error("Login failed");
       }
@@ -37,7 +44,14 @@ export function useAuth() {
         password,
       });
       if (res) {
-        dispatch(setUser({ email: res.email, username: res.username }));
+        dispatch(
+          setUser({
+            _id: res._id,
+            phone: res.phone,
+            email: res.email,
+            username: res.username,
+          })
+        );
         return res;
       } else {
         console.error("signup failed");
@@ -76,9 +90,16 @@ export function useAuth() {
       if (!user.email) {
         const res = await service.isLogin();
         console.log(res);
-        setUser_id(res._id)
+        setUser_id(res._id);
         if (res) {
-          dispatch(setUser({ email: res.email, username: res.username }));
+          dispatch(
+            setUser({
+              _id: res._id,
+              phone: res.phone,
+              email: res.email,
+              username: res.username,
+            })
+          );
         }
       }
     }
