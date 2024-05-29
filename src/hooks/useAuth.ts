@@ -36,7 +36,14 @@ export function useAuth() {
         password,
       });
       if (res) {
-        dispatch(setUser({ email: res.email, username: res.username }));
+        dispatch(
+          setUser({
+            _id: res._id,
+            phone: res.phone,
+            email: res.email,
+            username: res.username,
+          })
+        );
         return res;
       } else {
         console.error("signup failed");
@@ -76,7 +83,14 @@ export function useAuth() {
         const res = await service.isLogin();
         console.log(res);
         if (res) {
-          dispatch(setUser({ email: res.email, username: res.username }));
+          dispatch(
+            setUser({
+              _id: res._id,
+              phone: res.phone,
+              email: res.email,
+              username: res.username,
+            })
+          );
         }
       }
     }

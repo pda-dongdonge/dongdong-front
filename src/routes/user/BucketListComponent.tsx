@@ -194,7 +194,7 @@ export default function BucketListComponent({ tab }: Props) {
       <div className="bucket grid grid-cols-2 gap-4">
         {dummyBucket &&
           dummyBucket.map((bucket) => {
-            return <BucketItem bucket={bucket}></BucketItem>;
+            return <BucketItem key={bucket._id} bucket={bucket}></BucketItem>;
           })}
       </div>
     </div>

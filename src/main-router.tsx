@@ -70,7 +70,7 @@ const routers = [
     // index: true,
   },
   {
-    path: "/user",
+    path: "/user/:userId",
     element: <BoardLayout />,
     children: [
       {
