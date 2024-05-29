@@ -9,6 +9,7 @@ import BucketDetailPage from "./routes/bucketDetail/page";
 import UserPage from "./routes/user/page";
 import UpdatePage from "./routes/update/page";
 import HotPage from "./routes/hot/page";
+import LikePage from "./routes/like/page";
 const routers = [
   {
     path: "/",
@@ -27,6 +28,11 @@ const routers = [
       {
         path: "now",
         element: <UpdatePage />,
+        index: true,
+      },
+      {
+        path: "like",
+        element: <LikePage />,
         index: true,
       },
     ],

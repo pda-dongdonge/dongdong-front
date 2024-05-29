@@ -1,6 +1,4 @@
 import { Container, Nav, Navbar, Offcanvas, Button } from "react-bootstrap";
-import { FaSignInAlt } from "react-icons/fa";
-import { IoPerson } from "react-icons/io5";
 import React from "react";
 import { useState } from "react";
 import CreateBucket from "../CreateBucket/CreateBucket";
@@ -20,26 +18,45 @@ export default function MyNavbar() {
     setCreateShow(true);
   }
 
-  
-
   return (
+    <>
+    <style>
+      {`
+        .jua-regular {
+          font-family: "Jua", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+      `}
+    </style>
+
     <Navbar
-      expand={EXPAND_BREAKPOINT}
-      className="mb-3"
-      sticky="top"
-      style={{ backgroundColor: "white", padding: "20px" }}
-    >
-      <Container fluid>
+        expand={EXPAND_BREAKPOINT}
+        className="mb-3 mx-2"
+        sticky="top"
+        style={{
+          backgroundColor: "white",
+          paddingLeft: "5px",
+          paddingRight: "5px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+
+
+      <div className="flex flex-row justify-between items-center w-100">
+      <div className="flex flex-row items-center gap-10">
         <Navbar.Brand href="/">
           <img
             src="/dongdonglogo.png"
             style={{
               width: "60px"
             }}
-          ></img>
-         
+          />
         </Navbar.Brand>
-        DONGDONG
+        <div className="jua-regular text-2xl">DONGdongE</div>
         <Button
           as={Nav.Link}
           href="#action2"
@@ -56,10 +73,15 @@ export default function MyNavbar() {
           }}
           onClick={() => handleShow(true)}
         >
-        CREATE
+          CREATE
         </Button>
-
+      </div>
+      <div>
         <Navbar.Toggle aria-controls={`Navbar-expand-${EXPAND_BREAKPOINT}`} />
+      </div>
+    </div>
+
+        
         <Navbar.Offcanvas
           id={`Navbar-expand-${EXPAND_BREAKPOINT}`}
           aria-labelledby={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}
@@ -71,15 +93,11 @@ export default function MyNavbar() {
                 src="/dongdonglogo.png"
                 style={{
                   width: "60px",
-                  marginRight: "20px",
-                  marginLeft: "20px",
                 }}
               ></img>
               
             </Offcanvas.Title>
-            <div>
-            Dongdong
-            </div>
+            <div className="jua-regular text-xl ml-5">DONGdongE</div>
             
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
@@ -96,7 +114,7 @@ export default function MyNavbar() {
                 href="user">
                   <div className="flex-row flex items-center justify-between  font-bold text-sm">
                     {user.username}
-                    <img className="rounded-full w-10" src="public\dummy-profile.png"/>
+                    <img className="rounded-full w-10" src="/dummy-profile.png"/>
                   </div>
                   <div className="flex-row flex items-center text-xs">
                   내 버킷 <IoIosArrowForward />
@@ -116,9 +134,6 @@ export default function MyNavbar() {
                   onHide={() => setModalShow(false)}
             />
               </div>
-              
-                
-              
             </Nav>
             
             <Nav
@@ -142,7 +157,7 @@ export default function MyNavbar() {
                 {user.username ? (
                   <>
                     <Nav.Link
-                      href="#action2"
+                      href="like"
                       style={{ fontWeight: "bold", fontSize: "18px" }}
                     >
                       Like
@@ -154,15 +169,23 @@ export default function MyNavbar() {
                 )}
               </div>
               
-              <div className="text-right text-xs"
-              onClick={async () => {
-                await logOut();
-              }}
-            >
-             로그아웃
-            </div>
+
+              <div className="text-right text-xs">
+                {user.username ? (
+                    <>
+                      <div onClick={async () => {await logOut();}}>
+                        로그아웃
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                    <div onClick={() => setModalShow(true)} >
+                      회원가입
+                    </div>
+                  </>
+                  )}
+              </div>
               
-             
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
@@ -172,13 +195,8 @@ export default function MyNavbar() {
           </Offcanvas.Body>
           
         </Navbar.Offcanvas>
-      </Container>
       
     </Navbar>
+    </>
   );
 }
-
-
-/*
- <FaSignInAlt onClick={() => setModalShow(true)} />
-*/

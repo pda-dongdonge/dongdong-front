@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import authAPI, { IAuth } from "../apis/authAPI";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setUser, clearUser } from "../store/reducer";
 import { RootState } from "../store/store";
 
@@ -9,6 +9,7 @@ export function useAuth() {
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const service = new authAPI(VITE_BASE_URL + "auth");
+  const [user_id,setUser_id]= useState<string | undefined>(undefined);
 
   // POST login
   async function login(email: string, password: string) {
@@ -75,6 +76,7 @@ export function useAuth() {
       if (!user.email) {
         const res = await service.isLogin();
         console.log(res);
+        setUser_id(res._id)
         if (res) {
           dispatch(setUser({ email: res.email, username: res.username }));
         }
@@ -88,5 +90,6 @@ export function useAuth() {
     signUp,
     logOut,
     isEmailVerify,
+    user_id,
   };
 }

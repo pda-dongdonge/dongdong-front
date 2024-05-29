@@ -6,6 +6,7 @@ import axios from "axios";
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "./BucketItem";
 const { VITE_BASE_URL } = import.meta.env;
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 export default function UpdatePage() {
 const [bucketList, setBucketList] = useState<Bucket[]>([]);
@@ -35,16 +36,28 @@ useEffect(() => {
 
   return  (
     <>
-    <BucketNav />
+<BucketNav />
 
-    <div>
-        {bucketList.map((bucket) => (
+    <div className="flex flex-wrap justify-between">
+          {bucketList.map(bucket => (
             <BucketItem key={bucket._id} bucket={bucket} handleClick={UserClick} />
-        ))}
-    </div>
-
+          ))}
+      </div>
     
     </>
 
   );
 }
+
+/*
+<div className="p-4">
+    <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+    <Masonry gutter="20px">
+        {bucketList.map((bucket) => (
+            <BucketItem key={bucket._id} bucket={bucket} handleClick={UserClick} />
+        ))}
+      </Masonry>
+    </ResponsiveMasonry>
+
+    </div>
+    */
