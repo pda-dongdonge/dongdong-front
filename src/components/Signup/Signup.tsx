@@ -58,6 +58,7 @@ export default function SignupModal(props: Props) {
     try {
       const res = await signUp({ email, username, password, phone });
       setSuccess(`Sign up successful! ${res.username}`);
+      props.onHide();
     } catch (error) {
       setError("Sign up failed. Please try again.");
     }
@@ -72,9 +73,16 @@ export default function SignupModal(props: Props) {
       <Modal.Header closeButton style={{ borderBottom: "none" }}>
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ textAlign:"center"}}>
-        <div style={{ fontSize: "40px", marginBottom: "20px", display:"flex", justifyContent:"center"}}>
-          <img src="/dongdonglogo.png" width="60px" ></img>
+      <Modal.Body style={{ textAlign: "center" }}>
+        <div
+          style={{
+            fontSize: "40px",
+            marginBottom: "20px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <img src="/dongdonglogo.png" width="60px"></img>
         </div>
         <h1
           style={{
