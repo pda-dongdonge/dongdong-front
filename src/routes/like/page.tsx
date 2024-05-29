@@ -6,6 +6,7 @@ import axios from "axios";
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "../update/BucketItem";
 import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -14,6 +15,7 @@ export default function LikePage() {
     const { user_id, login, logOut } = useAuth();
 
     const service = new bucketlistAPI(VITE_BASE_URL + "");
+    const navigate = useNavigate();
     
     //내가 팔로우 한 것
     useEffect(() => {
@@ -34,6 +36,7 @@ export default function LikePage() {
       
         const UserClick = (bucket: Bucket) => {
           console.log(bucket);
+          navigate(`/bucketlist/${bucket._id}`)
         };
       
     
