@@ -68,6 +68,11 @@ export default class bucketlistAPI extends BaseApi {
         const resp=await this.fetcher.delete(`/${bucketId}`);
         console.log(resp);
       }
+
+      async getBucketListFollowing(userId: string){
+        const resp=await this.fetcher.get(`/bucket/feed/${userId}`);
+        return resp.data;
+      }
 }
 
 /*
