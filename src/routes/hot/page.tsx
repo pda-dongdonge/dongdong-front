@@ -5,12 +5,13 @@ import { Bucket } from "../../store/bucketlist";
 import axios from "axios";
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "../update/BucketItem";
+import { useNavigate } from "react-router-dom";
 
 const { VITE_BASE_URL } = import.meta.env;
 
 export default function HotPage() {
     const [bucketList, setBucketList] = useState<Bucket[]>([]);
-
+    const navigate = useNavigate();
 
     const service = new bucketlistAPI(VITE_BASE_URL + "");
     
@@ -30,7 +31,8 @@ export default function HotPage() {
       }, []);
       
         const UserClick = (bucket: Bucket) => {
-          console.log(bucket);
+          // console.log(bucket);
+          navigate(`/bucketlist/${bucket._id}`)
         };
       
     
