@@ -2,6 +2,11 @@
 // import { Bucket } from "../store/bucketlist";
 import { BaseApi } from "./baseAPI";
 
+export interface IUserInfo {
+  _id: string;
+  username: string;
+}
+
 export interface IBucketItem {
   _id: string;
   imgUrl: string;
@@ -16,6 +21,7 @@ export interface IBucketDetail {
   likeUser: number;
   contents: string;
   bucketItemList: IBucketItem[];
+  maker: IUserInfo;
 }
 
 export default class bucketlistAPI extends BaseApi {
@@ -45,6 +51,22 @@ export default class bucketlistAPI extends BaseApi {
       async getHotBucketList(){
         const resp = await this.fetcher.get('/hotbucket');
         return resp.data;
+      }
+
+
+      async getUserLikeBucketList(userId: string){
+        const resp = await this.fetcher.get(`/userprofile/likebucket/${userId}`);
+        return resp.data;
+      }
+      async getUserBuckets(){
+        const resp = await this.fetcher.get('/user');
+        console.log("data", resp.data);
+        return resp.data; 
+      }
+
+      async deleteBucket(bucketId){
+        const resp=await this.fetcher.delete(`/${bucketId}`);
+        console.log(resp);
       }
 }
 

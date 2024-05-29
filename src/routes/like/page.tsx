@@ -5,34 +5,34 @@ import { Bucket } from "../../store/bucketlist";
 import axios from "axios";
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "../update/BucketItem";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const { VITE_BASE_URL } = import.meta.env;
 
-export default function HotPage() {
+export default function LikePage() {
     const [bucketList, setBucketList] = useState<Bucket[]>([]);
-    const navigate = useNavigate();
+    const { user_id, login, logOut } = useAuth();
 
     const service = new bucketlistAPI(VITE_BASE_URL + "");
     
-    //좋아요 순!!
+    //내가 좋아요 한 것
     useEffect(() => {
-        const fetchBucketData = async () => {
-          try {
-            const data = await service.getHotBucketList();
-            setBucketList(data);
-          
-          } catch (error) {
-            console.error("Error fetching bucket data:", error);
-          }
-        };
-      
-        fetchBucketData();
-      }, []);
+        if (user_id) {
+            const fetchBucketData = async () => {
+                try {
+                    const data = await service.getUserLikeBucketList(user_id);
+                    setBucketList(data);
+                } catch (error) {
+                    console.error("Error fetching bucket data:", error);
+                }
+            };
+
+            fetchBucketData();
+        }
+    }, [user_id]);
       
         const UserClick = (bucket: Bucket) => {
-          // console.log(bucket);
-          navigate(`/bucketlist/${bucket._id}`)
+          console.log(bucket);
         };
       
     

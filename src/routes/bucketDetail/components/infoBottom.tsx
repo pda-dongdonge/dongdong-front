@@ -3,9 +3,12 @@ import shareIcon from "../../../assets/share.svg";
 import heartIcon from "../../../assets/heart.svg";
 import heartFillIcon from "../../../assets/heartFill.svg";
 import { useState } from "react";
+import { showToast } from "@/store/toastPopup";
+import { useDispatch } from "react-redux";
 
 export default function InfoBottom() {
   const [valid, setValid] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const heartClick = (): // e:React.ChangeEvent<HTMLInputElement>
   void => {
@@ -13,10 +16,13 @@ export default function InfoBottom() {
     //나중에 로직 추가하기
   };
 
-  const shareClick = (): // e:React.ChangeEvent<HTMLInputElement>
-  void => {
-    alert("클릭됨");
-    //클립보드에 복사되었습니다! 토스트 팝업으로 띄우기 이쁨게
+  const copyToClipboard = async (): Promise<void> => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      dispatch(showToast({ id: Date.now(), message: "copied!" }));
+    } catch (error) {
+      alert("failed");
+    }
   };
 
   return (
@@ -24,7 +30,7 @@ export default function InfoBottom() {
       <img
         className="w-[20px] cursor-pointer"
         src={shareIcon}
-        onClick={() => shareClick()}
+        onClick={() => copyToClipboard()}
       />
       <div onClick={() => heartClick()}>
         {valid ? (
