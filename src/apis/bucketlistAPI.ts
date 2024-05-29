@@ -2,6 +2,11 @@
 // import { Bucket } from "../store/bucketlist";
 import { BaseApi } from "./baseAPI";
 
+export interface IUserInfo {
+  _id: string;
+  username: string;
+}
+
 export interface IBucketItem {
   _id: string;
   imgUrl: string;
@@ -16,6 +21,7 @@ export interface IBucketDetail {
   likeUser: number;
   contents: string;
   bucketItemList: IBucketItem[];
+  maker: IUserInfo;
 }
 
 export default class bucketlistAPI extends BaseApi {
