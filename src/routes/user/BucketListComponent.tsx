@@ -32,12 +32,12 @@ export default function BucketListComponent({ tab }: Props) {
   return (
     !likeBIsLoading &&
     !makerBIsLoading && (
-      <div className="user-bucketList w-full  min-h-full  py-2 px-4">
-        <div>
-          <p className="text-dark-500 m-2 mb-3">{`${cnt}개의 바구니`}</p>
+      <div className="user-bucketList w-full  min-h-full  py-2 px-4 flex flex-col items-center">
+        <div className="w-full max-w-[1440px]">
+          <p className="text-dark-500 m-2 mb-3 text-left">{`${cnt}개의 바구니`}</p>
         </div>
         {cnt > 0 ? (
-          <div className="bucket grid grid-cols-2 gap-4">
+          <div className="bucket grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1440px] gap-4">
             {makerBucket &&
               likeBucket &&
               (tab === "bucket"

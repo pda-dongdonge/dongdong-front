@@ -57,10 +57,7 @@ export default function ThumbnailGrid({ imageUrl }: PhotoGridProps) {
           <img
             key={image + index}
             src={image}
-            className={`object-cover max-h-56 w-full ${gridItemCss(
-              arr.length,
-              index
-            )}`}
+            className={`object-cover w-full ${gridItemCss(arr.length, index)}`}
           />
         ))}
     </div>
