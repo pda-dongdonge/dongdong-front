@@ -5,8 +5,6 @@ interface PhotoGridProps {
 }
 
 export default function ThumbnailGrid({ imageUrl }: PhotoGridProps) {
-  console.log(imageUrl.length);
-
   const gridContainerCols = (listLength: number): string => {
     if (3 <= listLength) {
       //3개일때
@@ -29,7 +27,6 @@ export default function ThumbnailGrid({ imageUrl }: PhotoGridProps) {
 
   //grid 요소 예외처리
   const gridItemCss = (listLength: number, index: number): string => {
-    console.log(listLength);
     //3개 중 2번째
     if (listLength === 3 && index === 1) {
       return "h-full  border-white-500";

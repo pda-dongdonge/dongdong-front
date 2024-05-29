@@ -1,6 +1,5 @@
 // src/store/reducer.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {RootState} from "./store";
 interface UserState {
   _id: string | null;
   email: string | null;
