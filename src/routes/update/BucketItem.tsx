@@ -45,7 +45,7 @@ export default function BucketItem({ bucket, handleClick }) {
 
     return (
     <>
-    <div className="rounded-2xl border border-indigo-50 p-3 mb-8 w-full max-w-md mx-auto" key={bucket._id} onClick={() => handleClick(bucket)}>
+    <div className="rounded-2xl border border-indigo-50 p-3 mb-8 w-full max-w-md mx-auto cursor-pointer" key={bucket._id} onClick={() => handleClick(bucket)}>
         <div>
         {linkComponent}
         </div>
