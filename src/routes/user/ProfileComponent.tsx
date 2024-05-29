@@ -44,10 +44,12 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
         </div>
         <div className="buttons flex items-center gap-6">
           <IconShare className="cursor-pointer" />
-          <CustomButton
-            text={`${userInfo.isFollow ? "Unfollow" : "Follow"}`}
-            handleClick={handleFollow}
-          />
+          {userInfo.userId !== user._id && (
+            <CustomButton
+              text={`${userInfo.isFollow ? "Unfollow" : "Follow"}`}
+              handleClick={handleFollow}
+            />
+          )}
           <IconMore className="cursor-pointer" />
         </div>
       </div>
