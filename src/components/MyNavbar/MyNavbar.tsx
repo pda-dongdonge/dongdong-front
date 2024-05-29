@@ -163,7 +163,7 @@ export default function MyNavbar() {
                 )}
               </div>
 
-              <div className="text-right text-xs">
+              <div className="text-right text-xs cursor-pointer">
                 {user.username ? (
                   <>
                     <div
