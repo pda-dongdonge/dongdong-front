@@ -32,7 +32,7 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
         />
 
         <Link to="/storeItem" state={{bucketItemId: bucketItem._id}}>
-          <button className="absolute right-[5%] bottom-[40px] bg-cyan-100 h-[35px] w-[35px] rounded-full opacity-75 cursor-pointer text-slate-500">
+          <button className="absolute right-[5%] bottom-[40px] bg-purple-200 h-[35px] w-[35px] rounded-full opacity-75 cursor-pointer text-slate-500">
             +
           </button>
         </Link>
