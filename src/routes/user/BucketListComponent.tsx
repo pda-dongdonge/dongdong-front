@@ -8,18 +8,20 @@ const { VITE_BASE_URL } = import.meta.env;
 type Props = {
   tab: string;
 };
+const service = new bucketlistAPI(VITE_BASE_URL + "");
+
 export default function BucketListComponent({ tab }: Props) {
   const { userId } = useParams();
-  const service = new bucketlistAPI(VITE_BASE_URL + "");
+
   const [cnt, setCnt] = useState(0);
   const { data: makerBucket, isLoading: makerBIsLoading } = useSWR(
     `/bucket/user/${userId}`,
-    service.fetcher
+    service.fetcher.bind(service)
   );
 
   const { data: likeBucket, isLoading: likeBIsLoading } = useSWR(
     `/userprofile/likebucket/${userId}`,
-    service.fetcher
+    service.fetcher.bind(service)
   );
   useEffect(() => {
     if (tab === "bucket" && makerBucket) {
@@ -28,7 +30,7 @@ export default function BucketListComponent({ tab }: Props) {
     if (tab === "feed" && likeBucket) {
       setCnt(likeBucket.data.length);
     }
-  }, [tab]);
+  }, [tab, makerBucket, likeBucket]);
   return (
     !likeBIsLoading &&
     !makerBIsLoading && (
