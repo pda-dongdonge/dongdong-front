@@ -19,23 +19,44 @@ export default function MyNavbar() {
   }
 
   return (
+    <>
+    <style>
+      {`
+        .jua-regular {
+          font-family: "Jua", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+      `}
+    </style>
+
     <Navbar
-      expand={EXPAND_BREAKPOINT}
-      className="mb-3"
-      sticky="top"
-      style={{ backgroundColor: "white", padding: "20px" }}
-    >
-      <Container fluid>
+        expand={EXPAND_BREAKPOINT}
+        className="mb-3 mx-2"
+        sticky="top"
+        style={{
+          backgroundColor: "white",
+          paddingLeft: "5px",
+          paddingRight: "5px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+
+
+      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row items-center gap-10">
         <Navbar.Brand href="/">
           <img
             src="/dongdonglogo.png"
             style={{
               width: "60px"
             }}
-          ></img>
-         
+          />
         </Navbar.Brand>
-        DONGDONG
+        <div className="jua-regular text-2xl">DONGdongE</div>
         <Button
           as={Nav.Link}
           href="#action2"
@@ -52,10 +73,15 @@ export default function MyNavbar() {
           }}
           onClick={() => handleShow(true)}
         >
-        CREATE
+          CREATE
         </Button>
-
+      </div>
+      <div>
         <Navbar.Toggle aria-controls={`Navbar-expand-${EXPAND_BREAKPOINT}`} />
+      </div>
+    </div>
+
+        
         <Navbar.Offcanvas
           id={`Navbar-expand-${EXPAND_BREAKPOINT}`}
           aria-labelledby={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}
@@ -67,15 +93,11 @@ export default function MyNavbar() {
                 src="/dongdonglogo.png"
                 style={{
                   width: "60px",
-                  marginRight: "20px",
-                  marginLeft: "20px",
                 }}
               ></img>
               
             </Offcanvas.Title>
-            <div>
-            Dongdong
-            </div>
+            <div className="jua-regular text-xl ml-5">DONGdongE</div>
             
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
@@ -135,7 +157,7 @@ export default function MyNavbar() {
                 {user.username ? (
                   <>
                     <Nav.Link
-                      href="#action2"
+                      href="like"
                       style={{ fontWeight: "bold", fontSize: "18px" }}
                     >
                       Like
@@ -173,8 +195,8 @@ export default function MyNavbar() {
           </Offcanvas.Body>
           
         </Navbar.Offcanvas>
-      </Container>
       
     </Navbar>
+    </>
   );
 }

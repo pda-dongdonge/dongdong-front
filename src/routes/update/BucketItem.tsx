@@ -6,6 +6,8 @@ import MoreImg from "../bucketlistItem/MoreImg";
 import axios from "axios";
 import bucketlistAPI from "@/apis/bucketlistAPI";
 import { useAuth } from "@/hooks/useAuth";
+import NoImg from "../bucketlistItem/NoImg";
+
 
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -40,6 +42,8 @@ export default function BucketItem({ bucket, handleClick }) {
         linkComponent = <TwoImg src1={bucketImg[0]} src2={bucketImg[1]} />;
     } else if (img > 2) {
         linkComponent = <MoreImg srcArray={bucketImg} />;
+    } else {
+        linkComponent = <NoImg />;
     } 
     
 
