@@ -46,7 +46,7 @@ export default function MyNavbar() {
       >
 
 
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center w-100">
       <div className="flex flex-row items-center gap-10">
         <Navbar.Brand href="/">
           <img
@@ -114,7 +114,7 @@ export default function MyNavbar() {
                 href="user">
                   <div className="flex-row flex items-center justify-between  font-bold text-sm">
                     {user.username}
-                    <img className="rounded-full w-10" src="public\dummy-profile.png"/>
+                    <img className="rounded-full w-10" src="/dummy-profile.png"/>
                   </div>
                   <div className="flex-row flex items-center text-xs">
                   내 버킷 <IoIosArrowForward />
