@@ -63,7 +63,7 @@ export default class bucketlistAPI extends BaseApi {
     return resp.data;
   }
 
-  async deleteBucket(bucketId) {
+  async deleteBucket(bucketId: string) {
     const resp = await this.fetcher.delete(`/${bucketId}`);
     console.log(resp);
   }
