@@ -81,7 +81,7 @@ export default function MyNavbar() {
             >
               <div className="flex-grow-1 rounded-md py-3.5 pl-5 pr-5 bg bg-violet-50">
                 {user.username ? (
-                  <Nav.Link href="user">
+                  <Nav.Link href={`/user/${user._id}`}>
                     <div className="flex-row flex items-center justify-between  font-bold text-sm">
                       {user.username}
                       <img
@@ -94,7 +94,7 @@ export default function MyNavbar() {
                     </div>
                   </Nav.Link>
                 ) : (
-                  <Nav.Link href="sign">
+                  <Nav.Link href="/sign">
                     <div className="flex-row flex items-center  font-bold text-sm">
                       로그인 <IoIosArrowForward />
                     </div>
