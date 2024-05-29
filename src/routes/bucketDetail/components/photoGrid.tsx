@@ -1,4 +1,5 @@
 // import React from 'react'
+import tungtung from "@/../public/tungtung.png";
 
 type imageInfo = {
     imgUrl: string;
@@ -10,7 +11,7 @@ interface PhotoGridProps {
 }
 
 export default function PhotoGrid({imageList}: PhotoGridProps) {
-    // console.log(imageList);
+    console.log(imageList.length);
 
     const gridContainerCols = (listLength:number):string =>  {
         if(3 === listLength) { //3개일때
@@ -19,7 +20,7 @@ export default function PhotoGrid({imageList}: PhotoGridProps) {
         else if(5 <= listLength) { //5, 6개 이상
             return "grid-cols-[33%_34%_33%]";
         }
-        else if (1 === listLength) { //1개일땐 없음
+        else if (1 >= listLength) { //0, 1개일땐 없음
             return "";
         }
         else { //4개, 2개 이하일땐 반반
@@ -53,10 +54,12 @@ export default function PhotoGrid({imageList}: PhotoGridProps) {
 
   return (
     <div className={`overflow-hidden h-[270px] rounded-[20px] grid ${gridContainerCols(imageList.length)} ${gridContainerRows(imageList.length)}`}>
-        {imageList &&
-    imageList.map((image, index, arr)=>(
-        <img key={index} src={image.imgUrl} className={`object-cover ${gridItemCss(arr.length, index)} w-full h-full` }/>
-    ))}
+        {imageList.length ?
+    (imageList.map((image, index, arr)=>(
+        <img key={index} src={image.imgUrl} className={`object-cover ${gridItemCss(arr.length, index)} w-full h-full` }/>))
+    ): (
+        <img className="object-cover h-full" src={tungtung} />
+    )}
     </div>
   )
 }
