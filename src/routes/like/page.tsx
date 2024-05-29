@@ -15,13 +15,14 @@ export default function LikePage() {
 
     const service = new bucketlistAPI(VITE_BASE_URL + "");
     
-    //내가 좋아요 한 것
+    //내가 팔로우 한 것
     useEffect(() => {
         if (user_id) {
             const fetchBucketData = async () => {
                 try {
-                    const data = await service.getUserLikeBucketList(user_id);
-                    setBucketList(data);
+                    const data = await service.getBucketListFollowing(user_id);
+                   setBucketList(data);
+                   //console.log(data)
                 } catch (error) {
                     console.error("Error fetching bucket data:", error);
                 }

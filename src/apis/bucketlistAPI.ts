@@ -72,6 +72,11 @@ export default class bucketlistAPI extends BaseApi {
     const resq = await this.fetcher.get(`/bucket/user/${userId}`);
     return resq.data;
   }
+
+  async getBucketListFollowing(userId: string) {
+    const resp = await this.fetcher.get(`/bucket/feed/${userId}`);
+    return resp.data;
+  }
 }
 
 /*
