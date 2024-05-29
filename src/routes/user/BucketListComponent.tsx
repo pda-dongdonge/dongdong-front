@@ -36,21 +36,27 @@ export default function BucketListComponent({ tab }: Props) {
         <div>
           <p className="text-dark-500 m-2 mb-3">{`${cnt}개의 바구니`}</p>
         </div>
-        <div className="bucket grid grid-cols-2 gap-4">
-          {makerBucket &&
-            likeBucket &&
-            (tab === "bucket"
-              ? makerBucket.data.map((bucket: Bucket) => {
-                  return (
-                    <BucketItem key={bucket._id} bucket={bucket}></BucketItem>
-                  );
-                })
-              : likeBucket.data.map((bucket: Bucket) => {
-                  return (
-                    <BucketItem key={bucket._id} bucket={bucket}></BucketItem>
-                  );
-                }))}
-        </div>
+        {cnt > 0 ? (
+          <div className="bucket grid grid-cols-2 gap-4">
+            {makerBucket &&
+              likeBucket &&
+              (tab === "bucket"
+                ? makerBucket.data.map((bucket: Bucket) => {
+                    return (
+                      <BucketItem key={bucket._id} bucket={bucket}></BucketItem>
+                    );
+                  })
+                : likeBucket.data.map((bucket: Bucket) => {
+                    return (
+                      <BucketItem key={bucket._id} bucket={bucket}></BucketItem>
+                    );
+                  }))}
+          </div>
+        ) : (
+          <div>
+            <img src="/tung.png" alt="" />
+          </div>
+        )}
       </div>
     )
   );
