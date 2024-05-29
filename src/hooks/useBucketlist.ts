@@ -1,13 +1,12 @@
 // import { RootState } from "@reduxjs/toolkit/query";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import { useSelector } from "react-redux";
 import bucketlistAPI from "../apis/bucketlistAPI";
 const { VITE_BASE_URL } = import.meta.env;
 export function useBucketlist() {
   //const user = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const service = new bucketlistAPI(VITE_BASE_URL + "bucket");
-
 
   async function addBucket(title: string, contents: string) {
     try {
@@ -57,10 +56,34 @@ export function useBucketlist() {
     }
   }
 
+  async function likeBucket(bucketId:string) {
+    try {
+      const resp = await service.patchLikeBucket(bucketId);
+      if (resp) {
+        console.log('like success : ', resp);
+      }
+      return resp;
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  async function IsLikedBucket(bucketId:string) {
+    try {
+      const resp = await service.getIsLiked(bucketId);
+      return resp;
+    } catch (error) {
+      console.log('error', error);
+      // return error;
+    }
+  }
+
   return{
     addBucket,
     bringBucket,
-    removeBucket
+    removeBucket,
+    likeBucket,
+    IsLikedBucket,
   };
 
 }

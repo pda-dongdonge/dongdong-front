@@ -1,19 +1,38 @@
-import React from "react";
-import shareIcon from "../../../assets/share.svg";
-import heartIcon from "../../../assets/heart.svg";
-import heartFillIcon from "../../../assets/heartFill.svg";
-import { useState } from "react";
+import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
+import { useEffect, useState } from "react";
 import { showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
+import { FaRegCopy } from "react-icons/fa6";
+import { useBucketlist } from "@/hooks/useBucketlist";
 
-export default function InfoBottom() {
+type InfoBottomProps = {
+  bucketId: string;
+}
+
+export default function InfoBottom({bucketId}:InfoBottomProps) {
   const [valid, setValid] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const {likeBucket, IsLikedBucket} = useBucketlist();
+
+  useEffect(()=>{
+    const check  = async () => {
+      IsLikedBucket(bucketId)
+      .then(res=> {
+        // console.log(res.data.isLiked);
+        setValid(res?.data.isLiked);
+      });
+    }
+    check();
+  }, []);
 
   const heartClick = (): // e:React.ChangeEvent<HTMLInputElement>
   void => {
     setValid((prev) => !prev);
-    //나중에 로직 추가하기
+    likeBucket(bucketId).then(res=>{
+      if (res?.status === 200) {
+        dispatch(showToast({id: Date.now(), message: res.data.message}))
+      }
+    });
   };
 
   const copyToClipboard = async (): Promise<void> => {
@@ -27,16 +46,17 @@ export default function InfoBottom() {
 
   return (
     <>
-      <img
-        className="w-[20px] cursor-pointer"
-        src={shareIcon}
-        onClick={() => copyToClipboard()}
+      <FaRegCopy 
+      className="cursor-pointer"
+      color='gray'
+      size='16'
+      onClick={()=>copyToClipboard()}
       />
       <div onClick={() => heartClick()}>
         {valid ? (
-          <img src={heartFillIcon} className="w-[20px] cursor-pointer" />
+          <IoIosHeart className="cursor-pointer" size='19' color="#ff869b" />
         ) : (
-          <img className="w-[20px] cursor-pointer" src={heartIcon} />
+          <IoIosHeartEmpty className="cursor-pointer" size='19' color="#ff869b"/>
         )}
       </div>
     </>

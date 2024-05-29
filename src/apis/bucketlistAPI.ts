@@ -73,10 +73,24 @@ export default class bucketlistAPI extends BaseApi {
     return resq.data;
   }
 
-  async getBucketListFollowing(userId: string) {
-    const resp = await this.fetcher.get(`/bucket/feed/${userId}`);
-    return resp.data;
-  }
+      async getBucketListFollowing(userId: string){
+        const resp=await this.fetcher.get(`/bucket/feed/${userId}`);
+        return resp.data;
+      }
+
+      async patchLikeBucket(bucketId: string) {
+        const resp = await this.fetcher.patch(`/like`, {
+          bucketId: bucketId,
+        })
+        return resp;
+      }
+
+      async getIsLiked(bucketId: string) {
+        const resp = await this.fetcher.post(`/isLiked`, {
+          bucketId: bucketId
+        })
+        return resp;
+      }
 }
 
 /*
