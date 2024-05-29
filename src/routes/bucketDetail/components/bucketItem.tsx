@@ -1,10 +1,12 @@
 import { IBucketItem } from "@/apis/bucketlistAPI";
+import { Link } from "react-router-dom";
 
 type BucketItemProps = {
   bucketItem: IBucketItem;
 };
 
 export default function BucketItem({ bucketItem }: BucketItemProps) {
+
   return (
     <div className="grid grid-cols-7 gap-x-3">
       <div className="flex flex-col items-center">
@@ -28,9 +30,12 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
           className="mb-[1.5rem] rounded-[20px] cursor-pointer"
           src={bucketItem.imgUrl}
         />
-        <button className="absolute right-[5%] bottom-[40px] bg-cyan-100 h-[35px] w-[35px] rounded-full opacity-75 cursor-pointer text-slate-500">
-          +
-        </button>
+
+        <Link to="/storeItem" state={{bucketItemId: bucketItem._id}}>
+          <button className="absolute right-[5%] bottom-[40px] bg-cyan-100 h-[35px] w-[35px] rounded-full opacity-75 cursor-pointer text-slate-500">
+            +
+          </button>
+        </Link>
       </div>
     </div>
   );
