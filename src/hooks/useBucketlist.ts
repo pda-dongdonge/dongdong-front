@@ -68,11 +68,22 @@ export function useBucketlist() {
     }
   }
 
+  async function IsLikedBucket(bucketId:string) {
+    try {
+      const resp = await service.getIsLiked(bucketId);
+      return resp;
+    } catch (error) {
+      console.log('error', error);
+      // return error;
+    }
+  }
+
   return{
     addBucket,
     bringBucket,
     removeBucket,
     likeBucket,
+    IsLikedBucket,
   };
 
 }

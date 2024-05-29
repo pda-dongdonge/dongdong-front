@@ -80,6 +80,13 @@ export default class bucketlistAPI extends BaseApi {
         })
         return resp;
       }
+
+      async getIsLiked(bucketId: string) {
+        const resp = await this.fetcher.post(`/isLiked`, {
+          bucketId: bucketId
+        })
+        return resp;
+      }
 }
 
 /*
