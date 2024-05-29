@@ -20,9 +20,17 @@ export interface Bucket {
 type Props = {
   bucket: Bucket;
 };
+import { useNavigate } from "react-router-dom";
+
 export default function BucketItem({ bucket }: Props) {
+  const navigate = useNavigate();
+
+  const goToPage = (bucketId: string) => {
+    navigate(`/bucketlist/${bucketId}`);
+  };
+
   return (
-    <div className="bucket-item">
+    <div className="bucket-item" onClick={() => goToPage(bucket._id)}>
       <div className="thumbnail-box">
         <ThumbnailGrid
           imageUrl={bucket.bucketItemList.map((el) => el.imgUrl || "")}
