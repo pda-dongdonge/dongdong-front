@@ -40,7 +40,7 @@ export default function LikePage() {
     <>
     <BucketNav />
 
-    <div>
+    <div className="flex flex-wrap justify-between">
         {bucketList.map((bucket) => (
             <BucketItem key={bucket._id} bucket={bucket} handleClick={UserClick} />
         ))}
