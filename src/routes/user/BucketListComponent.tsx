@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BucketItem, { Bucket } from "./BucketItem";
 import useSWR from "swr";
-import bucketlistAPI, { IBucketItem } from "@/apis/bucketlistAPI";
+import bucketlistAPI from "@/apis/bucketlistAPI";
 import { useParams } from "react-router-dom";
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -12,17 +12,15 @@ export default function BucketListComponent({ tab }: Props) {
   const { userId } = useParams();
   const service = new bucketlistAPI(VITE_BASE_URL + "");
   const [cnt, setCnt] = useState(0);
-  const {
-    data: makerBucket,
-    error: makerBError,
-    isLoading: makerBIsLoading,
-  } = useSWR(`/bucket/user/${userId}`, service.fetcher);
+  const { data: makerBucket, isLoading: makerBIsLoading } = useSWR(
+    `/bucket/user/${userId}`,
+    service.fetcher
+  );
 
-  const {
-    data: likeBucket,
-    error: likeBError,
-    isLoading: likeBIsLoading,
-  } = useSWR(`/userprofile/likebucket/${userId}`, service.fetcher);
+  const { data: likeBucket, isLoading: likeBIsLoading } = useSWR(
+    `/userprofile/likebucket/${userId}`,
+    service.fetcher
+  );
   useEffect(() => {
     if (tab === "bucket" && makerBucket) {
       setCnt(makerBucket.data.length);
