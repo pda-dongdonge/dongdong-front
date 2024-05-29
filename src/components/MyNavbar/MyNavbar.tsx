@@ -135,7 +135,7 @@ export default function MyNavbar() {
                 {user.username ? (
                   <>
                     <Nav.Link
-                      href="#action2"
+                      href="like"
                       style={{ fontWeight: "bold", fontSize: "18px" }}
                     >
                       Like

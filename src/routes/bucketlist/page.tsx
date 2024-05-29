@@ -22,7 +22,7 @@ export default function BucketNav() {
 
         {user.username ? (
   <Nav.Link
-    href="#feed"
+    href="/like"
     style={{ fontWeight: "bold", fontSize: "18px", color: "black" }}
   >
     💖Like
