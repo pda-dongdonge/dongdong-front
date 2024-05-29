@@ -45,7 +45,7 @@ import './storeurl.css';
             fontWeight: "bolder",
           }}
         >
-          버킷에 영상 링크 저장하기
+          양동이에 영상 링크 저장하기
         </h1>
         <p>
         <InputGroup className="mb-3" style={{ borderColor: "#6066FF", border: "2px solid #6066FF", borderRadius:"7px"}}>

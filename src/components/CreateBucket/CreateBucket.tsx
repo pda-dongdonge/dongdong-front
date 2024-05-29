@@ -42,16 +42,16 @@ function CreateBucket(props) {
         <Modal.Body style={{ alignContent: "center" }}>
           <div style={{ marginBottom: "60px" }}>
             <h2 style={{ fontWeight: "bold", color: "#6066FF" }}>
-              새 버킷 만들기
+              새 양동이 만들기
             </h2>
-            <h2>새 버킷의 이름을 입력해주세요.</h2>
+            <h2>새 양동이의 이름을 입력해주세요.</h2>
           </div>
           <p>
             <Form.Label
               htmlFor="inputPassword5"
               style={{ fontSize: "20px", color: "#615B67" }}
             >
-              버킷 이름
+              양동이 이름
             </Form.Label>
             <Form.Control
               placeholder="e.g 로코, 류선재 모음집 , 시간 떼우기 좋은 영상들"
@@ -67,7 +67,7 @@ function CreateBucket(props) {
               htmlFor="inputPassword5"
               style={{ fontSize: "20px", color: "#615B67" }}
             >
-              버킷 간단 설명
+              양동이 간단 설명
             </Form.Label>
             <Form.Control
               as="textarea"
@@ -85,7 +85,7 @@ function CreateBucket(props) {
           <div className="d-grid gap-2" style={{ width: "100%" }}>
             <Button
               style={{
-                backgroundColor: "#00B0F0",
+                backgroundColor: "#7758F6",
                 borderRadius: "20px",
                 border: "none",
                 height: "60px",

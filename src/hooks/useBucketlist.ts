@@ -44,10 +44,23 @@ export function useBucketlist() {
       return false;
     }
   }
+  async function removeBucket(bucketId){
+    try{
+      const res = await service.deleteBucket(bucketId);
+      if (res) {
+        console.log("bucket delete success")
+      } else {
+        console.error("bucket delete fail");
+      }
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }
 
   return{
     addBucket,
-    bringBucket
+    bringBucket,
+    removeBucket
   };
 
 }

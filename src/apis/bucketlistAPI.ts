@@ -47,9 +47,14 @@ export default class bucketlistAPI extends BaseApi {
         return resp.data;
       }
       async getUserBuckets(){
-        const resp = await this.fetcher.get('/');
+        const resp = await this.fetcher.get('/user');
         console.log("data", resp.data);
-        return resp.data;
+        return resp.data; 
+      }
+
+      async deleteBucket(bucketId){
+        const resp=await this.fetcher.delete(`/${bucketId}`);
+        console.log(resp);
       }
 }
 
