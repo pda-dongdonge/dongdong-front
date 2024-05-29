@@ -1,10 +1,8 @@
-import React from "react";
-import shareIcon from "../../../assets/share.svg";
-import heartIcon from "../../../assets/heart.svg";
-import heartFillIcon from "../../../assets/heartFill.svg";
+import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 import { useState } from "react";
 import { showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
+import { FaRegCopy } from "react-icons/fa6";
 
 export default function InfoBottom() {
   const [valid, setValid] = useState<boolean>(false);
@@ -27,16 +25,17 @@ export default function InfoBottom() {
 
   return (
     <>
-      <img
-        className="w-[20px] cursor-pointer"
-        src={shareIcon}
-        onClick={()=>copyToClipboard()}
+      <FaRegCopy 
+      className="cursor-pointer"
+      color='gray'
+      size='16'
+      onClick={()=>copyToClipboard()}
       />
       <div onClick={() => heartClick()}>
         {valid ? (
-          <img src={heartFillIcon} className="w-[20px] cursor-pointer" />
+          <IoIosHeart className="cursor-pointer" size='18' color="#ff869b" />
         ) : (
-          <img className="w-[20px] cursor-pointer" src={heartIcon} />
+          <IoIosHeartEmpty className="cursor-pointer" size='18' color="#ff869b"/>
         )}
       </div>
     </>
