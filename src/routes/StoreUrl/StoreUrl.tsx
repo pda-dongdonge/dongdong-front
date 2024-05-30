@@ -35,11 +35,11 @@ export function StoreUrlModal(props: any) {
 
     try {
       const success = await addUrl(link, comment, bucketID);
-
       if (success.success) {
         alert("링크 정보가 양동이에 추가되었습니다.");
         props.onHide();
         location.reload();
+
       } else {
         alert(success.message);
       }

@@ -60,7 +60,7 @@ function CreateBucket(props: {
               양동이 이름
             </Form.Label>
             <Form.Control
-              placeholder="e.g 로코, 류선재 모음집 , 시간 떼우기 좋은 영상들"
+              placeholder="e.g 로코, 류선재 모음집 , 시간 떼우기 좋은 영상들, "
               style={{
                 borderRadius: "0px",
                 border: "none",
@@ -77,7 +77,7 @@ function CreateBucket(props: {
             </Form.Label>
             <Form.Control
               as="textarea"
-              placeholder="100자 이내로 써주세요."
+              placeholder="e.g 밥 친구가 되어 줄 무한도전 레전드 편 모음영상입니다. , 자기 전에 보려고 만든 영상들~ 좋아요 눌러주세요!"
               aria-label="With textarea"
               style={{
                 border: "3px solid #6066FF",
