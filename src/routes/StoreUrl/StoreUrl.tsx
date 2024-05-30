@@ -39,8 +39,10 @@ import { useAuth } from "@/hooks/useAuth";
     try {
       const success = await addUrl(link, comment, bucketID);
   
-      if (success) {
-        alert("링크 정보가 양동이에 성공적으로 추가되었습니다.");
+      if (success.success) {
+       alert("링크 정보가 양동이에 추가되었습니다.");
+       props.onHide();
+       location.reload();
       } else {
         alert(success);
       }
