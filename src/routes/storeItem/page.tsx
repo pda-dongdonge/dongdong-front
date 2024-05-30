@@ -1,31 +1,41 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 const { VITE_BASE_URL } = import.meta.env;
 import authAPI from "@/apis/authAPI";
 import CreateBucket from "@/components/CreateBucket/CreateBucket";
 import { useBucketlist } from "@/hooks/useBucketlist";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
+
+interface BucketItem {
+  _id: string;
+  imgUrl: string;
+}
+
+interface Bucket {
+  _id: string;
+  title: string;
+  contents: string;
+  bucketItemList: BucketItem[];
+}
+
 function StoreItems() {
   const authService = new authAPI(VITE_BASE_URL + "auth");
-  const [buckets, setBuckets]=useState([]);
+  const [buckets, setBuckets] = useState<Bucket[]>([]);
   const [showCreateBucketModal, setShowCreateBucketModal] = useState(false);
-  const [selectedBucketId, setSelectedBucketId] = useState(null);
-  const {bringBucket, removeBucket, addBucketItem }=useBucketlist();
+  const [selectedBucketId, setSelectedBucketId] = useState<string | null>(null);
+  const { bringBucket, removeBucket, addBucketItem } = useBucketlist();
   const handleShow = () => setShowCreateBucketModal(true);
   const handleClose = () => setShowCreateBucketModal(false);
   const location = useLocation();
-  const bucketItemId=location.state.bucketItemId;
-  const navigate=useNavigate();
-  const { user_id } = useAuth();
-  const handleImageClick = (id) => {
+  const bucketItemId = (location.state as { bucketItemId: string }).bucketItemId;
+  const navigate = useNavigate();
+
+  const handleImageClick = (id: string) => {
     setSelectedBucketId(id);
   };
 
-  const handleRemoveBucket = (id) => {
-    if (confirm("정말 삭제하시겠습니까?")) {
+  const handleRemoveBucket = (id: string) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
       removeBucket(id)
         .then(() => {
           setBuckets(buckets.filter(bucket => bucket._id !== id));
@@ -35,16 +45,16 @@ function StoreItems() {
         });
     }
   };
+
   useEffect(() => {
     bringBucket().then(data => {
-            if (data) {
-                setBuckets(data);
-            } else {
-                console.error("Failed to retrieve buckets");
-            }
-      });
+      if (data) {
+        setBuckets(data);
+      } else {
+        console.error("Failed to retrieve buckets");
+      }
+    });
   }, []);
-
 
   const handleStore = async () => {
     const user = await authService.isLogin();
@@ -53,26 +63,19 @@ function StoreItems() {
     } else {
       addBucketItem(selectedBucketId, bucketItemId)
         .then(response => {
-          console.log("아러닝");
           if (response) {
             alert("영상이 양동이에 성공적으로 저장되었습니다.");
-           
             navigate(`/user/${user._id}`);
-
-
-          }
-          else{
+          } else {
             alert("해당 영상이 이미 양동이에 있습니다.");
           }
-         
         })
         .catch(error => {
           alert(`Error: ${error.message}`);
           console.error("Failed to add bucketItem", error);
         });
     }
-  }
-  
+  };
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", padding: "20px", overflowY: "auto", paddingBottom: "70px", paddingTop:"60px"}}>
       <h4 style={{ fontWeight: "bold", textAlign: "center", marginBottom:"10%", color:"gray"}}>위시 동영상 저장</h4>
