@@ -15,4 +15,35 @@
   .fadeOut {
     animation: fadeOut 3s ease forwards;
   }
+  .img-gridItem {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .scroll-image {
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+    min-width: 100px;
+    min-height: 100px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+  
+  .img-caption {
+    text-align: center;
+  }
+  
+  @media (max-width: 600px) {
+    .scroll-image {
+      min-width: 150px;
+      min-height: 170px;
+    }
+  }
+  
+
+
   
