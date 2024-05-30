@@ -6,6 +6,7 @@ import useUser from "@/hooks/useUser";
 import { useAuth } from "@/hooks/useAuth";
 import { showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
+import useModal from "@/hooks/useModal";
 
 type Props = {
   userInfo: IUserProfile | undefined;
@@ -14,6 +15,7 @@ type Props = {
 export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
   const { user } = useAuth();
   const { follow, unFollow } = useUser();
+  const { open, close } = useModal();
   const dispatch = useDispatch();
   const copyToClipboard = async (e): Promise<void> => {
     e.stopPropagation();
@@ -44,7 +46,9 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
       setUserInfo(res);
     }
   };
-
+  const clickMore = () => {
+    open("⚠️", "아직 없는 기능이에요!", close);
+  };
   return (
     userInfo && (
       <div className="user-profile flex flex-col items-center gap-4">
@@ -67,7 +71,7 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
               handleClick={handleFollow}
             />
           )}
-          <IconMore className="cursor-pointer" />
+          <IconMore className="cursor-pointer" onClick={clickMore} />
         </div>
       </div>
     )
