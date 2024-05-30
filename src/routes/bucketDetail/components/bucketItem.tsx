@@ -12,24 +12,23 @@ const { VITE_BASE_URL } = import.meta.env;
 export default function BucketItem({ bucketItem }: BucketItemProps) {
   const navigate = useNavigate();
 
-  const plusButtonClick = async ():Promise<void> => {
+  const plusButtonClick = async (): Promise<void> => {
     const service = new authAPI(VITE_BASE_URL + "auth");
 
-    const res = await service.isLogin()
+    const res = await service.isLogin();
     console.log(res);
-    
-    if(res._id) {
+
+    if (res._id) {
       //로그인 한 경우 -> state와 함께 storeItem으로 이동하기
       navigate("/storeItem", {
         state: {
-          bucketItemId: bucketItem._id
-        }
-      })
+          bucketItemId: bucketItem._id,
+        },
+      });
+    } else {
+      alert("로그인이 필요한 서비스입니다!");
     }
-    else {
-        alert('로그인이 필요한 서비스입니다!')
-    }
-  }
+  };
 
   return (
     <div className="grid grid-cols-7 gap-x-3">
@@ -49,16 +48,21 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
         >
           {bucketItem.urlTitle} <b>&gt;</b>
         </p>
-        <img
-          onClick={() => window.open(bucketItem.url)}
-          className="mb-[1.5rem] rounded-[20px] cursor-pointer"
-          src={bucketItem.imgUrl}
-        />
-          <button 
-          onClick={()=>plusButtonClick()}
-          className="absolute right-[5%] bottom-[40px] bg-purple-200 h-[35px] w-[35px] rounded-full cursor-pointer text-slate-500 hover:opacity-100 opacity-75">
-            +
-          </button>
+        <div className="relative mb-[1.5rem] rounded-[20px]">
+          <img
+            onClick={() => window.open(bucketItem.url)}
+            className="rounded-[20px] cursor-pointer"
+            src={bucketItem.imgUrl}
+          />
+          <div 
+          className="absolute top-[0] rounded-[20px] w-full h-full bg-black opacity-40"></div>
+        </div>
+        <button
+          onClick={() => plusButtonClick()}
+          className="absolute right-[5%] bottom-[40px] bg-purple-200 h-[35px] w-[35px] rounded-full cursor-pointer text-slate-500 hover:opacity-100 opacity-75"
+        >
+          +
+        </button>
       </div>
     </div>
   );
