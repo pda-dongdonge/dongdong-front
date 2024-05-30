@@ -4,6 +4,7 @@ import { showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
 import { FaRegCopy } from "react-icons/fa6";
 import { useBucketlist } from "@/hooks/useBucketlist";
+import { useSWRConfig } from "swr";
 
 type InfoBottomProps = {
   bucketId: string;
@@ -13,6 +14,7 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
   const [valid, setValid] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { likeBucket, IsLikedBucket } = useBucketlist();
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     const check = async () => {
@@ -29,11 +31,16 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
   ): void => {
     e.stopPropagation();
     setValid((prev) => !prev);
-    likeBucket(bucketId).then((res) => {
-      if (res?.status === 200) {
-        dispatch(showToast({ id: Date.now(), message: res.data.message }));
-      }
-    });
+    likeBucket(bucketId)
+      .then((res) => {
+        if (res?.status === 200) {
+          dispatch(showToast({ id: Date.now(), message: res.data.message }));
+        }
+      })
+      .then(() => {
+        // 버킷 상태 업데이트
+        mutate(() => true);
+      });
   };
 
   const copyToClipboard = async (
