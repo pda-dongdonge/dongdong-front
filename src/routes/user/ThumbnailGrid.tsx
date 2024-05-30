@@ -1,5 +1,8 @@
 // import React from 'react'
 
+import { useEffect } from "react";
+import NoImg from "../bucketlistItem/NoImg";
+
 interface PhotoGridProps {
   imageUrl: string[];
 }
@@ -45,21 +48,26 @@ export default function ThumbnailGrid({ imageUrl }: PhotoGridProps) {
     }
     return "h-full w-full";
   };
-
+  useEffect(() => {
+    console.log("이미지 길이", imageUrl.length);
+  }, []);
   return (
     <div
       className={`overflow-hidden  rounded-[18px] grid aspect-square ${gridContainerCols(
         imageUrl.length
       )} ${gridContainerRows(imageUrl.length)}`}
     >
-      {imageUrl &&
+      {imageUrl.length > 0 ? (
         imageUrl.map((image, index, arr) => (
           <img
             key={image + index}
             src={image}
             className={`object-cover w-full ${gridItemCss(arr.length, index)}`}
           />
-        ))}
+        ))
+      ) : (
+        <NoImg />
+      )}
     </div>
   );
 }
