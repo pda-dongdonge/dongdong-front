@@ -1,15 +1,17 @@
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { Nav } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export default function BucketNav() {
     const { user, login, logOut } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = useState(location.pathname);
+    const navigate = useNavigate();
     const handleClick = (path:string) => {
       setActiveLink(path);
+      navigate(path);
     };
 
   return  (
@@ -39,6 +41,7 @@ export default function BucketNav() {
 
       <div
           onClick={() => handleClick('/now')}
+          
           className={`nav-link-style w-24 mr-12 text-center no-underline text-black text-inherit px-2 py-2 hover:no-underline focus:no-underline ${activeLink === '/now' ? 'active-link' : ''}`}
           style={{ fontWeight: "bold", fontSize: "18px" }}
       >
