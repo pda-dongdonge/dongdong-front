@@ -124,15 +124,25 @@ function StoreItems() {
           buckets.map((bucket: any, index) => (
             <div
               key={index}
+              onClick={() => handleImageClick(bucket._id)}
               style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
                 padding: "10px",
                 borderBottom: "0.5px solid #E9E4FF",
+                background:
+                  selectedBucketId === bucket._id ? "#cfc3ff7b" : "none",
+                borderRadius: "14px",
+                marginBottom: "4px",
               }}
             >
-              <div style={{ display: "flex", flexDirection: "row" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
                 {bucket.bucketItemList.length > 0 ? (
                   <div
                     onClick={() => handleImageClick(bucket._id)}
@@ -238,7 +248,7 @@ function StoreItems() {
         <Button
           onClick={handleStore}
           style={{
-            backgroundColor: "#B6A6F6",
+            backgroundColor: selectedBucketId ? "#994DE4" : "#B6A6F6",
             borderRadius: "20px",
             border: "none",
             width: "100%",
