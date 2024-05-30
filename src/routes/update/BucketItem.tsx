@@ -66,7 +66,7 @@ export default function BucketItem({
           >
             <img
               className="rounded-full w-8 my-1"
-              src="public\dummy-profile.png"
+              src="/dummy-profile.png"
               alt="Dongdong"
             />
             <div className="font-bold truncate w-full text-center">
