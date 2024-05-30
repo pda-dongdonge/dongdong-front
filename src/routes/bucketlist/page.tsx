@@ -38,7 +38,7 @@ export default function BucketNav() {
         }}
       >
         <div
-          className={`nav-link-style w-24 mr-12 text-center no-underline text-inherit px-2 py-2 hover:no-underline focus:no-underline ${
+          className={`cursor-pointer nav-link-style w-24 mr-12 text-center no-underline text-inherit px-2 py-2 hover:no-underline focus:no-underline ${
             activeLink === "/hot" ? "active-link" : ""
           }`}
           style={{ fontWeight: "bold", fontSize: "18px", color: "black" }}
@@ -49,7 +49,7 @@ export default function BucketNav() {
 
         <div
           onClick={() => handleClick("/now")}
-          className={`nav-link-style w-24 mr-12 text-center no-underline text-black text-inherit px-2 py-2 hover:no-underline focus:no-underline ${
+          className={`cursor-pointer nav-link-style w-24 mr-12 text-center no-underline text-black text-inherit px-2 py-2 hover:no-underline focus:no-underline ${
             activeLink === "/now" ? "active-link" : ""
           }`}
           style={{ fontWeight: "bold", fontSize: "18px" }}
@@ -60,7 +60,7 @@ export default function BucketNav() {
         {user.username ? (
           <div
             onClick={() => handleClick("/feed")}
-            className={`nav-link-style w-24 mr-12 text-center no-underline text-inherit text-black px-2 py-2 hover:no-underline focus:no-underline ${
+            className={`cursor-pointer nav-link-style w-24 mr-12 text-center no-underline text-inherit text-black px-2 py-2 hover:no-underline focus:no-underline ${
               activeLink === "/feed" ? "active-link" : ""
             }`}
             style={{ fontWeight: "bold", fontSize: "18px" }}

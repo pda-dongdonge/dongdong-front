@@ -123,7 +123,10 @@ export default function MyNavbar() {
             >
               <div className="flex-grow-1 rounded-md py-3.5 pl-5 pr-5 bg bg-violet-50">
                 {user.username ? (
-                  <Nav.Link href={`/user/${user._id}`}>
+                  <Nav.Link
+                    href={`/user/${user._id}`}
+                    style={{ border: "none" }}
+                  >
                     <div className="flex-row flex items-center justify-between  font-bold text-sm">
                       {user.username}
                       <img
@@ -131,7 +134,7 @@ export default function MyNavbar() {
                         src="/dummy-profile.png"
                       />
                     </div>
-                    <div className="flex-row flex items-center text-xs">
+                    <div className="flex-row flex items-center text-xs border-none">
                       내 버킷 <IoIosArrowForward />
                     </div>
                   </Nav.Link>
@@ -158,17 +161,21 @@ export default function MyNavbar() {
 
             <Nav
               className="flex-grow-1"
-              style={{ gap: "10%", marginTop: "15px" }}
+              style={{ gap: "10%", marginTop: "15px", border: "none" }}
             >
               <Nav.Link
                 href="/hot"
-                style={{ fontWeight: "bold", fontSize: "18px" }}
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "18px",
+                  border: "none",
+                }}
               >
                 Hot
               </Nav.Link>
               <Nav.Link
                 href="/now"
-                style={{ fontWeight: "bold", fontSize: "18px" }}
+                style={{ fontWeight: "bold", fontSize: "18px", border: "none" }}
               >
                 Now
               </Nav.Link>
@@ -178,7 +185,11 @@ export default function MyNavbar() {
                   <>
                     <Nav.Link
                       href="/feed"
-                      style={{ fontWeight: "bold", fontSize: "18px" }}
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        border: "none",
+                      }}
                     >
                       Feed
                     </Nav.Link>
