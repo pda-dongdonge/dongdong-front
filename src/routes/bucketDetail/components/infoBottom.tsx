@@ -1,6 +1,6 @@
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 import { useEffect, useState } from "react";
-import { removeToast, showToast } from "@/store/toastPopup";
+import { showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
 import { FaRegCopy } from "react-icons/fa6";
 import { useBucketlist } from "@/hooks/useBucketlist";
@@ -25,9 +25,8 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
   }, []);
 
   const heartClick = (
-    e
-  ): // e:React.ChangeEvent<HTMLInputElement>
-  void => {
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ): void => {
     e.stopPropagation();
     setValid((prev) => !prev);
     likeBucket(bucketId).then((res) => {
@@ -37,7 +36,9 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
     });
   };
 
-  const copyToClipboard = async (e): Promise<void> => {
+  const copyToClipboard = async (
+    e: React.MouseEvent<SVGElement, MouseEvent>
+  ): Promise<void> => {
     e.stopPropagation();
     try {
       await navigator.clipboard.writeText(window.location.href);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileComponent from "./ProfileComponent";
 import MenuComponent from "./MenuComponent";
 import BucketListComponent from "./BucketListComponent";
@@ -45,7 +45,7 @@ export default function UserPage() {
     <>
       <CreateBucket
         show={createShow}
-        fullscreen={fullscreen}
+        fullScreen={fullscreen}
         onHide={() => setCreateShow(false)}
       />
       <div className="userPage basis-0 shrink grow flex-col">

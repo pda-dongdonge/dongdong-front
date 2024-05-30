@@ -17,7 +17,9 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
   const { follow, unFollow } = useUser();
   const { open, close } = useModal();
   const dispatch = useDispatch();
-  const copyToClipboard = async (e): Promise<void> => {
+  const copyToClipboard = async (
+    e: React.MouseEvent<SVGSVGElement, MouseEvent>
+  ): Promise<void> => {
     e.stopPropagation();
     try {
       await navigator.clipboard.writeText(window.location.href);

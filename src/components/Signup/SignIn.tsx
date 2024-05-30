@@ -13,8 +13,6 @@ type Props = {
 
 export default function SignInModal(props: Props) {
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-
   const { login } = useAuth();
   // ref로 바꾸기
   const [inputValue, setInputValue] = useState("");

@@ -1,4 +1,3 @@
-import React from "react";
 import ThumbnailGrid from "./ThumbnailGrid";
 import InfoBottom from "../bucketDetail/components/infoBottom";
 export interface BucketItem {

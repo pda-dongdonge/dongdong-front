@@ -62,9 +62,14 @@ export default function MyNavbar() {
                 }}
               />
             </Navbar.Brand>
-            <a href="/" className="jua-regular text-2xl text-black no-underline">DONGdongE</a>
+            <a
+              href="/"
+              className="jua-regular text-2xl text-black no-underline"
+            >
+              DONGdongE
+            </a>
             <Button
-              as={Nav.Link}
+              as="a"
               href="#action2"
               size="lg"
               style={{
@@ -96,14 +101,20 @@ export default function MyNavbar() {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}>
               <a href="/">
-              <img
-                src="/dongdonglogo.png"
-                style={{
-                  width: "60px",
-                }}
-              ></img></a>
+                <img
+                  src="/dongdonglogo.png"
+                  style={{
+                    width: "60px",
+                  }}
+                ></img>
+              </a>
             </Offcanvas.Title>
-            <a href="/" className="jua-regular text-xl ml-5 text-black no-underline">DONGdongE</a>
+            <a
+              href="/"
+              className="jua-regular text-xl ml-5 text-black no-underline"
+            >
+              DONGdongE
+            </a>
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
             <Nav
@@ -197,7 +208,7 @@ export default function MyNavbar() {
               </div>
               <CreateBucket
                 show={createShow}
-                fullscreen={fullscreen}
+                fullScreen={fullscreen}
                 onHide={() => setCreateShow(false)}
               />
             </Nav>

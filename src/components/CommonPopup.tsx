@@ -1,13 +1,13 @@
 import { RootState } from "@/store/store";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { closeModal } from "@/store/modal";
 import { useDispatch, useSelector } from "react-redux";
 import "./modal.css";
 export default function CommonPopup() {
   const dispatch = useDispatch();
   const modal = useSelector((state: RootState) => state.modal);
-  const close = (e) => {
-    if (e.target.classList.contains("main-modal")) {
+  const close = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.currentTarget.classList.contains("main-modal")) {
       dispatch(closeModal());
     }
   };
@@ -33,7 +33,7 @@ export default function CommonPopup() {
     <div
       className="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
       style={{ background: "rgba(0,0,0,.7)", zIndex: "10000" }}
-      onClick={close}
+      onClick={(e) => close(e)}
     >
       <div className="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
         <div className="modal-content py-4 text-left px-6">

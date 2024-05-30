@@ -73,56 +73,60 @@ export default class bucketlistAPI extends BaseApi {
     return resq.data;
   }
 
-      async getBucketListFollowing(userId: string){
-        const resp=await this.fetcher.get(`/bucket/feed/${userId}`);
-        return resp.data;
-      }
+  async getBucketListFollowing(userId: string) {
+    const resp = await this.fetcher.get(`/bucket/feed/${userId}`);
+    return resp.data;
+  }
 
-      async patchLikeBucket(bucketId: string) {
-        const resp = await this.fetcher.patch(`/like`, {
-          bucketId: bucketId,
-        })
-        return resp;
-      }
+  async patchLikeBucket(bucketId: string) {
+    const resp = await this.fetcher.patch(`/like`, {
+      bucketId: bucketId,
+    });
+    return resp;
+  }
 
-      async getIsLiked(bucketId: string) {
-        const resp = await this.fetcher.post(`/isLiked`, {
-          bucketId: bucketId
-        })
-        return resp;
-      }
+  async getIsLiked(bucketId: string) {
+    const resp = await this.fetcher.post(`/isLiked`, {
+      bucketId: bucketId,
+    });
+    return resp;
+  }
 
-      async postUrl(url: string, urlContent: string, bucketId: string): Promise<any> {
-        try {
-          const resp = await this.fetcher.post(`/url/${bucketId}`, {
-            url: url, 
-            urlTitle: "",
-            urlContent: urlContent,
-            imgUrl: ""
-          });
-          return resp.data;
-        } catch (error) {
-          console.error("Error posting URL:", error.response.data.message);
-          return {message: error.response.data.message}
-          // 서버가 응답한 에러 메시지를 반환
-          //if (error.response && error.response.data && error.response.data.message) {
-           //   return { success: false, message: error.response.data.message };
-          //} else {
-          //    return { success: false, message: "요청 중 오류가 발생했습니다." };
-          //}
-        }
-      }
+  async postUrl(url: string, urlContent: string, bucketId: string) {
+    try {
+      const resp = await this.fetcher.post(`/url/${bucketId}`, {
+        url: url,
+        urlTitle: "",
+        urlContent: urlContent,
+        imgUrl: "",
+      });
+      return resp.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Error posting URL:", error.response.data.message);
+      return { message: error.response.data.message };
+      // 서버가 응답한 에러 메시지를 반환
+      //if (error.response && error.response.data && error.response.data.message) {
+      //   return { success: false, message: error.response.data.message };
+      //} else {
+      //    return { success: false, message: "요청 중 오류가 발생했습니다." };
+      //}
+    }
+  }
 
-      async saveBucketItem(bucketId:string, bucketItemId:string):Promise<boolean>{
-        try{
-          const resp= await this.fetcher.get(`/${bucketId}/${bucketItemId}`);
-          console.log("data", resp.data);
-          return true;
-        }catch(err){
-          console.log(err)
-          return false;
-        }
-      }
+  async saveBucketItem(
+    bucketId: string,
+    bucketItemId: string
+  ): Promise<boolean> {
+    try {
+      const resp = await this.fetcher.get(`/${bucketId}/${bucketItemId}`);
+      console.log("data", resp.data);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }
 }
 
 /*

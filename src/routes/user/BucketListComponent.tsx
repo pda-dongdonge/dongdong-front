@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import BucketItem, { Bucket } from "./BucketItem";
 import useSWR from "swr";
 import bucketlistAPI from "@/apis/bucketlistAPI";
 import { useParams } from "react-router-dom";
 import SkeletonContainer from "@/components/SkeletonContainer";
 import { useAuth } from "@/hooks/useAuth";
-import { GrBucket } from "react-icons/gr";
 import CustomButton from "@/components/CustomButton";
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -23,13 +23,13 @@ export default function BucketListComponent({ tab, goToBucketCreate }: Props) {
     data: makerBucket,
     isLoading: makerBIsLoading,
     error: makerBucketError,
-  } = useSWR(`/bucket/user/${userId}`, service.fetcher.bind(service));
+  } = useSWR<any>(`/bucket/user/${userId}`, service.fetcher.bind(service));
 
   const {
     data: likeBucket,
     isLoading: likeBIsLoading,
     error: likeBucketError,
-  } = useSWR(
+  } = useSWR<any>(
     `/userprofile/likebucket/${userId}`,
     service.fetcher.bind(service)
   );
@@ -53,7 +53,7 @@ export default function BucketListComponent({ tab, goToBucketCreate }: Props) {
       </div>
       {cnt > 0 ? (
         <div className="bucket grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1440px] gap-4">
-          {makerBucket &&
+          {makerBucket?.data &&
             likeBucket &&
             (tab === "bucket"
               ? makerBucket.data.map((bucket: Bucket) => {
