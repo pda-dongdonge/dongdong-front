@@ -42,7 +42,7 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
       <div className="px-[1rem]">
         <PhotoGrid imageList={photoList} />
       </div>
-      <div className="px-[1.2rem] flex flex-row-reverse gap-[13px] translate-y-[68%]">
+      <div className="px-[1.2rem] flex items-center justify-end gap-[13px] translate-y-[68%]">
         <InfoBottom bucketId={bucketDetail._id}/>
       </div>
       <button
