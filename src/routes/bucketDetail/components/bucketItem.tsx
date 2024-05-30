@@ -2,6 +2,7 @@ import { IBucketItem } from "@/apis/bucketlistAPI";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import authAPI from "@/apis/authAPI";
+import { useState } from "react";
 
 type BucketItemProps = {
   bucketItem: IBucketItem;
@@ -11,6 +12,7 @@ const { VITE_BASE_URL } = import.meta.env;
 
 export default function BucketItem({ bucketItem }: BucketItemProps) {
   const navigate = useNavigate();
+  const [hide, setHide] = useState<boolean>(true);
 
   const plusButtonClick = async (): Promise<void> => {
     const service = new authAPI(VITE_BASE_URL + "auth");
@@ -48,18 +50,23 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
         >
           {bucketItem.urlTitle} <b>&gt;</b>
         </p>
-        <div className="relative mb-[1.5rem] rounded-[20px]">
+        <div className="relative mb-[1.5rem] rounded-[20px] flex justify-center">
           <img
             onClick={() => window.open(bucketItem.url)}
             className="rounded-[20px] cursor-pointer"
             src={bucketItem.imgUrl}
           />
-          <div 
-          className="absolute top-[0] rounded-[20px] w-full h-full bg-black opacity-40"></div>
+          <div
+          onMouseOver={()=>setHide(false)}
+          onMouseOut={()=>setHide(true)} 
+          className={`absolute top-[0] rounded-[20px] w-full h-full bg-[#00000066] px-[1rem] ${hide ? "opacity-0" : "opacity-100"} flex items-center justify-center`}
+          >
+            <p className="text-white">{bucketItem.urlContent}</p>
+          </div>
         </div>
         <button
           onClick={() => plusButtonClick()}
-          className="absolute right-[5%] bottom-[40px] bg-purple-200 h-[35px] w-[35px] rounded-full cursor-pointer text-slate-500 hover:opacity-100 opacity-75"
+          className="absolute right-[5%] bottom-[40px] bg-purple-300 h-[35px] w-[35px] rounded-full cursor-pointer text-slate-500 hover:opacity-100 opacity-75"
         >
           +
         </button>
