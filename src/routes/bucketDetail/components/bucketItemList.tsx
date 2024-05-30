@@ -11,7 +11,7 @@ export default function BucketItemList({bucketItemList}: BucketItemListProps) {
   return (
     <>
     {bucketItemList.length ? 
-      <div className="w-full max-w-[500px] shadow-lg bg-white min-h-[350px] rounded-[2rem] mb-6 p-[1rem]">
+      <div className="w-full max-w-[500px] shadow-lg bg-white min-h-[325px] rounded-[2rem] mb-6 p-[1rem]">
         {/* bucketItemList */}
         {bucketItemList.map((item)=>(
           <BucketItem key={item._id} bucketItem={item}/>

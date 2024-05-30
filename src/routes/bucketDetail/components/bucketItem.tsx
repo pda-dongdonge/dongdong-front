@@ -1,25 +1,24 @@
 import { IBucketItem } from "@/apis/bucketlistAPI";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import authAPI from "@/apis/authAPI";
 
 type BucketItemProps = {
   bucketItem: IBucketItem;
 };
 
-// utils/cookies.js
-export const getCookie = (name: string) => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-};
+const { VITE_BASE_URL } = import.meta.env;
 
 export default function BucketItem({ bucketItem }: BucketItemProps) {
-
   const navigate = useNavigate();
-  const plusButtonClick = ():void => {
-    const token = getCookie('AUTH-TOKEN');
-    console.log(token);
-    if(token) {
+
+  const plusButtonClick = async ():Promise<void> => {
+    const service = new authAPI(VITE_BASE_URL + "auth");
+
+    const res = await service.isLogin()
+    console.log(res);
+    
+    if(res._id) {
       //로그인 한 경우 -> state와 함께 storeItem으로 이동하기
       navigate("/storeItem", {
         state: {
@@ -27,9 +26,9 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
         }
       })
     }
-      else {
+    else {
         alert('로그인이 필요한 서비스입니다!')
-      }
+    }
   }
 
   return (
@@ -55,17 +54,11 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
           className="mb-[1.5rem] rounded-[20px] cursor-pointer"
           src={bucketItem.imgUrl}
         />
-
-        {/* <Link 
-        onClick={()=>console.log('되나?')}
-        to="/storeItem" 
-        state={{bucketItemId: bucketItem._id}}> */}
           <button 
           onClick={()=>plusButtonClick()}
           className="absolute right-[5%] bottom-[40px] bg-purple-200 h-[35px] w-[35px] rounded-full cursor-pointer text-slate-500 hover:opacity-100 opacity-75">
             +
           </button>
-        {/* </Link> */}
       </div>
     </div>
   );
