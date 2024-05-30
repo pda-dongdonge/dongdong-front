@@ -5,6 +5,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useRef, useState } from "react";
 import { IAuth } from "@/apis/authAPI";
+import useModal from "@/hooks/useModal";
+
 interface IAuthWithConfirm extends IAuth {
   confirmPassword: string;
 }
@@ -14,10 +16,10 @@ type Props = {
   goSignIn: () => void;
 };
 export default function SignupModal(props: Props) {
+  const { open, close } = useModal();
   const { signUp, isEmailVerify } = useAuth();
   const emailRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<IAuthWithConfirm>({
     email: "",
@@ -38,17 +40,15 @@ export default function SignupModal(props: Props) {
       const res = await isEmailVerify(email);
       if (res) {
         //이메일 사용가능 팝업 띄우기
-        alert("사용가능");
+        open("Confirm", "사용 가능한 이메일입니다.", close);
       } else {
-        alert("중복이요");
+        open("Fail", "사용중인 메일이에요 😢", close);
       }
     }
   };
 
   const handleSubmit = async () => {
     setError(null);
-    setSuccess(null);
-
     const { email, username, password, confirmPassword, phone } = formData;
 
     if (password !== confirmPassword) {
@@ -58,7 +58,7 @@ export default function SignupModal(props: Props) {
 
     try {
       const res = await signUp({ email, username, password, phone });
-      setSuccess(`Sign up successful! ${res.username}`);
+      open("Success", `${res.username}님, 동동이가 되신걸 환영해요 🤗`, close);
       props.onHide();
     } catch (error) {
       setError("Sign up failed. Please try again.");
