@@ -62,7 +62,7 @@ export default function MyNavbar() {
                 }}
               />
             </Navbar.Brand>
-            <div className="jua-regular text-2xl">DONGdongE</div>
+            <a href="/" className="jua-regular text-2xl text-black no-underline">DONGdongE</a>
             <Button
               as={Nav.Link}
               href="#action2"
@@ -95,14 +95,15 @@ export default function MyNavbar() {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}>
+              <a href="/">
               <img
                 src="/dongdonglogo.png"
                 style={{
                   width: "60px",
                 }}
-              ></img>
+              ></img></a>
             </Offcanvas.Title>
-            <div className="jua-regular text-xl ml-5">DONGdongE</div>
+            <a href="/" className="jua-regular text-xl ml-5 text-black no-underline">DONGdongE</a>
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
             <Nav
