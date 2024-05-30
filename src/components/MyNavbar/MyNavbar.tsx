@@ -4,11 +4,13 @@ import CreateBucket from "../CreateBucket/CreateBucket";
 import SignupModal from "../Signup/Signup";
 import { useAuth } from "@/hooks/useAuth";
 import { IoIosArrowForward } from "react-icons/io";
+import SignInModal from "../Signup/SignIn";
 const EXPAND_BREAKPOINT = "always";
 
 export default function MyNavbar() {
   const { user, logOut } = useAuth();
   const [modalShow, setModalShow] = useState<boolean>(false);
+  const [modalLoginShow, setLoginModalShow] = useState<boolean>(false);
   const [fullscreen, setFullscreen] = useState<boolean | string>(true);
   const [createShow, setCreateShow] = useState<boolean>(false);
 
@@ -28,7 +30,6 @@ export default function MyNavbar() {
         }
       `}
       </style>
-
       <Navbar
         expand={EXPAND_BREAKPOINT}
         className="mb-3 mx-2"
@@ -79,7 +80,6 @@ export default function MyNavbar() {
             />
           </div>
         </div>
-
         <Navbar.Offcanvas
           id={`Navbar-expand-${EXPAND_BREAKPOINT}`}
           aria-labelledby={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}
@@ -116,16 +116,20 @@ export default function MyNavbar() {
                     </div>
                   </Nav.Link>
                 ) : (
-                  <Nav.Link href="/sign">
+                  <div onClick={() => setLoginModalShow(true)}>
                     <div className="flex-row flex items-center  font-bold text-sm">
                       로그인 <IoIosArrowForward />
                     </div>
-                  </Nav.Link>
+                  </div>
                 )}
 
                 <SignupModal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
+                />
+                <SignInModal
+                  show={modalLoginShow}
+                  onHide={() => setLoginModalShow(false)}
                 />
               </div>
             </Nav>
@@ -180,7 +184,6 @@ export default function MyNavbar() {
                   </>
                 )}
               </div>
-
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}
