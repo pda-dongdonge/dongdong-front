@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useBucketlist } from "@/hooks/useBucketlist";
 import "./storeurl.css";
+import useModal from "@/hooks/useModal";
 
 // type StoreModalProps = {
 //   bucketId: string;
@@ -16,6 +17,7 @@ export function StoreUrlModal(props: any) {
   const [link, setLink] = useState("");
   const [comment, setComment] = useState("");
   const { addUrl } = useBucketlist();
+  const { open, close } = useModal();
   // const {user_id}=useAuth();
   const bucketID = props.bucket_id;
   const handleLinkChange = (e: any) => {
@@ -27,7 +29,9 @@ export function StoreUrlModal(props: any) {
   };
   const handleClick = async () => {
     if (!link.trim() || !comment.trim()) {
-      alert("링크와 내용을 모두 입력해주세요.");
+      // alert("링크와 내용을 모두 입력해주세요.");
+      open("Check", "링크와 내용을 모두 입력해주세요.", close);
+
       return;
     }
 
@@ -36,16 +40,19 @@ export function StoreUrlModal(props: any) {
     try {
       const success = await addUrl(link, comment, bucketID);
       if (success.success) {
-        alert("링크 정보가 양동이에 추가되었습니다.");
+        // alert("링크 정보가 양동이에 추가되었습니다.");
+        open("Confirm", "링크 정보가 양동이에 추가되었습니다.", close);
+
         props.onHide();
         location.reload();
-
       } else {
-        alert(success.message);
+        // alert(success.message);
+        open("Confirm", `${success.message}`, close);
       }
     } catch (error) {
       console.error("Error handling click event:", error);
-      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      // alert("오류가 발생했습니다. 다시 시도해주세요.");
+      open("Fail", "오류가 발생했습니다. 다시 시도해주세요.", close);
     }
   };
 

@@ -29,7 +29,8 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
       //   dispatch(removeToast(toastId))
       // }, 2000)
     } catch (error) {
-      alert("failed");
+      // alert("failed");
+      open("Fail", "실패했어요..", close);
     }
   };
   const handleFollow = async () => {
@@ -65,7 +66,7 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
         <div className="buttons flex items-center gap-6">
           <IconShare
             className="cursor-pointer"
-            onClick={(e) => copyToClipboard(e)}
+            onClick={e => copyToClipboard(e)}
           />
           {userInfo.userId !== user._id && (
             <CustomButton

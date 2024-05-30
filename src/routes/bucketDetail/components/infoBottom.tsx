@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { FaRegCopy } from "react-icons/fa6";
 import { useBucketlist } from "@/hooks/useBucketlist";
 import { useSWRConfig } from "swr";
+import useModal from "@/hooks/useModal";
 
 type InfoBottomProps = {
   bucketId: string;
@@ -15,10 +16,10 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
   const dispatch = useDispatch();
   const { likeBucket, IsLikedBucket } = useBucketlist();
   const { mutate } = useSWRConfig();
-
+  const { open, close } = useModal();
   useEffect(() => {
     const check = async () => {
-      IsLikedBucket(bucketId).then((res) => {
+      IsLikedBucket(bucketId).then(res => {
         // console.log(res.data.isLiked);
         setValid(res?.data.isLiked);
       });
@@ -30,9 +31,9 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
     e.stopPropagation();
-    setValid((prev) => !prev);
+    setValid(prev => !prev);
     likeBucket(bucketId)
-      .then((res) => {
+      .then(res => {
         if (res?.status === 200) {
           dispatch(showToast({ id: Date.now(), message: res.data.message }));
         }
@@ -55,7 +56,8 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
       //   dispatch(removeToast(toastId))
       // }, 2000)
     } catch (error) {
-      alert("failed");
+      //alert("failed");
+      open("Fail", "실패했어요...", close);
     }
   };
 
@@ -65,9 +67,9 @@ export default function InfoBottom({ bucketId }: InfoBottomProps) {
         className="cursor-pointer"
         color="gray"
         size="16"
-        onClick={(e) => copyToClipboard(e)}
+        onClick={e => copyToClipboard(e)}
       />
-      <div onClick={(e) => heartClick(e)}>
+      <div onClick={e => heartClick(e)}>
         {valid ? (
           <IoIosHeart className="cursor-pointer" size="19" color="#ff869b" />
         ) : (

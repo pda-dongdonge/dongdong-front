@@ -6,6 +6,7 @@ import authAPI from "@/apis/authAPI";
 import CreateBucket from "@/components/CreateBucket/CreateBucket";
 import { useBucketlist } from "@/hooks/useBucketlist";
 import { useLocation, useNavigate } from "react-router-dom";
+import useModal from "@/hooks/useModal";
 function StoreItems() {
   const authService = new authAPI(VITE_BASE_URL + "auth");
   const [buckets, setBuckets] = useState([]);
@@ -20,21 +21,21 @@ function StoreItems() {
   const handleImageClick = (id: any) => {
     setSelectedBucketId(id);
   };
-
+  const { open, close } = useModal();
   const handleRemoveBucket = (id: any) => {
     if (confirm("정말 삭제하시겠습니까?")) {
       removeBucket(id)
         .then(() => {
           setBuckets(buckets.filter((bucket: any) => bucket._id !== id));
         })
-        .catch((error) => {
+        .catch(error => {
           console.error("Failed to remove bucket", error);
         });
     }
   };
 
   useEffect(() => {
-    bringBucket().then((data) => {
+    bringBucket().then(data => {
       if (data) {
         setBuckets(data);
       } else {
@@ -46,21 +47,27 @@ function StoreItems() {
   const handleStore = async () => {
     const user = await authService.isLogin();
     if (!selectedBucketId) {
-      alert("영상을 저장할 양동이를 선택해주세요.");
+      // alert("영상을 저장할 양동이를 선택해주세요.");
+      open("", "영상을 저장할 양동이를 선택해주세요.", close);
     } else {
       addBucketItem(selectedBucketId, bucketItemId)
-        .then((response) => {
-          console.log("아러닝");
+        .then(response => {
           if (response) {
-            alert("영상이 양동이에 성공적으로 저장되었습니다.");
-
+            // alert("영상이 양동이에 성공적으로 저장되었습니다.");
+            open(
+              "Confirm",
+              "영상이 양동이에 성공적으로 저장되었습니다.",
+              close
+            );
             navigate(`/user/${user._id}`);
           } else {
-            alert("해당 영상이 이미 양동이에 있습니다.");
+            // alert("해당 영상이 이미 양동이에 있습니다.");
+            open("", "해당 영상이 이미 양동이에 있습니다.", close);
           }
         })
-        .catch((error) => {
-          alert(`Error: ${error.message}`);
+        .catch(error => {
+          // alert(`Error: ${error.message}`);
+          open("Error", `${error.message}`, close);
           console.error("Failed to add bucketItem", error);
         });
     }
