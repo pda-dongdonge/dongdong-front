@@ -53,7 +53,7 @@ export default function MyNavbar() {
         }}
       >
         <div className="flex flex-row justify-between items-center w-100">
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center justify-between md:gap-10">
             <Navbar.Brand href="/">
               <img
                 src="/dongdonglogo.png"
