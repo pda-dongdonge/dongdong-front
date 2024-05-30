@@ -21,22 +21,29 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
   // console.log(photoList);
   const navigate = useNavigate();
   return (
-    <div className="w-full max-w-[500px] shadow-lg h-[433px] rounded-[2rem]">
-      <div className="w-full h-[50px] rounded-t-[2rem] bg-cyan-300 relative">
+    <div className="w-full max-w-[500px] shadow-lg min-h-[433px] pb-[1.75rem] rounded-[2rem]">
+      <div className="w-full h-[50px] rounded-t-[2rem] bg-purple-400 relative">
         <img
-          src={dummyData.userImage}
-          className="w-[48px] h-[48px] rounded-full absolute top-[14px] left-[13px] border-2 border-white"
+          src={dummyProfileImg}
+          onClick={() => navigate(`/user/${bucketDetail.maker._id}`)}
+          className="w-[48px] h-[48px] rounded-full absolute top-[14px] left-[13px] border-2 border-white cursor-pointer"
         />
-        <p className="absolute left-[75px] top-[40%] font-semibold">kenny</p>
+        <p
+          onClick={() => navigate(`/user/${bucketDetail.maker._id}`)}
+          className="absolute left-[75px] top-[40%] font-semibold cursor-pointer"
+        >
+          {bucketDetail.maker.username}
+        </p>
       </div>
       <div className="px-[1rem] pt-[1.5rem]">
-        <p>{dummyData.content}</p>
+        <p className="m-0">{bucketDetail.title}</p>
+        <p className="text-slate-500 text-sm">{bucketDetail.contents}</p>
       </div>
       <div className="px-[1rem]">
-        <PhotoGrid imageUrl={dummyData.photoList} />
+        <PhotoGrid imageList={photoList} />
       </div>
-      <div className="px-[1rem] flex flex-row-reverse gap-[10px] translate-y-[68%]">
-        <InfoBottom />
+      <div className="px-[1.2rem] flex flex-row-reverse gap-[13px] translate-y-[68%]">
+        <InfoBottom bucketId={bucketDetail._id}/>
       </div>
       <button
       onClick={() => setModalShow(true)}

@@ -35,7 +35,7 @@ export default class authAPI extends BaseApi {
       const resp = await this.fetcher.get("/islogin");
       return resp.data;
     } catch (err) {
-      return;
+      return err;
     }
   }
   async logout() {

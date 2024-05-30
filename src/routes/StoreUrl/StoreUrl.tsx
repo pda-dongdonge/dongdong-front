@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -75,7 +76,7 @@ import { useAuth } from "@/hooks/useAuth";
             fontWeight: "bolder",
           }}
         >
-          버킷에 영상 링크 저장하기
+          양동이에 영상 링크 저장하기
         </h1>
         <p>
         <InputGroup className="mb-3" style={{ borderColor: "#6066FF", border: "2px solid #6066FF", borderRadius:"7px"}}>
@@ -88,6 +89,7 @@ import { useAuth } from "@/hooks/useAuth";
           placeholder="영상 링크를 붙여넣어주세요"
           aria-label="Username"
           aria-describedby="basic-addon1"
+          onChange={handleLinkChange}
           
         />
       </InputGroup>
@@ -98,6 +100,7 @@ import { useAuth } from "@/hooks/useAuth";
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
               style={{ borderColor: "#6066FF", border: "2px solid #6066FF", borderRadius:"7px"}}
+              onChange={handleCommentChange}
             />
           </InputGroup>
         </p>
@@ -112,6 +115,7 @@ import { useAuth } from "@/hooks/useAuth";
               borderRadius: "20px",
               fontWeight: "500",
             }}
+            onClick={handleClick}
           >
             저장
           </Button>

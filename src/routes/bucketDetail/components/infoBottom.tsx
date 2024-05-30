@@ -1,30 +1,62 @@
-import React from 'react'
-import shareIcon from "../../../assets/share.svg";
-import heartIcon from "../../../assets/heart.svg";
-import heartFillIcon from "../../../assets/heartFill.svg";
-import { useState } from "react";
+import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
+import { useEffect, useState } from "react";
+import { showToast } from "@/store/toastPopup";
+import { useDispatch } from "react-redux";
+import { FaRegCopy } from "react-icons/fa6";
+import { useBucketlist } from "@/hooks/useBucketlist";
 
-export default function InfoBottom() {
+type InfoBottomProps = {
+  bucketId: string;
+}
+
+export default function InfoBottom({bucketId}:InfoBottomProps) {
   const [valid, setValid] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const {likeBucket, IsLikedBucket} = useBucketlist();
 
-  const heartClick = (e:React.ChangeEvent<HTMLInputElement>):void => {
-    setValid(prev => !prev);
-    //나중에 로직 추가하기
-  }
+  useEffect(()=>{
+    const check  = async () => {
+      IsLikedBucket(bucketId)
+      .then(res=> {
+        // console.log(res.data.isLiked);
+        setValid(res?.data.isLiked);
+      });
+    }
+    check();
+  }, []);
 
-  const shareClick = (e:React.ChangeEvent<HTMLInputElement>):void => {
-    alert("클릭됨"); 
-    //클립보드에 복사되었습니다! 토스트 팝업으로 띄우기 이쁨게
-  }
+  const heartClick = (): // e:React.ChangeEvent<HTMLInputElement>
+  void => {
+    setValid((prev) => !prev);
+    likeBucket(bucketId).then(res=>{
+      if (res?.status === 200) {
+        dispatch(showToast({id: Date.now(), message: res.data.message}))
+      }
+    });
+  };
+
+  const copyToClipboard = async (): Promise<void> => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      dispatch(showToast({ id: Date.now(), message: "copied!" }));
+    } catch (error) {
+      alert("failed");
+    }
+  };
 
   return (
     <>
-      <img className="w-[20px] cursor-pointer" src={shareIcon} onClick={(e) => shareClick(e)}/>
-      <div onClick={(e)=> heartClick(e)}>
+      <FaRegCopy 
+      className="cursor-pointer"
+      color='gray'
+      size='16'
+      onClick={()=>copyToClipboard()}
+      />
+      <div onClick={() => heartClick()}>
         {valid ? (
-          <img src={heartFillIcon} className="w-[20px] cursor-pointer" />
+          <IoIosHeart className="cursor-pointer" size='19' color="#ff869b" />
         ) : (
-          <img className="w-[20px] cursor-pointer" src={heartIcon} />
+          <IoIosHeartEmpty className="cursor-pointer" size='19' color="#ff869b"/>
         )}
       </div>
     </>

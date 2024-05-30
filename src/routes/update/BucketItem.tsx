@@ -5,10 +5,14 @@ import TwoImg from "../bucketlistItem/TwoImg";
 import MoreImg from "../bucketlistItem/MoreImg";
 import axios from "axios";
 import bucketlistAPI from "@/apis/bucketlistAPI";
+import { useAuth } from "@/hooks/useAuth";
+import NoImg from "../bucketlistItem/NoImg";
+
 
 const { VITE_BASE_URL } = import.meta.env;
 
 export default function BucketItem({ bucket, handleClick }) {
+    const { user, login, logOut } = useAuth();
     const service = new bucketlistAPI(VITE_BASE_URL + "");
 
     const [img, setImg] = useState<number | undefined>(undefined);
@@ -38,26 +42,30 @@ export default function BucketItem({ bucket, handleClick }) {
         linkComponent = <TwoImg src1={bucketImg[0]} src2={bucketImg[1]} />;
     } else if (img > 2) {
         linkComponent = <MoreImg srcArray={bucketImg} />;
+    } else {
+        linkComponent = <NoImg />;
     } 
     
 
     return (
     <>
-    <div className="rounded-2xl border border-indigo-50 p-3 mb-8 w-full max-w-md mx-auto" key={bucket._id} onClick={() => handleClick(bucket)}>
+    <div className="rounded-2xl border border-indigo-50 p-3 mb-8 w-full max-w-md mx-auto cursor-pointer" key={bucket._id} onClick={() => handleClick(bucket)}>
         <div>
         {linkComponent}
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-row mt-2">
             <div className="flex flex-col items-center justify-center w-1/6">
-                <img className="w-8 my-1" src="/dongdonglogo.png" alt="Dongdong Logo" />
-                <div className="font-bold truncate w-full">
-                    user.name
+                <img className="rounded-full w-8 my-1" src="public\dummy-profile.png" alt="Dongdong"/>
+                <div className="font-bold truncate w-full text-center"> 
+                    { bucket.maker.username? bucket.maker.username: "동동이"}
                 </div>
             </div>
+
 
             <div className="flex flex-col justify-center truncate w-full pl-4">
                 <div className="font-semibold text-xl truncate w-full">{bucket.title}</div>
                 <div className="font-light text-sm truncate w-full">{bucket.contents}</div>
+                <div className="font-light text-xs truncate w-full">💜 {bucket.__v}</div>
             </div>
         </div>
     </div>
