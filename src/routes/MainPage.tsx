@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./mainpage.css";
 import { useNavigate } from "react-router-dom";
 
-const App = () => {
-  const navigate=useNavigate();
+const App: React.FC = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleScroll = () => {
-      const imgElements = document.querySelectorAll(".scroll-image");
+      const imgElements = document.querySelectorAll<HTMLElement>(".scroll-image");
       imgElements.forEach(img => {
         const scrollY = window.scrollY;
-        const speed = img.dataset.scrollSpeed || 0.3;
+        const speed = parseFloat(img.dataset.scrollSpeed || "0.3");
         img.style.transform = `translateY(-${scrollY * speed}px)`;
       });
     };
@@ -20,14 +21,13 @@ const App = () => {
     };
   }, []);
 
-
-
   useEffect(() => {
-    const h1Element = document.querySelector(".fade-text");
+    const h1Element = document.querySelector<HTMLElement>(".fade-text");
     setTimeout(() => {
-      h1Element.style.opacity = 1; // 처음에는 투명하지 않게 설정
+      if (h1Element) h1Element.style.opacity = "1"; // 처음에는 투명하지 않게 설정
     }, 100); // 텍스트가 나타난 후 0.1초 후에 투명하지 않은 상태로 설정
   }, []);
+
   return (
     <>
 <main className="content js-content">
@@ -128,6 +128,7 @@ const App = () => {
         }} >저희랑 함께 하실래요? | JOIN</div></h1>
   </section>
 </main>
+
     </>
   );
 };

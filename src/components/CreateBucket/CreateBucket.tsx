@@ -4,16 +4,21 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { useBucketlist } from "../../hooks/useBucketlist";
 import { useNavigate } from "react-router-dom";
-function CreateBucket(props) {
+
+function CreateBucket(props: {
+  show: boolean;
+  fullScreen: boolean | string;
+  onHide: () => void;
+}) {
   const [bucketName, setBucketName] = useState("");
   const [bucketDescription, setBucketDescription] = useState("");
-  const {addBucket}=useBucketlist();
+  const { addBucket } = useBucketlist();
   const navigate = useNavigate();
-  const handleNameChange = (e) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBucketName(e.target.value);
   };
 
-  const handleDescriptionChange = (e) => {
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBucketDescription(e.target.value);
   };
 
@@ -22,12 +27,11 @@ function CreateBucket(props) {
       alert("제목과 내용을 모두 입력해주세요.");
       return;
     }
-    const success=await addBucket(bucketName, bucketDescription);
+    const success = await addBucket(bucketName, bucketDescription);
     if (success) {
-      alert("양동이가 성공적으로 추가되었습니다.")
+      alert("양동이가 성공적으로 추가되었습니다.");
       props.onHide();
       location.reload();
-      
     } else {
       alert("로그인이 필요합니다");
       props.onHide();

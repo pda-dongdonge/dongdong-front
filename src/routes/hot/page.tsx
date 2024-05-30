@@ -1,53 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BucketNav from "../bucketlist/page";
-import { useEffect, useState } from "react";
-//import {getBucketList} from "../../apis/bucketlistAPI";
-import { Bucket } from "../../store/bucketlist";
-import axios from "axios";
+import { Key, useEffect, useState } from "react";
+
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "../update/BucketItem";
 import { useNavigate } from "react-router-dom";
-
+import { Bucket } from "../user/BucketItem";
+import useSWR from "swr";
 const { VITE_BASE_URL } = import.meta.env;
 
 export default function HotPage() {
-    const [bucketList, setBucketList] = useState<Bucket[]>([]);
-    const navigate = useNavigate();
+  // const [bucketList, setBucketList] = useState<Bucket[]>([]);
+  const navigate = useNavigate();
 
-    const service = new bucketlistAPI(VITE_BASE_URL + "");
-    
-    //좋아요 순!!
-    useEffect(() => {
-        const fetchBucketData = async () => {
-          try {
-            const data = await service.getHotBucketList();
-            setBucketList(data);
-          
-          } catch (error) {
-            console.error("Error fetching bucket data:", error);
-          }
-        };
-      
-        fetchBucketData();
-      }, []);
-      
-        const UserClick = (bucket: Bucket) => {
-          // console.log(bucket);
-          navigate(`/bucketlist/${bucket._id}`)
-        };
-      
-    
-  return  (
+  const service = new bucketlistAPI(VITE_BASE_URL + "");
+  const { data, isLoading } = useSWR<any>(
+    `/hotbucket`,
+    service.fetcher.bind(service)
+  );
+
+  const UserClick = (bucket: Bucket) => {
+    // console.log(bucket);
+    navigate(`/bucketlist/${bucket._id}`);
+  };
+  if (isLoading) return <div>loading</div>;
+  return (
     <>
-    <BucketNav />
-
-    <div className="flex flex-wrap justify-between">
-        {bucketList.map((bucket) => (
-            <BucketItem key={bucket._id} bucket={bucket} handleClick={UserClick} />
+      <BucketNav />
+      <div className="flex flex-wrap justify-between">
+        {data.data.map((bucket: any) => (
+          <BucketItem
+            key={bucket._id}
+            bucket={bucket}
+            handleClick={UserClick}
+          />
         ))}
-    </div>
-
-    
+      </div>
     </>
-
   );
 }
