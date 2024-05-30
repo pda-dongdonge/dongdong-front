@@ -61,7 +61,7 @@ export default function CommonPopup() {
           <div className="flex justify-center pt-2">
             <button
               onClick={() => modal.onClick()}
-              className="focus:outline-none px-4 bg-teal-500 p-3 ml-3 rounded-lg text-white hover:bg-teal-400"
+              className="focus:outline-none px-4 bg-indigo-500 p-3 ml-3 rounded-lg text-white hover:bg-indigo-400"
             >
               확인
             </button>
