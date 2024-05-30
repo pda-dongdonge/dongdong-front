@@ -92,20 +92,6 @@ export default class bucketlistAPI extends BaseApi {
         return resp;
       }
 
-
-      async getUserLikeBucketList(userId: string){
-        const resp = await this.fetcher.get(`/userprofile/likebucket/${userId}`);
-        return resp.data;
-      }
-      async getUserBuckets(){
-        const resp = await this.fetcher.get('/user');
-        return resp.data; 
-      }
-
-      async deleteBucket(bucketId:string ){
-        const resp=await this.fetcher.delete(`/${bucketId}`);
-        console.log(resp);
-      }
       async postUrl(url: string, urlContent: string, bucketId: string): Promise<any> {
         try {
           const resp = await this.fetcher.post(`/url/${bucketId}`, {
