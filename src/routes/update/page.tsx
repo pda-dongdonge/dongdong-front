@@ -40,7 +40,7 @@ export default function UpdatePage() {
   return (
     <>
       <BucketNav />
-      <div className="flex flex-wrap justify-between">
+      <div className="flex flex-wrap justify-center gap-8 max-w-[1440px] mx-auto">
         {data.data.reverse().map((bucket: any) => (
           <BucketItem
             key={bucket._id}
