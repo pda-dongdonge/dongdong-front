@@ -26,8 +26,72 @@ export function useBucketlist() {
       //실패 케이스에 따라 로그아웃 실패 노출(존재하지않는계정 )
     }
   }
+
+  async function bringBucket(){
+    try{
+      const res=await service.getUserBuckets();
+      if(res){
+        console.log("bring buckets success");
+        console.log("res", res)
+        return res;
+      }else{
+        console.error("get failed");
+        return false;
+      
+      }
+
+    }catch(err){
+      console.log("Error to bringBucket");
+      return false;
+    }
+  }
+  async function removeBucket(bucketId:string){
+    try{
+      await service.deleteBucket(bucketId);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }
+  async function addUrl(url: string, urlContent: string, bucketID: string): Promise<{ success: boolean, message: string }> {
+    try {
+      const res = await service.postUrl(url, urlContent, bucketID);
+      if (res) {
+        console.log("URL post success");
+        return { success: true, message: "URL post success" };
+      } else {
+        console.error("URL post failed");
+        return { success: false, message: "URL post failed" };
+      }
+    } catch (err) {
+      console.error("Error adding URL:", err);
+      if (err.response && err.response.data && err.response.data.message) {
+        return { success: false, message: err.response.data.message };
+      } else {
+        return { success: false, message: "An error occurred while adding the URL." };
+      }
+    }
+  }
+  
+  
+  
+  async function addBucketItem(bucketId: string, bucketItemId: string): Promise<boolean> {
+    try {
+      await service.saveBucketItem(bucketId, bucketItemId);
+      console.log("bucket item save success");
+      return true;
+    } catch (err) {
+      console.error("Error", err);
+      return false;
+    }
+  }
+  
+
   return{
-    addBucket
+    addBucket,
+    bringBucket,
+    removeBucket,
+    addUrl,
+    addBucketItem
   };
 
 }

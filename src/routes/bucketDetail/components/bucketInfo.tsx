@@ -1,24 +1,25 @@
 // import React from "react";
 import PhotoGrid from "./photoGrid";
 import InfoBottom from "./infoBottom";
+import { IBucketDetail, IBucketItem } from "@/apis/bucketlistAPI";
+import dummyProfileImg from "../../../../public/dummy-profile.png";
+import { useNavigate } from "react-router-dom";
+import { StoreUrlModal } from "@/routes/StoreUrl/StoreUrl";
+import { useState } from "react";
 
-const dummyData = {
-  userImage:
-    "https://i.namu.wiki/i/Qvk18CBALY3A7CKoYdienLC1B8q8JXEZIiydvuxxVFFqGYjDmDOaY2vB0YX_P_WbxA5REh9NtAdhi5L1TLEx1A.webp",
-  content: "가짜설명....",
-  photoList: [
-    "https://d2gfz7wkiigkmv.cloudfront.net/pickin/2/1/2/zU_ec1ZnTQSqkTIQbQaxsA",
-    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FgKDADa_OS_SIwwFOE17Ezw&w=1080&q=75",
-    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FvmyksiS1Q_WxHe8ntXhQiA&w=1080&q=75",
-    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FhjvCBXzQTAmlSwo8oAGy3w&w=1080&q=75",
-    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2Fo9LQPpyKQFWLbpJTZNXj3A&w=1080&q=75",
-    "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FWt64eovFTgq6YRSMwzeNrg&w=1080&q=75",
-  ],
-};
+interface BucketInfoProps {
+  bucketDetail: IBucketDetail;
+}
 
 //최대 6개,
 // 1개 / 2개 / 3개 / 4개 / 6개
-export default function BucketInfo() {
+export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
+  const [modalShow, setModalShow] = useState(false);
+  const photoList = bucketDetail.bucketItemList.map((item: IBucketItem) => {
+    return { imgUrl: item.imgUrl, id: item._id };
+  });
+  // console.log(photoList);
+  const navigate = useNavigate();
   return (
     <div className="w-full max-w-[500px] shadow-lg h-[433px] rounded-[2rem]">
       <div className="w-full h-[50px] rounded-t-[2rem] bg-cyan-300 relative">
@@ -37,6 +38,14 @@ export default function BucketInfo() {
       <div className="px-[1rem] flex flex-row-reverse gap-[10px] translate-y-[68%]">
         <InfoBottom />
       </div>
+      <button
+      onClick={() => setModalShow(true)}
+      >모달!!!!!!!!!!!!!!!!!1</button>
+      <StoreUrlModal 
+      bucket_id={bucketDetail._id}
+      show={modalShow}
+      onHide={()=>setModalShow(false)}
+      />
     </div>
   );
 }

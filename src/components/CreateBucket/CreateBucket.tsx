@@ -16,10 +16,21 @@ function CreateBucket(props) {
   };
 
   const handleSubmit = async () => {
-    // 여기에 제출 로직을 추가합니다.
-    console.log("Bucket Name:", bucketName);
-    console.log("Bucket Description:", bucketDescription);
-    await addBucket(bucketName, bucketDescription);
+    if (!bucketName.trim() || !bucketDescription.trim()) {
+      alert("제목과 내용을 모두 입력해주세요.");
+      return;
+    }
+    const success=await addBucket(bucketName, bucketDescription);
+    if (success) {
+      alert("양동이가 성공적으로 추가되었습니다.")
+      props.onHide();
+      location.reload();
+      
+    } else {
+      alert("로그인이 필요합니다");
+      props.onHide();
+      navigate("/");
+    }
   };
 
   return (
