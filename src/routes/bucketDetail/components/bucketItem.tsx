@@ -14,7 +14,10 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
   const navigate = useNavigate();
   const [hide, setHide] = useState<boolean>(true);
 
-  const plusButtonClick = async (): Promise<void> => {
+  const plusButtonClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): Promise<void> => {
+    e.stopPropagation();
     const service = new authAPI(VITE_BASE_URL + "auth");
 
     const res = await service.isLogin();
@@ -57,15 +60,18 @@ export default function BucketItem({ bucketItem }: BucketItemProps) {
             src={bucketItem.imgUrl}
           />
           <div
-          onMouseOver={()=>setHide(false)}
-          onMouseOut={()=>setHide(true)} 
-          className={`absolute top-[0] rounded-[20px] w-full h-full bg-[#00000066] px-[1rem] ${hide ? "opacity-0" : "opacity-100"} flex items-center justify-center`}
+            onMouseOver={() => setHide(false)}
+            onMouseOut={() => setHide(true)}
+            onClick={() => window.open(bucketItem.url)}
+            className={`absolute top-[0] rounded-[20px] w-full h-full bg-[#00000066] px-[1rem] ${
+              hide ? "opacity-0" : "opacity-100"
+            } flex items-center justify-center`}
           >
             <p className="text-white">{bucketItem.urlContent}</p>
           </div>
         </div>
         <button
-          onClick={() => plusButtonClick()}
+          onClick={e => plusButtonClick(e)}
           className="absolute right-[5%] bottom-[40px] bg-purple-300 h-[35px] w-[35px] rounded-full cursor-pointer text-slate-500 hover:opacity-100 opacity-75"
         >
           +
