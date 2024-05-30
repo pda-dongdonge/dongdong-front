@@ -87,11 +87,10 @@ export default function MyNavbar() {
               CREATE
             </Button>
           </div>
-          <div>
-            <Navbar.Toggle
-              aria-controls={`Navbar-expand-${EXPAND_BREAKPOINT}`}
-            />
-          </div>
+          <Navbar.Toggle
+            style={{ border: "none", cursor: "pointer" }}
+            aria-controls={`Navbar-expand-${EXPAND_BREAKPOINT}`}
+          />
         </div>
         <Navbar.Offcanvas
           id={`Navbar-expand-${EXPAND_BREAKPOINT}`}
@@ -171,13 +170,13 @@ export default function MyNavbar() {
                   border: "none",
                 }}
               >
-                Hot
+                🔥Hot
               </Nav.Link>
               <Nav.Link
                 href="/now"
                 style={{ fontWeight: "bold", fontSize: "18px", border: "none" }}
               >
-                Now
+                ✨Now
               </Nav.Link>
 
               <div>
@@ -191,7 +190,7 @@ export default function MyNavbar() {
                         border: "none",
                       }}
                     >
-                      Feed
+                      💖Feed
                     </Nav.Link>
                     <hr />
                   </>
