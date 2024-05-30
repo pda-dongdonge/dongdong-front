@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import BucketNav from "../bucketlist/page";
-import { Key, useEffect, useState } from "react";
-
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "../update/BucketItem";
 import { useNavigate } from "react-router-dom";

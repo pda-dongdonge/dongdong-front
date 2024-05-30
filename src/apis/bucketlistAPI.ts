@@ -23,20 +23,10 @@ export interface IBucketDetail {
   bucketItemList: IBucketItem[];
   maker: IUserInfo;
 }
-
-interface PostUrlResponse {
-  data: any;
-}
-
-interface PostUrlErrorResponse {
-  message: string;
-}
-
-
 export default class bucketlistAPI extends BaseApi {
   async getBucketList() {
     const resp = await this.fetcher.get("/bucket");
-    return resp.data;
+    return resp.data.reverse();
   }
 
   async postBucket(title: string, contents: string) {
