@@ -24,6 +24,15 @@ export interface IBucketDetail {
   maker: IUserInfo;
 }
 
+interface PostUrlResponse {
+  data: any;
+}
+
+interface PostUrlErrorResponse {
+  message: string;
+}
+
+
 export default class bucketlistAPI extends BaseApi {
   async getBucketList() {
     const resp = await this.fetcher.get("/bucket");
@@ -92,16 +101,18 @@ export default class bucketlistAPI extends BaseApi {
         return resp;
       }
 
-      async postUrl(url: string, urlContent: string, bucketId: string): Promise<any> {
+      
+
+      async postUrl(url: string, urlContent: string, bucketId: string): Promise<PostUrlResponse | PostUrlErrorResponse> {
         try {
-          const resp = await this.fetcher.post(`/url/${bucketId}`, {
+          const resp = await this.fetcher.post<PostUrlResponse>(`/url/${bucketId}`, {
             url: url, 
             urlTitle: "",
             urlContent: urlContent,
             imgUrl: ""
           });
           return resp.data;
-        } catch (error) {
+        } catch (error:unknown) {
           console.error("Error posting URL:", error.response.data.message);
           return {message: error.response.data.message}
           // 서버가 응답한 에러 메시지를 반환

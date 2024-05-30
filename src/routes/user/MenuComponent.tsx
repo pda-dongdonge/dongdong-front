@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import IconHeart from "@/assets/icon-heart.svg?react";
 type Props = {

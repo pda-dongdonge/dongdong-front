@@ -1,6 +1,6 @@
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 import { useEffect, useState } from "react";
-import { removeToast, showToast } from "@/store/toastPopup";
+import { showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
 import { FaRegCopy } from "react-icons/fa6";
 import { useBucketlist } from "@/hooks/useBucketlist";
