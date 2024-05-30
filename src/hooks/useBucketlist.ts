@@ -53,7 +53,11 @@ export function useBucketlist() {
   async function addUrl(url: string, urlContent: string, bucketID: string): Promise<{ success: boolean, message: string }> {
     try {
       const res = await service.postUrl(url, urlContent, bucketID);
-      if (res) {
+      const con=urlContent;
+      if(res.message){
+        return  { success: false, message: "URL post fail" };
+      }
+      if (con.length !==0 ) {
         console.log("URL post success");
         return { success: true, message: "URL post success" };
       } else {
@@ -61,7 +65,8 @@ export function useBucketlist() {
         return { success: false, message: "URL post failed" };
       }
     } catch (err) {
-      console.error("Error adding URL:", err);
+      console.error("Error adding URL:", err.response.data.message);
+
       if (err.response && err.response.data && err.response.data.message) {
         return { success: false, message: err.response.data.message };
       } else {
