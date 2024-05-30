@@ -4,6 +4,10 @@ import CustomButton from "@/components/CustomButton";
 import { IUserProfile } from "@/apis/userAPI";
 import useUser from "@/hooks/useUser";
 import { useAuth } from "@/hooks/useAuth";
+import { showToast } from "@/store/toastPopup";
+import { useDispatch } from "react-redux";
+import useModal from "@/hooks/useModal";
+
 type Props = {
   userInfo: IUserProfile | undefined;
   setUserInfo: (userInfo: IUserProfile) => void;
@@ -11,7 +15,23 @@ type Props = {
 export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
   const { user } = useAuth();
   const { follow, unFollow } = useUser();
-
+  const { open, close } = useModal();
+  const dispatch = useDispatch();
+  const copyToClipboard = async (
+    e: React.MouseEvent<SVGSVGElement, MouseEvent>
+  ): Promise<void> => {
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      const toastId = Date.now();
+      dispatch(showToast({ id: toastId, message: "copied!" }));
+      // setTimeout(()=>{
+      //   dispatch(removeToast(toastId))
+      // }, 2000)
+    } catch (error) {
+      alert("failed");
+    }
+  };
   const handleFollow = async () => {
     if (!userInfo) return;
     //TODO: 비로그인 유저면 로그인 유도(로그인이 필요합니다)팝업 띄우고 확인시 로그인창 이동
@@ -28,7 +48,9 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
       setUserInfo(res);
     }
   };
-
+  const clickMore = () => {
+    open("⚠️", "아직 없는 기능이에요!", close);
+  };
   return (
     userInfo && (
       <div className="user-profile flex flex-col items-center gap-4">
@@ -41,14 +63,17 @@ export default function ProfileComponent({ userInfo, setUserInfo }: Props) {
           <span>{`${userInfo.followingCount} following`}</span>
         </div>
         <div className="buttons flex items-center gap-6">
-          <IconShare className="cursor-pointer" />
+          <IconShare
+            className="cursor-pointer"
+            onClick={(e) => copyToClipboard(e)}
+          />
           {userInfo.userId !== user._id && (
             <CustomButton
               text={`${userInfo.isFollow ? "Unfollow" : "Follow"}`}
               handleClick={handleFollow}
             />
           )}
-          <IconMore className="cursor-pointer" />
+          <IconMore className="cursor-pointer" onClick={clickMore} />
         </div>
       </div>
     )

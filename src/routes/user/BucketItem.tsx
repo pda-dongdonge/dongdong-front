@@ -1,4 +1,3 @@
-import React from "react";
 import ThumbnailGrid from "./ThumbnailGrid";
 import InfoBottom from "../bucketDetail/components/infoBottom";
 export interface BucketItem {
@@ -39,7 +38,7 @@ export default function BucketItem({ bucket }: Props) {
       <div className="item-info flex justify-between items-center">
         <p className="title pl-1 py-2 m-0">{bucket.title}</p>
         <div className="flex items-center justify-center gap-2">
-          <InfoBottom />
+          <InfoBottom bucketId={bucket._id} />
         </div>
         {/* <p className="item-cnt">{bucket.bucketCnt}개의 영상</p> */}
       </div>
