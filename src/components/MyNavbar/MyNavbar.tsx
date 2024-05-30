@@ -40,7 +40,7 @@ export default function MyNavbar() {
       </style>
       <Navbar
         expand={EXPAND_BREAKPOINT}
-        className="mb-3 mx-2"
+        className="mb-3"
         sticky="top"
         style={{
           backgroundColor: "white",
@@ -68,24 +68,6 @@ export default function MyNavbar() {
             >
               DONGdongE
             </a>
-            <Button
-              as="a"
-              href="#action2"
-              size="lg"
-              style={{
-                backgroundColor: "#7758F6",
-                borderRadius: "30px",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: "16px",
-                padding: "13px 22px", // Padding for large button size
-                display: "inline-block",
-                textAlign: "center",
-              }}
-              onClick={() => handleShow(true)}
-            >
-              CREATE
-            </Button>
           </div>
           <Navbar.Toggle
             style={{ border: "none", cursor: "pointer" }}
@@ -178,7 +160,6 @@ export default function MyNavbar() {
               >
                 ✨Now
               </Nav.Link>
-
               <div>
                 {user.username ? (
                   <>
@@ -192,12 +173,36 @@ export default function MyNavbar() {
                     >
                       💖Feed
                     </Nav.Link>
-                    <hr />
                   </>
                 ) : (
-                  <hr />
+                    <>
+                    </>
+                  
                 )}
+
               </div>
+              <div>
+              <Button
+                      as="a"
+                      href="#action2"
+                      size="lg"
+                      style={{
+                        backgroundColor: "#7758F6",
+                        borderRadius: "30px",
+                        color: "white",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                        padding: "13px 22px", // Padding for large button size
+                        display: "inline-block",
+                        textAlign: "center",
+                        width:"100%"
+                      }}
+                      onClick={() => handleShow(true)}
+                    >
+                      CREATE
+                    </Button>
+                    <hr/>
+                    </div>
 
               <div className="text-right text-xs cursor-pointer">
                 {user.username ? (
@@ -216,6 +221,7 @@ export default function MyNavbar() {
                   </>
                 )}
               </div>
+
               <CreateBucket
                 show={createShow}
                 fullScreen={fullscreen}
