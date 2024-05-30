@@ -1,12 +1,15 @@
 // import { RootState } from "@reduxjs/toolkit/query";
 // import { useDispatch } from "react-redux";
 // import { useSelector } from "react-redux";
+import authAPI from "@/apis/authAPI";
 import bucketlistAPI from "../apis/bucketlistAPI";
+import { useAuth } from "@/hooks/useAuth";
 const { VITE_BASE_URL } = import.meta.env;
 export function useBucketlist() {
   //const user = useSelector((state: RootState) => state.user);
   // const dispatch = useDispatch();
   const service = new bucketlistAPI(VITE_BASE_URL + "bucket");
+  const authService = new authAPI(VITE_BASE_URL + "auth");
 
   async function addBucket(title: string, contents: string) {
     try {
@@ -27,7 +30,11 @@ export function useBucketlist() {
 
   async function bringBucket(){
     try{
-      const res=await service.getUserBuckets();
+      const user = await authService.isLogin();
+      const bucketService = await new bucketlistAPI(VITE_BASE_URL);
+
+      const res=await bucketService.getUserProfileBuckets(user._id);
+      
       if(res){
         console.log("bring buckets success");
         console.log("res", res)
@@ -74,9 +81,15 @@ export function useBucketlist() {
   
   async function addBucketItem(bucketId: string, bucketItemId: string): Promise<boolean> {
     try {
-      await service.saveBucketItem(bucketId, bucketItemId);
-      console.log("bucket item save success");
-      return true;
+      const res = await service.saveBucketItem(bucketId, bucketItemId);
+      if(res){
+        console.log("bucket item save success");
+        return true;
+      }else{
+        console.log("fail save bucket")
+        
+        return false;
+      }
     } catch (err) {
       console.error("Error", err);
       return false;
