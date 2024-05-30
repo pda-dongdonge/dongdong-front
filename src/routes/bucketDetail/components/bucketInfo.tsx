@@ -4,6 +4,8 @@ import InfoBottom from "./infoBottom";
 import { IBucketDetail, IBucketItem } from "@/apis/bucketlistAPI";
 import dummyProfileImg from "../../../../public/dummy-profile.png";
 import { useNavigate } from "react-router-dom";
+import { StoreUrlModal } from "@/routes/StoreUrl/StoreUrl";
+import { useState } from "react";
 
 interface BucketInfoProps {
   bucketDetail: IBucketDetail;
@@ -12,6 +14,7 @@ interface BucketInfoProps {
 //최대 6개,
 // 1개 / 2개 / 3개 / 4개 / 6개
 export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
+  const [modalShow, setModalShow] = useState(false);
   const photoList = bucketDetail.bucketItemList.map((item: IBucketItem) => {
     return { imgUrl: item.imgUrl, id: item._id };
   });
@@ -42,6 +45,14 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
       <div className="px-[1.2rem] flex flex-row-reverse gap-[13px] translate-y-[68%]">
         <InfoBottom bucketId={bucketDetail._id}/>
       </div>
+      <button
+      onClick={() => setModalShow(true)}
+      >모달!!!!!!!!!!!!!!!!!1</button>
+      <StoreUrlModal 
+      bucket_id={bucketDetail._id}
+      show={modalShow}
+      onHide={()=>setModalShow(false)}
+      />
     </div>
   );
 }

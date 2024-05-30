@@ -24,8 +24,10 @@ function CreateBucket(props) {
     }
     const success=await addBucket(bucketName, bucketDescription);
     if (success) {
+      alert("양동이가 성공적으로 추가되었습니다.")
       props.onHide();
-      navigate("/user");
+      location.reload();
+      
     } else {
       alert("로그인이 필요합니다");
       props.onHide();

@@ -43,19 +43,45 @@ export function useBucketlist() {
       return false;
     }
   }
-  async function removeBucket(bucketId){
+  async function removeBucket(bucketId:string){
     try{
-      const res = await service.deleteBucket(bucketId);
-      if (res) {
-        console.log("bucket delete success")
-      } else {
-        console.error("bucket delete fail");
-      }
+      await service.deleteBucket(bucketId);
     } catch (err) {
       console.log("Error", err);
     }
   }
-
+  async function addUrl(url: string, urlContent: string, bucketID: string): Promise<{ success: boolean, message: string }> {
+    try {
+      const res = await service.postUrl(url, urlContent, bucketID);
+      if (res) {
+        console.log("URL post success");
+        return { success: true, message: "URL post success" };
+      } else {
+        console.error("URL post failed");
+        return { success: false, message: "URL post failed" };
+      }
+    } catch (err) {
+      console.error("Error adding URL:", err);
+      if (err.response && err.response.data && err.response.data.message) {
+        return { success: false, message: err.response.data.message };
+      } else {
+        return { success: false, message: "An error occurred while adding the URL." };
+      }
+    }
+  }
+  
+  
+  
+  async function addBucketItem(bucketId: string, bucketItemId: string): Promise<boolean> {
+    try {
+      await service.saveBucketItem(bucketId, bucketItemId);
+      console.log("bucket item save success");
+      return true;
+    } catch (err) {
+      console.error("Error", err);
+      return false;
+    }
+  }
   async function likeBucket(bucketId:string) {
     try {
       const resp = await service.patchLikeBucket(bucketId);
@@ -78,12 +104,16 @@ export function useBucketlist() {
     }
   }
 
+  
+
   return{
     addBucket,
     bringBucket,
     removeBucket,
     likeBucket,
-    IsLikedBucket,
+    IsLikedBucket,               
+    addUrl,
+    addBucketItem
   };
 
 }

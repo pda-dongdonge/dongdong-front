@@ -4,10 +4,23 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { useBucketlist } from "@/hooks/useBucketlist";
+import { useNavigate } from "react-router-dom";
 import './storeurl.css';
- function StoreUrlModal(props) {
+import { addListener } from "process";
+import { useAuth } from "@/hooks/useAuth";
+
+// type StoreModalProps = {
+//   bucketId: string;
+// }
+
+ export function StoreUrlModal(props) {
   const [link, setLink] = useState("");
   const [comment, setComment] = useState("");
+  const {addUrl }=useBucketlist();
+  const navigate=useNavigate();
+  // const {user_id}=useAuth();
+  const bucketID=props.bucket_id
   const handleLinkChange = (e) => {
     setLink(e.target.value);
   };
@@ -15,15 +28,33 @@ import './storeurl.css';
   const handleCommentChange = (e) => {
     setComment(e.target.value);
   };
-  const handleClick=()=>{
+  const handleClick = async () => {
     if (!link.trim() || !comment.trim()) {
       alert("링크와 내용을 모두 입력해주세요.");
       return;
     }
-    console.log(link);
-    console.log(comment);
+  
+    console.log(link, comment);
+  
+    try {
+      const success = await addUrl(link, comment, bucketID);
+  
+      if (success) {
+        alert("링크 정보가 양동이에 성공적으로 추가되었습니다.");
+      } else {
+        alert(success);
+      }
+  
+      props.onHide();
+      location.reload();
+    } catch (error) {
+      console.error("Error handling click event:", error);
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+    }
+  };
+  
 
-  }
+
   return (
     <Modal
       {...props}
@@ -49,7 +80,7 @@ import './storeurl.css';
         </h1>
         <p>
         <InputGroup className="mb-3" style={{ borderColor: "#6066FF", border: "2px solid #6066FF", borderRadius:"7px"}}>
-        <InputGroup.Text id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16"
+        <InputGroup.Text id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-link-45deg" viewBox="0 0 16 16"
        >
   <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/>
   <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/>
@@ -93,6 +124,8 @@ import './storeurl.css';
     </Modal>
   );
 }
+
+
 export default function StoreUrl() {
   const [modalShow, setModalShow] = React.useState(false);
 
