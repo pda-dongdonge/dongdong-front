@@ -31,7 +31,7 @@ const routers = [
         index: true,
       },
       {
-        path: "like",
+        path: "feed",
         element: <LikePage />,
         index: true,
       },

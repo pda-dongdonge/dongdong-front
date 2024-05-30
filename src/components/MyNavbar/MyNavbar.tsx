@@ -151,10 +151,10 @@ export default function MyNavbar() {
                 {user.username ? (
                   <>
                     <Nav.Link
-                      href="/like"
+                      href="/feed"
                       style={{ fontWeight: "bold", fontSize: "18px" }}
                     >
-                      Like
+                      Feed
                     </Nav.Link>
                     <hr />
                   </>

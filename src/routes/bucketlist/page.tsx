@@ -24,10 +24,10 @@ export default function BucketNav() {
 
         {user.username ? (
           <Nav.Link
-            href="/like"
+            href="/feed"
             style={{ fontWeight: "bold", fontSize: "18px", color: "black" }}
           >
-            💖Like
+            💖Feed
           </Nav.Link>
           ) : (
             <div>&nbsp;</div>

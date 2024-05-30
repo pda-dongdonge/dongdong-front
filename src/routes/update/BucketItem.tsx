@@ -53,7 +53,7 @@ export default function BucketItem({ bucket, handleClick }) {
         <div>
         {linkComponent}
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-row mt-2">
             <div className="flex flex-col items-center justify-center w-1/6">
                 <img className="rounded-full w-8 my-1" src="public\dummy-profile.png" alt="Dongdong"/>
                 <div className="font-bold truncate w-full text-center"> 
@@ -65,6 +65,7 @@ export default function BucketItem({ bucket, handleClick }) {
             <div className="flex flex-col justify-center truncate w-full pl-4">
                 <div className="font-semibold text-xl truncate w-full">{bucket.title}</div>
                 <div className="font-light text-sm truncate w-full">{bucket.contents}</div>
+                <div className="font-light text-xs truncate w-full">💜 {bucket.__v}</div>
             </div>
         </div>
     </div>
