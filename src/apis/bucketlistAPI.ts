@@ -57,11 +57,11 @@ export default class bucketlistAPI extends BaseApi {
     const resp = await this.fetcher.get(`/userprofile/likebucket/${userId}`);
     return resp.data;
   }
-  async getUserBuckets() {
-    const resp = await this.fetcher.get("/user");
-    console.log("data", resp.data);
-    return resp.data;
-  }
+  // async getUserBuckets() {
+  //   const resp = await this.fetcher.get("/user");
+  //   console.log("data", resp.data);
+  //   return resp.data;
+  // }
 
   async deleteBucket(bucketId: string) {
     const resp = await this.fetcher.delete(`/${bucketId}`);
@@ -113,9 +113,15 @@ export default class bucketlistAPI extends BaseApi {
         }
       }
 
-      async saveBucketItem(bucketId:string, bucketItemId:string){
-        const resp=await this.fetcher.get(`/${bucketId}/${bucketItemId}`);
-        console.log("data", resp.data);
+      async saveBucketItem(bucketId:string, bucketItemId:string):Promise<boolean>{
+        try{
+          const resp= await this.fetcher.get(`/${bucketId}/${bucketItemId}`);
+          console.log("data", resp.data);
+          return true;
+        }catch(err){
+          console.log(err)
+          return false;
+        }
       }
 }
 
