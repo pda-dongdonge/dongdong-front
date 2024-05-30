@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import BucketNav from "../bucketlist/page";
-import { useEffect, useState } from "react";
 import bucketlistAPI from "../../apis/bucketlistAPI";
 import BucketItem from "../update/BucketItem";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Bucket } from "../user/BucketItem";
 import useSWR from "swr";
+import SkeletonContainer from "@/components/SkeletonContainer";
 
 const { VITE_BASE_URL } = import.meta.env;
 const service = new bucketlistAPI(VITE_BASE_URL + "");
 
 export default function LikePage() {
-  const { user_id, user } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { data, isLoading } = useSWR<any>(
     user._id ? `/bucket/feed/${user._id}` : null,
@@ -39,7 +39,13 @@ export default function LikePage() {
     console.log(bucket);
     navigate(`/bucketlist/${bucket._id}`);
   };
-  if (isLoading) return <div>loading</div>;
+  if (isLoading)
+    return (
+      <>
+        <BucketNav />
+        <SkeletonContainer cnt={3} />;
+      </>
+    );
   return (
     <>
       <BucketNav />

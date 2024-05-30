@@ -6,6 +6,7 @@ import BucketItem from "./BucketItem";
 const { VITE_BASE_URL } = import.meta.env;
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
+import SkeletonContainer from "@/components/SkeletonContainer";
 export interface Maker {
   _id: string;
   username: string;
@@ -29,7 +30,13 @@ export default function UpdatePage() {
     console.log(bucket);
     navigate(`/bucketlist/${bucket._id}`);
   };
-  if (isLoading) return <div>loading</div>;
+  if (isLoading)
+    return (
+      <>
+        <BucketNav />
+        <SkeletonContainer cnt={3} />;
+      </>
+    );
   return (
     <>
       <BucketNav />

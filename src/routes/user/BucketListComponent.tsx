@@ -43,7 +43,7 @@ export default function BucketListComponent({ tab, goToBucketCreate }: Props) {
   }, [tab, makerBucket, likeBucket]);
 
   // 로딩 상태 및 에러 처리
-  if (makerBIsLoading && likeBIsLoading) return <SkeletonContainer />;
+  if (makerBIsLoading && likeBIsLoading) return <SkeletonContainer cnt={4} />;
   if (makerBucketError && likeBucketError) return <div>Failed to load</div>;
 
   return (
