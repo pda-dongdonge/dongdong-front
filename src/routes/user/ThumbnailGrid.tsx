@@ -1,4 +1,4 @@
-// import React from 'react'
+import NoImg from "../bucketlistItem/NoImg";
 
 interface PhotoGridProps {
   imageUrl: string[];
@@ -52,14 +52,17 @@ export default function ThumbnailGrid({ imageUrl }: PhotoGridProps) {
         imageUrl.length
       )} ${gridContainerRows(imageUrl.length)}`}
     >
-      {imageUrl &&
+      {imageUrl.length > 0 ? (
         imageUrl.map((image, index, arr) => (
           <img
             key={image + index}
             src={image}
             className={`object-cover w-full ${gridItemCss(arr.length, index)}`}
           />
-        ))}
+        ))
+      ) : (
+        <NoImg />
+      )}
     </div>
   );
 }

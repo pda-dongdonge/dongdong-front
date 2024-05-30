@@ -27,9 +27,11 @@ export function useAuth() {
       } else {
         console.error("Login failed");
       }
+      return true;
     } catch (err) {
       //복구
       console.log("Error to login", err);
+      return false;
       //실패 케이스에 따라 로그아웃 실패 노출(존재하지않는계정 )
     }
   }

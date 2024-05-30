@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useAuth } from "@/hooks/useAuth";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IAuth } from "@/apis/authAPI";
 interface IAuthWithConfirm extends IAuth {
   confirmPassword: string;
@@ -11,6 +11,7 @@ interface IAuthWithConfirm extends IAuth {
 type Props = {
   show: boolean;
   onHide: () => void;
+  goSignIn: () => void;
 };
 export default function SignupModal(props: Props) {
   const { signUp, isEmailVerify } = useAuth();
@@ -58,10 +59,19 @@ export default function SignupModal(props: Props) {
     try {
       const res = await signUp({ email, username, password, phone });
       setSuccess(`Sign up successful! ${res.username}`);
+      props.onHide();
     } catch (error) {
       setError("Sign up failed. Please try again.");
     }
   };
+
+  useEffect(() => {
+    // 클린업 함수로 상태 초기화
+    if (!props.show) {
+      setError(null);
+    }
+  }, [props.show]);
+
   return (
     <Modal
       {...props}
@@ -72,9 +82,16 @@ export default function SignupModal(props: Props) {
       <Modal.Header closeButton style={{ borderBottom: "none" }}>
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ textAlign:"center"}}>
-        <div style={{ fontSize: "40px", marginBottom: "20px", display:"flex", justifyContent:"center"}}>
-          <img src="/dongdonglogo.png" width="60px" ></img>
+      <Modal.Body style={{ textAlign: "center" }}>
+        <div
+          style={{
+            fontSize: "40px",
+            marginBottom: "20px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <img src="/dongdonglogo.png" width="60px"></img>
         </div>
         <h1
           style={{
@@ -178,6 +195,7 @@ export default function SignupModal(props: Props) {
               borderRadius: "20px",
               fontWeight: "500",
             }}
+            onClick={props.goSignIn}
           >
             Have account? Sign in
           </Button>
