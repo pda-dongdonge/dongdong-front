@@ -1,6 +1,6 @@
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 import { useEffect, useState } from "react";
-import { showToast } from "@/store/toastPopup";
+import { removeToast, showToast } from "@/store/toastPopup";
 import { useDispatch } from "react-redux";
 import { FaRegCopy } from "react-icons/fa6";
 import { useBucketlist } from "@/hooks/useBucketlist";
@@ -38,7 +38,11 @@ export default function InfoBottom({bucketId}:InfoBottomProps) {
   const copyToClipboard = async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      dispatch(showToast({ id: Date.now(), message: "copied!" }));
+      const toastId = Date.now()
+      dispatch(showToast({ id: toastId, message: "copied!" }));
+      // setTimeout(()=>{
+      //   dispatch(removeToast(toastId))
+      // }, 2000)
     } catch (error) {
       alert("failed");
     }
