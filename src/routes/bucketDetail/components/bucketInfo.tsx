@@ -25,23 +25,22 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
   // console.log(photoList);
   const navigate = useNavigate();
 
-
   // 버킷의 주인만 양동이 채우기 버튼이 보이도록 수정
-  useEffect(()=>{
-    const check = async ():Promise<void> => {
+  useEffect(() => {
+    const check = async (): Promise<void> => {
       const service = new authAPI(VITE_BASE_URL + "auth");
       const res = await service.isLogin();
 
-      if(res._id === bucketDetail.maker._id) {
+      if (res._id === bucketDetail.maker._id) {
         setAddBtnValid(true);
       }
-    }
+    };
     check();
   }, []);
 
   return (
     <div className="w-full max-w-[500px] shadow-lg min-h-[433px] pb-[1.75rem] rounded-[2rem] relative">
-      <div className="w-full h-[50px] rounded-t-[2rem] bg-purple-400 relative">
+      <div className="w-full h-[50px] rounded-t-[2rem] relative bg-gradient-to-r from-[#b18dff] to-[#868aff]">
         <img
           src={dummyProfileImg}
           onClick={() => navigate(`/user/${bucketDetail.maker._id}`)}
@@ -62,16 +61,20 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
         <PhotoGrid imageList={photoList} />
       </div>
       <div className="px-[1.2rem] flex items-center justify-end gap-[13px] translate-y-[68%]">
-        <InfoBottom bucketId={bucketDetail._id}/>
+        <InfoBottom bucketId={bucketDetail._id} />
       </div>
-      {addBtnValid && <button
-      className="bg-purple-200 p-[8px] rounded-[10px] text-slate-700 text-xs absolute cursor-pointer top-[13%] right-[2%]"
-      onClick={() => setModalShow(true)}
-      >양동이 채우기</button>}
-      <StoreUrlModal 
-      bucket_id={bucketDetail._id}
-      show={modalShow}
-      onHide={()=>setModalShow(false)}
+      {addBtnValid && (
+        <button
+          className="bg-purple-200 p-[8px] rounded-[10px] text-slate-700 text-xs absolute cursor-pointer top-[13%] right-[2%]"
+          onClick={() => setModalShow(true)}
+        >
+          양동이 채우기
+        </button>
+      )}
+      <StoreUrlModal
+        bucket_id={bucketDetail._id}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
       />
     </div>
   );
