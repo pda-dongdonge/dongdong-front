@@ -18,6 +18,14 @@ export default function MyNavbar() {
     setFullscreen(breakpoint);
     setCreateShow(true);
   }
+  function goSignUp() {
+    setLoginModalShow(false);
+    setModalShow(true);
+  }
+  function goSignIn() {
+    setModalShow(false);
+    setLoginModalShow(true);
+  }
 
   return (
     <>
@@ -126,10 +134,12 @@ export default function MyNavbar() {
                 <SignupModal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
+                  goSignIn={goSignIn}
                 />
                 <SignInModal
                   show={modalLoginShow}
                   onHide={() => setLoginModalShow(false)}
+                  goSignUp={goSignUp}
                 />
               </div>
             </Nav>

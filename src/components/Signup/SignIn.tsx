@@ -3,11 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useAuth } from "@/hooks/useAuth";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 type Props = {
   show: boolean;
   onHide: () => void;
+  goSignUp: () => void;
 };
 
 export default function SignInModal(props: Props) {
@@ -23,15 +24,15 @@ export default function SignInModal(props: Props) {
   const handleLogin = async () => {
     const res = await login(inputValue, inputpw);
     if (res) {
-      setInputPw("");
-      setInputValue("");
-      setError(null);
       props.onHide();
     } else {
       setError("로그인에 실패했습니다");
     }
   };
 
+  const handleGoSignUp = () => {
+    props.goSignUp();
+  };
   const enterInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (inputValue && inputpw) {
@@ -41,6 +42,14 @@ export default function SignInModal(props: Props) {
       refPw?.current?.blur();
     }
   };
+  useEffect(() => {
+    // 클린업 함수로 상태 초기화
+    if (!props.show) {
+      setInputPw("");
+      setInputValue("");
+      setError(null);
+    }
+  }, [props.show]);
 
   return (
     <Modal
@@ -123,7 +132,7 @@ export default function SignInModal(props: Props) {
               borderRadius: "20px",
               fontWeight: "500",
             }}
-            onClick={handleLogin}
+            onClick={handleGoSignUp}
           >
             회원이 아니신가요?
           </Button>

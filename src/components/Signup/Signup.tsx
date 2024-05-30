@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useAuth } from "@/hooks/useAuth";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IAuth } from "@/apis/authAPI";
 interface IAuthWithConfirm extends IAuth {
   confirmPassword: string;
@@ -11,6 +11,7 @@ interface IAuthWithConfirm extends IAuth {
 type Props = {
   show: boolean;
   onHide: () => void;
+  goSignIn: () => void;
 };
 export default function SignupModal(props: Props) {
   const { signUp, isEmailVerify } = useAuth();
@@ -63,6 +64,14 @@ export default function SignupModal(props: Props) {
       setError("Sign up failed. Please try again.");
     }
   };
+
+  useEffect(() => {
+    // 클린업 함수로 상태 초기화
+    if (!props.show) {
+      setError(null);
+    }
+  }, [props.show]);
+
   return (
     <Modal
       {...props}
@@ -186,6 +195,7 @@ export default function SignupModal(props: Props) {
               borderRadius: "20px",
               fontWeight: "500",
             }}
+            onClick={props.goSignIn}
           >
             Have account? Sign in
           </Button>
