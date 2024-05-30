@@ -9,6 +9,7 @@ import { IUserProfile } from "@/apis/userAPI";
 //userId 를 queary로 받아서 user bucket list, user info 노출 (user following follower), 좋아요한 버킷list
 export default function UserPage() {
   const location = useLocation();
+
   const queryParams = new URLSearchParams(location.search);
   const [userprofileInfo, setUserProfileInfo] = useState<
     IUserProfile | undefined
@@ -17,6 +18,7 @@ export default function UserPage() {
   const { userId } = useParams();
   const [currentTab, setCurrentTab] = useState(tab);
   const { getUserProfile } = useUser();
+
   useEffect(() => {
     setCurrentTab(tab);
   }, [tab]);
