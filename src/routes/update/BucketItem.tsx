@@ -7,6 +7,7 @@ import axios from "axios";
 import bucketlistAPI from "@/apis/bucketlistAPI";
 import { useAuth } from "@/hooks/useAuth";
 import NoImg from "../bucketlistItem/NoImg";
+import InfoBottom from "@/routes/bucketDetail/components/infoBottom";
 
 
 const { VITE_BASE_URL } = import.meta.env;
@@ -17,6 +18,8 @@ export default function BucketItem({ bucket, handleClick }) {
 
     const [img, setImg] = useState<number | undefined>(undefined);
     const [bucketImg, setBucketImg] = useState<number[]>([]);
+    //const [bucket_id, setBucket_id]=useState<number | undefined>(bucket_id);
+    console.log(bucket._id)
     
     useEffect(() => {
         const fetchData = async () => {
@@ -49,26 +52,40 @@ export default function BucketItem({ bucket, handleClick }) {
 
     return (
     <>
-    <div className="rounded-2xl border border-indigo-50 p-3 mb-8 w-full max-w-md mx-auto cursor-pointer" key={bucket._id} onClick={() => handleClick(bucket)}>
-        <div>
-        {linkComponent}
-        </div>
-        <div className="flex flex-row mt-2">
-            <div className="flex flex-col items-center justify-center w-1/6">
-                <img className="rounded-full w-8 my-1" src="public\dummy-profile.png" alt="Dongdong"/>
-                <div className="font-bold truncate w-full text-center"> 
-                    { bucket.maker.username? bucket.maker.username: "동동이"}
+    <div className="rounded-2xl border border-indigo-50 p-3 mb-8 w-full max-w-md mx-auto cursor-pointer">
+
+            <div key={bucket._id} onClick={() => handleClick(bucket)}>
+            {linkComponent}
+            </div>
+            <div className="flex flex-row mt-2" >
+                <div className="flex flex-col items-center justify-center w-1/6" key={bucket._id} onClick={() => handleClick(bucket)}>
+                    <img className="rounded-full w-8 my-1" src="public\dummy-profile.png" alt="Dongdong"/>
+                    <div className="font-bold truncate w-full text-center"> 
+                        { bucket.maker.username? bucket.maker.username: "동동이"}
+                    </div>
                 </div>
+
+                <div className="flex flex-col justify-center truncate w-full pl-4">
+                    <div className="font-semibold text-xl truncate w-full"  key={bucket._id} onClick={() => handleClick(bucket)}>{bucket.title}</div>
+                    <div className="font-light text-sm truncate w-full"  key={bucket._id} onClick={() => handleClick(bucket)}>{bucket.contents}</div>
+                    <div className="flex flex-row justify-end font-light text-xs truncate w-full items-center"> 
+                        <div className="flex flex-row justify-center gap-2"><InfoBottom bucketId={bucket._id}  /> </div>
+                        &nbsp;{bucket.__v}
+                    </div>
+                </div>
+               
             </div>
 
-
-            <div className="flex flex-col justify-center truncate w-full pl-4">
-                <div className="font-semibold text-xl truncate w-full">{bucket.title}</div>
-                <div className="font-light text-sm truncate w-full">{bucket.contents}</div>
-                <div className="font-light text-xs truncate w-full">💜 {bucket.__v}</div>
-            </div>
-        </div>
+        
     </div>
     </>
     );
 }
+
+/*/>
+
+ <div className="flex flex-row">
+            <InfoBottom bucketId={bucket._id}  />
+            {bucket.__v}
+        </div>
+*/
