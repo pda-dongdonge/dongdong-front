@@ -50,7 +50,7 @@ export default function LikePage() {
     <>
       <BucketNav />
 
-      <div className="flex flex-wrap justify-center gap-8 max-w-[1440px] mx-auto">
+      <div className="flex flex-wrap justify-center gap-8 max-w-[1440px]  px-2">
         {data &&
           data.data.map((bucket: any) => (
             <BucketItem

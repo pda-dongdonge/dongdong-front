@@ -32,7 +32,7 @@ export default function HotPage() {
   return (
     <>
       <BucketNav />
-      <div className="flex flex-wrap justify-center gap-8 max-w-[1440px] mx-auto">
+      <div className="flex flex-wrap justify-center gap-8 max-w-[1440px] px-2">
         {data.data.map((bucket: any) => (
           <BucketItem
             key={bucket._id}
