@@ -21,7 +21,7 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
   // console.log(photoList);
   const navigate = useNavigate();
   return (
-    <div className="w-full max-w-[500px] shadow-lg min-h-[433px] pb-[1.75rem] rounded-[2rem]">
+    <div className="w-full max-w-[500px] shadow-lg min-h-[433px] pb-[1.75rem] rounded-[2rem] relative">
       <div className="w-full h-[50px] rounded-t-[2rem] bg-purple-400 relative">
         <img
           src={dummyProfileImg}
@@ -46,8 +46,9 @@ export default function BucketInfo({ bucketDetail }: BucketInfoProps) {
         <InfoBottom bucketId={bucketDetail._id}/>
       </div>
       <button
+      className="bg-purple-200 p-[8px] rounded-[10px] text-slate-700 text-xs absolute cursor-pointer top-[15%] right-[3%]"
       onClick={() => setModalShow(true)}
-      >모달!!!!!!!!!!!!!!!!!1</button>
+      >양동이 채우기</button>
       <StoreUrlModal 
       bucket_id={bucketDetail._id}
       show={modalShow}
