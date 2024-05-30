@@ -4,17 +4,27 @@ import CreateBucket from "../CreateBucket/CreateBucket";
 import SignupModal from "../Signup/Signup";
 import { useAuth } from "@/hooks/useAuth";
 import { IoIosArrowForward } from "react-icons/io";
+import SignInModal from "../Signup/SignIn";
 const EXPAND_BREAKPOINT = "always";
 
 export default function MyNavbar() {
   const { user, logOut } = useAuth();
   const [modalShow, setModalShow] = useState<boolean>(false);
+  const [modalLoginShow, setLoginModalShow] = useState<boolean>(false);
   const [fullscreen, setFullscreen] = useState<boolean | string>(true);
   const [createShow, setCreateShow] = useState<boolean>(false);
 
   function handleShow(breakpoint: boolean | string) {
     setFullscreen(breakpoint);
     setCreateShow(true);
+  }
+  function goSignUp() {
+    setLoginModalShow(false);
+    setModalShow(true);
+  }
+  function goSignIn() {
+    setModalShow(false);
+    setLoginModalShow(true);
   }
 
   return (
@@ -28,7 +38,6 @@ export default function MyNavbar() {
         }
       `}
       </style>
-
       <Navbar
         expand={EXPAND_BREAKPOINT}
         className="mb-3 mx-2"
@@ -53,7 +62,7 @@ export default function MyNavbar() {
                 }}
               />
             </Navbar.Brand>
-            <div className="jua-regular text-2xl">DONGdongE</div>
+            <a href="/" className="jua-regular text-2xl text-black no-underline">DONGdongE</a>
             <Button
               as={Nav.Link}
               href="#action2"
@@ -79,7 +88,6 @@ export default function MyNavbar() {
             />
           </div>
         </div>
-
         <Navbar.Offcanvas
           id={`Navbar-expand-${EXPAND_BREAKPOINT}`}
           aria-labelledby={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}
@@ -87,14 +95,15 @@ export default function MyNavbar() {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`NavbarLabel-expand-${EXPAND_BREAKPOINT}`}>
+              <a href="/">
               <img
                 src="/dongdonglogo.png"
                 style={{
                   width: "60px",
                 }}
-              ></img>
+              ></img></a>
             </Offcanvas.Title>
-            <div className="jua-regular text-xl ml-5">DONGdongE</div>
+            <a href="/" className="jua-regular text-xl ml-5 text-black no-underline">DONGdongE</a>
           </Offcanvas.Header>
           <Offcanvas.Body className="flex-row-reverse">
             <Nav
@@ -116,16 +125,22 @@ export default function MyNavbar() {
                     </div>
                   </Nav.Link>
                 ) : (
-                  <Nav.Link href="/sign">
+                  <div onClick={() => setLoginModalShow(true)}>
                     <div className="flex-row flex items-center  font-bold text-sm">
                       로그인 <IoIosArrowForward />
                     </div>
-                  </Nav.Link>
+                  </div>
                 )}
 
                 <SignupModal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
+                  goSignIn={goSignIn}
+                />
+                <SignInModal
+                  show={modalLoginShow}
+                  onHide={() => setLoginModalShow(false)}
+                  goSignUp={goSignUp}
                 />
               </div>
             </Nav>
@@ -163,7 +178,7 @@ export default function MyNavbar() {
                 )}
               </div>
 
-              <div className="text-right text-xs">
+              <div className="text-right text-xs cursor-pointer">
                 {user.username ? (
                   <>
                     <div
@@ -180,7 +195,6 @@ export default function MyNavbar() {
                   </>
                 )}
               </div>
-
               <CreateBucket
                 show={createShow}
                 fullscreen={fullscreen}

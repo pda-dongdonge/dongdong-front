@@ -39,14 +39,13 @@ import { useAuth } from "@/hooks/useAuth";
     try {
       const success = await addUrl(link, comment, bucketID);
   
-      if (success) {
-        alert("링크 정보가 양동이에 성공적으로 추가되었습니다.");
-      } else {
-        alert(success);
-      }
-  
-      props.onHide();
+      if (success.success) {
+       alert("링크 정보가 양동이에 추가되었습니다.");
+       props.onHide();
       location.reload();
+      } else {
+        alert(success.message);
+      }
     } catch (error) {
       console.error("Error handling click event:", error);
       alert("오류가 발생했습니다. 다시 시도해주세요.");
