@@ -100,16 +100,16 @@ export default class bucketlistAPI extends BaseApi {
             urlContent: urlContent,
             imgUrl: ""
           });
-          console.log(resp.data);
           return resp.data;
         } catch (error) {
-          console.error("Error posting URL:", error);
+          console.error("Error posting URL:", error.response.data.message);
+          return {message: error.response.data.message}
           // 서버가 응답한 에러 메시지를 반환
-          if (error.response && error.response.data && error.response.data.message) {
-              return { success: false, message: error.response.data.message };
-          } else {
-              return { success: false, message: "요청 중 오류가 발생했습니다." };
-          }
+          //if (error.response && error.response.data && error.response.data.message) {
+           //   return { success: false, message: error.response.data.message };
+          //} else {
+          //    return { success: false, message: "요청 중 오류가 발생했습니다." };
+          //}
         }
       }
 
