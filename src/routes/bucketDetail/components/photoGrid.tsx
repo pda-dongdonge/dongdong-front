@@ -58,7 +58,7 @@ export default function PhotoGrid({imageList}: PhotoGridProps) {
     (imageList.map((image, index, arr)=>(
         <img key={index} src={image.imgUrl} className={`object-cover ${gridItemCss(arr.length, index)} w-full h-full` }/>))
     ): (
-        <img className="object-cover h-full" src={tungtung} />
+        <img className="object-cover h-full w-full" src={tungtung} />
     )}
     </div>
   )
