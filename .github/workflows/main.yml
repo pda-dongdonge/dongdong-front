@@ -19,7 +19,7 @@ jobs:
         run: npm run build
 
       - name: Sync S3 bucket
-        run: aws s3 sync ./dist s3://pda-dongdong-bucket --delete
+        run: aws s3 sync ./dist s3://dongdong-front-s3 --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
