@@ -36,6 +36,13 @@ export default function MyNavbar() {
           font-weight: 400;
           font-style: normal;
         }
+        .no-wrap{
+          flex-wrap: nowrap !important;
+          white-space: nowrap;
+        }
+        .no-margin-right {
+          margin-right: 0 !important;
+        }
       `}
       </style>
       <Navbar
@@ -141,22 +148,17 @@ export default function MyNavbar() {
             </Nav>
 
             <Nav
-              className="flex-grow-1"
-              style={{ gap: "10%", marginTop: "15px", border: "none" }}
+              className="flex-grow-1 no-wrap"
+              style={{whiteSpace: "nowrap"}}
             >
               <Nav.Link
                 href="/hot"
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "18px",
-                  border: "none",
-                }}
+                className="no-margin-right"
               >
                 🔥Hot
               </Nav.Link>
               <Nav.Link
                 href="/now"
-                style={{ fontWeight: "bold", fontSize: "18px", border: "none" }}
               >
                 ✨Now
               </Nav.Link>
@@ -165,11 +167,6 @@ export default function MyNavbar() {
                   <>
                     <Nav.Link
                       href="/feed"
-                      style={{
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                        border: "none",
-                      }}
                     >
                       💖Feed
                     </Nav.Link>
@@ -228,6 +225,7 @@ export default function MyNavbar() {
                 onHide={() => setCreateShow(false)}
               />
             </Nav>
+
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Navbar>

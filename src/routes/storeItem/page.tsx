@@ -230,7 +230,7 @@ function StoreItems() {
             </div>
           ))
         ) : (
-          <p style={{ color: "darkgray" }}>No buckets available</p>
+          <p style={{ color: "darkgray" }}>저장할 양동이가 없습니다.</p>
         )}
       </div>
       <footer

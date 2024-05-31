@@ -42,13 +42,16 @@ const App: React.FC = () => {
 </section>
   <section className="block">
     <div className="item-parallax-content flex-container img-grid">
-<figure className="img-gridItem type-right" style={{display:"flex", gap:"20px", justifyContent:"center"}}>
-      <div style={ {borderRadius: "15px",
-                      backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/YouTube_Logo_%282013-2017%29.svg/800px-YouTube_Logo_%282013-2017%29.svg.png)`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      minHeight:"170px",
-                      width:"400px",
+<figure className="img-gridItem type-right" style={{display:"flex", gap:"30px", justifyContent:"center"}}>
+      <div style={{position: "relative",
+            minHeight:"180px",
+            width:"450px",
+            borderRadius: "15px",
+            overflow: "hidden",  
+            paddingBottom: "10%", /* Aspect ratio 16:9 */
+            backgroundImage: `url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb8TmpM%2FbtrTQPiYB3E%2FCSCa5DPsaBeZej27dRXTMk%2Fimg.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center"
                       }}>
 
      </div>
@@ -72,8 +75,8 @@ const App: React.FC = () => {
                       backgroundImage: `url(https://cdn.digitaltoday.co.kr/news/photo/201910/216206_191039_2844.jpg)`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      minHeight:"170px",
-                      width:"400px",
+                      minHeight:"180px",
+                      width:"450px"
                       }}>
 
      </div>
@@ -89,8 +92,8 @@ const App: React.FC = () => {
                       backgroundImage: `url(https://www.kocca.kr/trend/vol30/img/s11/img_1.jpg)`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      minHeight:"170px",
-                      width:"400px",
+                      minHeight:"180px",
+                      width:"450px"
                       }}>
 
      </div>
@@ -112,8 +115,8 @@ const App: React.FC = () => {
                       backgroundImage: `url(https://img.wavve.com/service30/profile/wavve.png)`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      minHeight:"170px",
-                      width:"400px",
+                      minHeight:"180px",
+                      width:"450px"
                       }}>
 
      </div>
